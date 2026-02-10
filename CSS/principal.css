@@ -1,0 +1,93 @@
+.seccion-imagen {
+    width: 100%;
+    height: 55vh;
+
+    background-image: url('../MULTIMEDIA/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-central {
+    width: 60%;
+    max-height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.seccion-contenido {
+    width: 100%;
+    min-height: 40vh;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 30px;
+    padding: 35px;
+    flex-shrink: 0;
+}
+
+.seccion-contenido a {
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.boton {
+    width: 100%;
+    height: 100%;
+
+    font-family: "Zen Dots", sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 20px;
+
+    font-size: 3vmin;
+    cursor: pointer;
+    transition: 0.3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.boton i {
+    font-size: 8vmin;
+}
+
+.boton:hover {
+    background-color: #126611;
+    color: #ffffff;
+    box-shadow: 0 0 10px #10be39;
+    transform: scale(1.05);
+}
+
+.boton:active {
+    background-color: #10be39;
+    box-shadow: 0 0 20px #10be39;
+    transform: scale(0.95);
+    transition: 0.1s;
+}
+
+footer {
+    height: 5vh;
+    bottom: 0;
+    width: 100%;
+
+    background-color: #000000;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
