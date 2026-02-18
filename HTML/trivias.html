@@ -14,13 +14,51 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>FifaScan2026</title>
+    <title>FifaScan</title>
 </head>
 
 <body>
 
+    <header class="header-trivia">
+        <a href="index.html" class="boton-volver" id="btn-volver">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <h1 id="titulo-header">TRIVIA</h1>
+    </header>
+
     <section class="fondo-trivias">
+        
+        <div class="contenedor-menu" id="menu-categorias">
+            <button class="btn-opcion" data-categoria="2014">MUNDIAL BRASIL 2014</button>
+            <button class="btn-opcion" data-categoria="2018">MUNDIAL RUSIA 2018</button>
+            <button class="btn-opcion" data-categoria="2026">MUNDIAL MEXICO 2026</button>
+        </div>
+
+        <div class="contenedor-juego oculto" id="pantalla-juego">
+            <div class="tarjeta-pregunta">
+                <p id="texto-pregunta">Cargando pregunta...</p>
+            </div>
+
+            <div class="grid-respuestas" id="contenedor-respuestas">
+                </div>
+        </div>
+
+        <div class="contenedor-menu oculto" id="pantalla-resultados">
+            <div class="tarjeta-resultado">
+                <h2>¡JUEGO TERMINADO!</h2>
+                <p>SCORE:</p>
+                <div class="puntaje-grande">
+                    <span id="txt-aciertos">0</span> / <span id="txt-total">0</span>
+                </div>
+            </div>
+
+            <button class="btn-opcion" id="btn-volver-trivias">VOLVER A TRIVIAS</button>
+            <a href="index.html" class="btn-opcion" style="text-decoration: none;">VOLVER AL MENU</a>
+        </div>
+
     </section>
+
+    <script src="../JS/trivias.js"></script>
 
 </body>
 

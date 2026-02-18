@@ -14,13 +14,74 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>FifaScan2026</title>
+    <title>FifaScan</title>
 </head>
 
 <body>
 
+    <header class="header-stats">
+        <a href="index.html" class="boton-volver">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <h1>ESTADISTICAS</h1>
+    </header>
+
     <section class="fondo-estadisticas">
+        
+        <div class="tarjeta-informe">
+            
+            <div class="navegacion-pais">
+                <button class="btn-nav" id="btn-ant"><i class="fas fa-chevron-left"></i></button>
+                <h2 class="titulo-pais" id="titulo-pais">MÉXICO</h2>
+                <button class="btn-nav" id="btn-sig"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="contenedor-interno">
+                <h3 class="subtitulo">INFORME DE SELECCIÓN<br>(PROCESO 2026)</h3>
+
+                <div class="contenedor-grafico">
+                    <div class="grafico-pastel" id="grafico"></div>
+                    </div>
+
+                <div class="leyenda-datos">
+                    <div class="columna-leyenda">
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-victorias"></div>
+                            <span id="lbl-victorias">Victorias</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-empates"></div>
+                            <span id="lbl-empates">Empates</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-derrotas"></div>
+                            <span id="lbl-derrotas">Derrotas</span>
+                        </div>
+                    </div>
+
+                    <div class="columna-leyenda">
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-favor"></div>
+                            <span id="lbl-favor">Goles Favor</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-contra"></div>
+                            <span id="lbl-contra">Goles Contra</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="titulo-seccion">PLANTILLA</h3>
+
+                <div class="lista-jugadores" id="lista-jugadores">
+                    </div>
+            </div>
+
+        </div>
+
     </section>
+
+    <script src="../JS/estadisticas.js"></script>
 
 </body>
 
