@@ -232,3 +232,42 @@ body {
     margin: 6px 0;
     line-height: 1.3;
 }
+/* --- MINI GALERÍA DE VIDEOS --- */
+.mini-galeria {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas para ahorrar espacio */
+    gap: 15px;
+    width: 100%;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.mini-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.mini-card video {
+    width: 100%;
+    height: 100px; /* Altura fija pequeña para uniformidad */
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformar */
+    background-color: black;
+}
+
+.mini-card p {
+    font-family: "Zen Dots", sans-serif;
+    font-size: 0.6rem; /* Texto pequeño */
+    color: #333;
+    padding: 8px 5px;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid #eee;
+}
