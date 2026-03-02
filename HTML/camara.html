@@ -70,25 +70,67 @@
 <body>
     <button id="back-button" onclick="window.location.href='index.html'">Volver</button>
 
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind; uiScanning: #none;" color-space="sRGB"
+    <a-scene mindar-image="imageTargetSrc: ../Modelos/targets.mind; uiScanning: #none;" color-space="sRGB"
         renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false">
 
         <a-assets>
-            <a-asset-item id="modeloTrofeo" src="./LogoModelo2.glb"></a-asset-item>
-            <a-asset-item id="modeloEstadio" src="./LogoModelo.glb"></a-asset-item>
+            <a-asset-item id="sudafrica" src="../Modelos/Sudafrica.glb"></a-asset-item>
+            <a-asset-item id="tunez" src="../Modelos/Tunez.glb"></a-asset-item>
+            <a-asset-item id="japon" src="../Modelos/Japon.glb"></a-asset-item>
+            <a-asset-item id="uruguay" src="../Modelos/Uruguay.glb"></a-asset-item>
+            <a-asset-item id="espana" src="../Modelos/Espana.glb"></a-asset-item>
+            <a-asset-item id="corea" src="../Modelos/Corea.glb"></a-asset-item>
+            <a-asset-item id="mexico" src="../Modelos/Mexico.glb"></a-asset-item>
+            <a-asset-item id="colombia" src="../Modelos/Colombia.glb"></a-asset-item>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-gltf-model src="#modeloTrofeo" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+            <a-gltf-model src="#sudafrica" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1">
-            <a-gltf-model src="#modeloEstadio" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+            <a-gltf-model src="#tunez" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 2">
+            <a-gltf-model src="#japon" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 3">
+            <a-gltf-model src="#uruguay" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 4">
+            <a-gltf-model src="#espana" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 5">
+            <a-gltf-model src="#corea" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 6">
+            <a-gltf-model src="#mexico" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+                <a-entity mindar-image-target="targetIndex: 7">
+            <a-gltf-model src="#colombia" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
