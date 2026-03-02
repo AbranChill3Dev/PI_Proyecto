@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,6 +35,65 @@
             <span>ESTADISTICAS</span>
         </a>
     </div>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            padding: 10px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="back-button" onclick="window.location.href='index.html'">Volver</button>
+
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind; uiScanning: #none;" color-space="sRGB"
+        renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false">
+
+        <a-assets>
+            <a-asset-item id="modeloTrofeo" src="./LogoModelo2.glb"></a-asset-item>
+            <a-asset-item id="modeloEstadio" src="./LogoModelo.glb"></a-asset-item>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model src="#modeloTrofeo" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+        <a-entity mindar-image-target="targetIndex: 1">
+            <a-gltf-model src="#modeloEstadio" rotation="0 0 0" position="0 0 0" scale="1 1 1"
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
+        </a-entity>
+
+    </a-scene>
 
 </body>
 
