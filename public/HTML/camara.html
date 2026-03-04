@@ -109,6 +109,7 @@
         const ctx = fireworksCanvas.getContext('2d');
         
         let particles = [];
+        let currentAnim = 0; // Alternar entre Gol y Fuegos Artificiales
         let showText = false;
         let textOpacity = 0;
         let isAnimating = false;
@@ -213,10 +214,30 @@
             btnAnimaciones.classList.add('boton-deshabilitado');
             fireworksCanvas.style.display = 'block';
 
+            if (currentAnim === 0) {
+                // ANIMACIÓN 1: GOOL CENTRAL
+                showText = true;
+                textOpacity = 1;
+                createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+                setTimeout(() => createExplosion(window.innerWidth / 2, window.innerHeight / 2), 250);
+            } else {
+                // ANIMACIÓN 2: FUEGOS ARTIFICIALES POR TODA LA PANTALLA
+                const multiColors = ['#00FF00', '#00FFFF', '#FF00FF', '#FF4500', '#FFFFFF'];
+                for (let i = 0; i < 7; i++) {
+                    setTimeout(() => {
+                        const rx = Math.random() * window.innerWidth;
+                        const ry = Math.random() * (window.innerHeight * 0.6);
+                        createExplosion(rx, ry, multiColors);
+                    }, i * 200);
+                }
+            }
+
             if (!isAnimating) {
                 isAnimating = true;
                 animateLoop();
             }
+
+            //currentAnim = (currentAnim + 1) % 2;
 
             // Bloqueo de 2 segundos
             setTimeout(() => {
