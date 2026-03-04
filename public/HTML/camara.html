@@ -263,26 +263,15 @@
         }
 
         // Fuegos rojos y blancos (explosión clásica)
-        // funcion genérica para crear fuegos artificiales realistas
+        // función para crear fuegos artificiales usando la clase Particle
         function createRealFireworks(x, y) {
-            const baseColors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
-            for (let i = 0; i < 150; i++) {
-                const color = baseColors[Math.floor(Math.random() * baseColors.length)];
-                // gradiente radial
-                const grad = ctx.createRadialGradient(x, y, 0, x, y, Math.random() * 10 + 5);
-                grad.addColorStop(0, color);
-                grad.addColorStop(0.5, color + '88');
-                grad.addColorStop(1, color + '00');
-                particles.push({
-                    x,
-                    y,
-                    vx: (Math.random() - 0.5) * 20,
-                    vy: (Math.random() - 0.5) * 20,
-                    size: Math.random() * 6 + 4,
-                    opacity: 1,
-                    decay: Math.random() * 0.02 + 0.01,
-                    gradient: grad
-                });
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500'];
+            for (let i = 0; i < 100; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const p = new Particle(x, y, color, Math.random() * 8 + 4, 30);
+                // darle un impulso mayor en y para simular estallido
+                p.speedY -= Math.random() * 10 + 5;
+                particles.push(p);
             }
         }
 
@@ -309,23 +298,8 @@
 
             for (let i = particles.length - 1; i >= 0; i--) {
                 const p = particles[i];
-                // soporte para partículas personalizadas de fuegos artificiales
-                if (p.update) {
-                    p.update();
-                    p.draw(ctx);
-                } else {
-                    // objeto simple con gradient
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.opacity -= p.decay;
-                    ctx.save();
-                    ctx.globalAlpha = p.opacity;
-                    ctx.fillStyle = p.gradient;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.restore();
-                }
+                p.update();
+                p.draw(ctx);
                 if (p.opacity <= 0) {
                     particles.splice(i, 1);
                 }
