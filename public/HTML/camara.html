@@ -263,14 +263,16 @@
         }
 
         // Fuegos rojos y blancos (explosión clásica)
-        // función para crear fuegos artificiales usando la clase Particle
-        function createRealFireworks(x, y) {
-            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFA500'];
-            for (let i = 0; i < 100; i++) {
+        // función para crear fuego normal desde una posición inicial hacia arriba
+        function createGroundFire(x, y) {
+            for (let i = 0; i < 120; i++) {
+                // variaciones de naranja/amarillo
+                const colors = ['#FF4500', '#FF8C00', '#FFA500', '#FFD700'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                const p = new Particle(x, y, color, Math.random() * 8 + 4, 30);
-                // darle un impulso mayor en y para simular estallido
-                p.speedY -= Math.random() * 10 + 5;
+                const p = new Particle(x + (Math.random() - 0.5) * 100, y, color, Math.random() * 6 + 6, 10);
+                // flama hacia arriba con dispersión
+                p.speedY = - (Math.random() * 4 + 2);
+                p.speedX = (Math.random() - 0.5) * 2;
                 particles.push(p);
             }
         }
@@ -352,12 +354,13 @@
                 setTimeout(() => createBigExplosion(centerX, centerY), 250);
                 setTimeout(() => createBigExplosion(centerX, centerY), 500);
             } else {
-                // animación de fuegos artificiales realistas
-                for (let i = 0; i < 4; i++) {
+                // animación de fuego normal desde el fondo hasta la mitad
+                const groundY = window.innerHeight;
+                const midY = window.innerHeight / 2;
+                for (let i = 0; i < 3; i++) {
                     setTimeout(() => {
-                        const x = Math.random() * window.innerWidth;
-                        const y = Math.random() * window.innerHeight / 2;
-                        createRealFireworks(x, y);
+                        const x = window.innerWidth / 2;
+                        createGroundFire(x, groundY);
                     }, i * 200);
                 }
             }
