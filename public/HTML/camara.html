@@ -2,29 +2,25 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/CSS/default.css">
-    <link rel="stylesheet" href="/CSS/camara.css">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="/CSS/default.css">
+        <link rel="stylesheet" href="/CSS/camara.css">
 
-    <title>FifaScan</title>
-    <style>
-        /* Estilo para indicar que el botón está en espera */
-        .boton-deshabilitado {
-            opacity: 0.5 !important;
-            cursor: not-allowed !important;
-            filter: grayscale(1);
-        }
-    </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <title>FifaScan</title>
+    </head>
 </head>
 
 <body>
@@ -48,73 +44,95 @@
 
         <a-entity mindar-image-target="targetIndex: 0" data-country="sudafrica">
             <a-gltf-model src="#sudafrica" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1" data-country="tunez">
             <a-gltf-model src="#tunez" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 2" data-country="japon">
             <a-gltf-model src="#japon" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 3" data-country="uruguay">
             <a-gltf-model src="#uruguay" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 4" data-country="espana">
             <a-gltf-model src="#espana" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 5" data-country="corea">
             <a-gltf-model src="#corea" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 6" data-country="mexico">
             <a-gltf-model src="#mexico" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 7" data-country="colombia">
             <a-gltf-model src="#colombia" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            </a-gltf-model>
         </a-entity>
+
     </a-scene>
 
     <div class="controles-camara">
         <a href="../index.html" class="boton-flotante">
-            <i class="fas fa-arrow-left"></i><span>VOLVER</span>
+            <i class="fas fa-arrow-left"></i>
+            <span>VOLVER</span>
         </a>
         <a id="btn-estadisticas" href="#" class="boton-flotante boton-oculto">
-            <i class="fas fa-chart-bar"></i><span>ESTADISTICAS</span>
+            <i class="fas fa-chart-bar"></i>
+            <span>ESTADISTICAS</span>
         </a>
         <button id="btn-animaciones" class="boton-flotante boton-oculto">
-            <i class="fas fa-wand-magic-sparkles"></i><span>ANIMACIONES</span>
+            <i class="fas fa-wand-magic-sparkles"></i>
+            <span>ANIMACIONES</span>
         </button>
     </div>
 
-    <canvas id="fireworks-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none; z-index: 1000;"></canvas>
-
+    <canvas id="fireworks-canvas"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none;"></canvas>
     <script>
-        const paisMap = { 'mexico': 0, 'espana': 1, 'uruguay': 2, 'colombia': 3, 'japon': 4, 'corea': 5, 'sudafrica': 6, 'tunez': 7 };
+        // Mapeo de países a índices en estadísticas.js
+        const paisMap = {
+            'mexico': 0,
+            'espana': 1,
+            'uruguay': 2,
+            'colombia': 3,
+            'japon': 4,
+            'corea': 5,
+            'sudafrica': 6,
+            'tunez': 7
+        };
+
         const btnEstadisticas = document.getElementById('btn-estadisticas');
         const btnAnimaciones = document.getElementById('btn-animaciones');
         const fireworksCanvas = document.getElementById('fireworks-canvas');
         const ctx = fireworksCanvas.getContext('2d');
-        
+        let targetActual = null;
         let particles = [];
-        let currentAnim = 0; // Alternar entre Gol y Fuegos Artificiales
+        let currentAnim = 0; // 0 = explosion, 1 = fireworks
         let showText = false;
         let textOpacity = 0;
-        let isAnimating = false;
-        let canClick = true;
 
+        // Configurar canvas
         function resizeCanvas() {
             fireworksCanvas.width = window.innerWidth;
             fireworksCanvas.height = window.innerHeight;
@@ -122,42 +140,52 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Control de visibilidad de botones MindAR
+        // Obtener todas las entidades con mindar-image-target
         const targets = document.querySelectorAll('[mindar-image-target]');
+
         targets.forEach(target => {
+            // Detectar cuando el target aparece
             target.addEventListener('targetFound', () => {
                 const country = target.getAttribute('data-country');
-                btnEstadisticas.href = `estadisticas.html?pais=${paisMap[country]}`;
+                targetActual = country;
+                const indice = paisMap[country];
+
+                // Mostrar botones y establecer href
+                btnEstadisticas.href = `estadisticas.html?pais=${indice}`;
                 btnEstadisticas.classList.remove('boton-oculto');
                 btnAnimaciones.classList.remove('boton-oculto');
             });
+
+            // Detectar cuando el target desaparece
             target.addEventListener('targetLost', () => {
+                targetActual = null;
+                // Ocultar botones
                 btnEstadisticas.classList.add('boton-oculto');
                 btnAnimaciones.classList.add('boton-oculto');
             });
         });
 
-        // Clase Partícula de Explosión (Usada para GOL y para Fuegos Artificiales)
+        // Clase base de partículas
         class Particle {
-            constructor(x, y, color) {
+            constructor(x, y, color, size, speed) {
                 this.x = x;
                 this.y = y;
+                this.size = size;
                 this.color = color;
-                this.size = Math.random() * 4 + 2;
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 8 + 2;
-                this.velocityX = Math.cos(angle) * speed;
-                this.velocityY = Math.sin(angle) * speed;
                 this.opacity = 1;
-                this.decay = Math.random() * 0.02 + 0.01;
+                this.speedX = (Math.random() - 0.5) * speed;
+                this.speedY = (Math.random() - 0.5) * speed - 1;
+                this.decay = Math.random() * 0.015 + 0.008;
             }
+
             update() {
-                this.x += this.velocityX;
-                this.y += this.velocityY;
-                this.velocityY += 0.1; // Gravedad
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.15; // gravedad
                 this.opacity -= this.decay;
             }
-            draw() {
+
+            draw(ctx) {
                 ctx.save();
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
@@ -168,31 +196,122 @@
             }
         }
 
-        function createExplosion(x, y, colorSet = null) {
-            const colors = colorSet || ['#FFD700', '#FF4500', '#FFFFFF', '#FF0000'];
-            for (let i = 0; i < 60; i++) {
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color));
+        // Clase para partículas de fuego con gradiente
+        class FireParticle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type; // 'core', 'spark', 'smoke'
+                this.opacity = 1;
+
+                if (type === 'core') {
+                    this.size = Math.random() * 20 + 15;
+                    this.speedX = (Math.random() - 0.5) * 8;
+                    this.speedY = (Math.random() - 0.5) * 8 - 1;
+                    this.decay = Math.random() * 0.03 + 0.02;
+                } else if (type === 'spark') {
+                    this.size = Math.random() * 8 + 4;
+                    this.speedX = (Math.random() - 0.5) * 16;
+                    this.speedY = (Math.random() - 0.5) * 16 - 2;
+                    this.decay = Math.random() * 0.025 + 0.012;
+                } else { // smoke
+                    this.size = Math.random() * 30 + 20;
+                    this.speedX = (Math.random() - 0.5) * 4;
+                    this.speedY = -Math.random() * 3 - 1;
+                    this.decay = Math.random() * 0.008 + 0.003;
+                }
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.type !== 'smoke') {
+                    this.speedY += 0.15;
+                }
+                this.opacity -= this.decay;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+
+                if (this.type === 'core') {
+                    // Núcleo amarillo-naranja
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(255, 255, 100, 0.8)');
+                    gradient.addColorStop(0.5, 'rgba(255, 180, 0, 0.6)');
+                    gradient.addColorStop(1, 'rgba(255, 80, 0, 0)');
+                    ctx.fillStyle = gradient;
+                } else if (this.type === 'spark') {
+                    // Chispas rojas
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(255, 100, 0, 1)');
+                    gradient.addColorStop(1, 'rgba(200, 0, 0, 0)');
+                    ctx.fillStyle = gradient;
+                } else {
+                    // Humo gris
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(100, 100, 100, 0.3)');
+                    gradient.addColorStop(1, 'rgba(50, 50, 50, 0)');
+                    ctx.fillStyle = gradient;
+                }
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
             }
         }
 
-        function animateLoop() {
+        // Fuegos rojos y blancos (explosión clásica)
+        // función para crear fuego normal desde una posición inicial hacia arriba
+        function createGroundFire(x, y) {
+            for (let i = 0; i < 100; i++) {
+                const colors = ['#FF4500', '#FF8C00', '#FFA500', '#FFD700'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                // Reducimos la velocidad inicial y la gravedad dentro de la clase para esta animación
+                const p = new Particle(x + (Math.random() - 0.5) * 150, y, color, Math.random() * 6 + 4, 15);
+                p.speedY = -(Math.random() * 12 + 5); // ¡Más impulso hacia arriba!
+                particles.push(p);
+            }
+        }
+
+        // Explosión grande de centro con efecto realista de fuego
+        function createBigExplosion(x, y) {
+            // Núcleo central amarillo-naranja
+            for (let i = 0; i < 40; i++) {
+                particles.push(new FireParticle(x, y, 'core'));
+            }
+
+            // Chispas rojas que salen disparadas
+            for (let i = 0; i < 80; i++) {
+                particles.push(new FireParticle(x, y, 'spark'));
+            }
+
+            // Humo que sube
+            for (let i = 0; i < 30; i++) {
+                particles.push(new FireParticle(x, y, 'smoke'));
+            }
+        }
+
+        function animateFireworks() {
             ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
             for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].opacity <= 0) particles.splice(i, 1);
+                const p = particles[i];
+                p.update();
+                p.draw(ctx);
+                if (p.opacity <= 0) {
+                    particles.splice(i, 1);
+                }
             }
 
             if (showText) {
                 ctx.save();
                 ctx.globalAlpha = textOpacity;
                 ctx.fillStyle = 'yellow';
-                ctx.font = 'bold 80px "Zen Dots"';
+                ctx.font = 'bold 80px Zen Dots'; // Usando la fuente que importaste
                 ctx.textAlign = 'center';
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = "gold";
                 ctx.fillText('GOOOL', fireworksCanvas.width / 2, fireworksCanvas.height / 2);
                 ctx.restore();
                 textOpacity -= 0.01;
@@ -200,50 +319,45 @@
             }
 
             if (particles.length > 0 || showText) {
-                requestAnimationFrame(animateLoop);
+                requestAnimationFrame(animateFireworks);
             } else {
                 fireworksCanvas.style.display = 'none';
-                isAnimating = false;
+                isAnimating = false; // Liberar la bandera
             }
         }
 
         btnAnimaciones.addEventListener('click', (e) => {
-            if (!canClick) return;
+            e.preventDefault();
 
-            canClick = false;
-            btnAnimaciones.classList.add('boton-deshabilitado');
+            // Si ya hay una animación corriendo, no encimamos otra violentamente
+            if (isAnimating && particles.length > 50) return;
+
             fireworksCanvas.style.display = 'block';
+            isAnimating = true;
 
             if (currentAnim === 0) {
-                // ANIMACIÓN 1: GOOL CENTRAL
+                // ANIMACIÓN 1: GOAL
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
                 showText = true;
                 textOpacity = 1;
-                createExplosion(window.innerWidth / 2, window.innerHeight / 2);
-                setTimeout(() => createExplosion(window.innerWidth / 2, window.innerHeight / 2), 250);
+                createBigExplosion(centerX, centerY);
+                setTimeout(() => createBigExplosion(centerX, centerY), 200);
             } else {
-                // ANIMACIÓN 2: FUEGOS ARTIFICIALES POR TODA LA PANTALLA
-                const multiColors = ['#00FF00', '#00FFFF', '#FF00FF', '#FF4500', '#FFFFFF'];
-                for (let i = 0; i < 7; i++) {
-                    setTimeout(() => {
-                        const rx = Math.random() * window.innerWidth;
-                        const ry = Math.random() * (window.innerHeight * 0.6);
-                        createExplosion(rx, ry, multiColors);
-                    }, i * 200);
-                }
+                // ANIMACIÓN 2: FUEGO (Desde abajo)
+                const groundY = window.innerHeight;
+                const centerX = window.innerWidth / 2;
+                createGroundFire(centerX, groundY);
+                // Lanzar ráfagas adicionales
+                setTimeout(() => createGroundFire(centerX - 100, groundY), 200);
+                setTimeout(() => createGroundFire(centerX + 100, groundY), 400);
             }
 
-            if (!isAnimating) {
-                isAnimating = true;
-                animateLoop();
-            }
-
+            // Cambiar para la próxima vez
             currentAnim = (currentAnim + 1) % 2;
 
-            // Bloqueo de 2 segundos
-            setTimeout(() => {
-                canClick = true;
-                btnAnimaciones.classList.remove('boton-deshabilitado');
-            }, 2000);
+            // Solo iniciar el loop si no estaba corriendo
+            animateFireworks();
         });
     </script>
 </body>
