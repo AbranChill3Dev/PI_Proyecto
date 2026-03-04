@@ -128,6 +128,8 @@
         let targetActual = null;
         let particles = [];
         let animationType = 0;
+        let showText = false;
+        let textOpacity = 0;
 
         // Configurar canvas
         function resizeCanvas() {
@@ -317,7 +319,26 @@
                 }
             }
 
-            if (particles.length > 0) {
+            // dibujar texto encima si se debe mostrar
+            if (showText) {
+                ctx.save();
+                ctx.globalAlpha = textOpacity;
+                ctx.fillStyle = 'yellow';
+                ctx.font = 'bold 120px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('GOOOL', fireworksCanvas.width / 2, fireworksCanvas.height / 2);
+                ctx.restore();
+
+                // disminuir opacidad
+                textOpacity -= 0.01;
+                if (textOpacity <= 0) {
+                    showText = false;
+                    textOpacity = 0;
+                }
+            }
+
+            if (particles.length > 0 || showText) {
                 requestAnimationFrame(animateFireworks);
             } else {
                 fireworksCanvas.style.display = 'none';
@@ -334,12 +355,16 @@
             animationType++;
 
             if (fireType === 0) {
-                // Fuegos rojos - explosión central grande CENTRADA
+                // Fuegos rojos - explosión central grande CENTRADA + texto "GOOOL"
                 const centerX = window.innerWidth / 2;
                 const centerY = window.innerHeight / 2;
-                
+
+                // mostrar texto
+                showText = true;
+                textOpacity = 1;
+
                 createBigExplosion(centerX, centerY);
-                
+
                 for (let i = 0; i < 2; i++) {
                     setTimeout(() => {
                         createBigExplosion(centerX, centerY);
