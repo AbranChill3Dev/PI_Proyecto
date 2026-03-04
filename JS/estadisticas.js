@@ -313,6 +313,13 @@ const datosPaises = [
 
 let indiceActual = 0;
 
+// Leer parámetro pais de la URL
+const params = new URLSearchParams(window.location.search);
+const paisParam = params.get('pais');
+if (paisParam !== null && !isNaN(paisParam)) {
+    indiceActual = parseInt(paisParam);
+}
+
 const tituloPais = document.getElementById('titulo-pais');
 const grafico = document.getElementById('grafico');
 const listaJugadores = document.getElementById('lista-jugadores');
@@ -383,5 +390,5 @@ btnSig.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarPais(0);
+    cargarPais(indiceActual);
 });

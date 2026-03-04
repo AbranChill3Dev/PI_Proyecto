@@ -91,3 +91,7 @@
 .boton-flotante:active {
     transform: scale(0.9);
 }
+
+.boton-oculto {
+    display: none !important;
+}

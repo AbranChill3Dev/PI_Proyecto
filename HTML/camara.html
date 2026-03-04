@@ -42,49 +42,49 @@
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity mindar-image-target="targetIndex: 0" data-country="sudafrica">
             <a-gltf-model src="#sudafrica" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity mindar-image-target="targetIndex: 1" data-country="tunez">
             <a-gltf-model src="#tunez" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 2">
+        <a-entity mindar-image-target="targetIndex: 2" data-country="japon">
             <a-gltf-model src="#japon" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 3">
+        <a-entity mindar-image-target="targetIndex: 3" data-country="uruguay">
             <a-gltf-model src="#uruguay" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 4">
+        <a-entity mindar-image-target="targetIndex: 4" data-country="espana">
             <a-gltf-model src="#espana" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 5">
+        <a-entity mindar-image-target="targetIndex: 5" data-country="corea">
             <a-gltf-model src="#corea" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 6">
+        <a-entity mindar-image-target="targetIndex: 6" data-country="mexico">
             <a-gltf-model src="#mexico" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
         </a-entity>
 
-        <a-entity mindar-image-target="targetIndex: 7">
+        <a-entity mindar-image-target="targetIndex: 7" data-country="colombia">
             <a-gltf-model src="#colombia" rotation="0 0 0" position="0 0 0" scale="1 1 1"
                 animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
             </a-gltf-model>
@@ -97,12 +97,50 @@
             <i class="fas fa-arrow-left"></i>
             <span>VOLVER</span>
         </a>
-        <a href="estadisticas.html" class="boton-flotante">
+        <a id="btn-estadisticas" href="#" class="boton-flotante boton-oculto">
             <i class="fas fa-chart-bar"></i>
             <span>ESTADISTICAS</span>
         </a>
     </div>
+    <script>
+        // Mapeo de países a índices en estadísticas.js
+        const paisMap = {
+            'mexico': 0,
+            'espana': 1,
+            'uruguay': 2,
+            'colombia': 3,
+            'japon': 4,
+            'corea': 5,
+            'sudafrica': 6,
+            'tunez': 7
+        };
 
+        const btnEstadisticas = document.getElementById('btn-estadisticas');
+        let targetActual = null;
+
+        // Obtener todas las entidades con mindar-image-target
+        const targets = document.querySelectorAll('[mindar-image-target]');
+
+        targets.forEach(target => {
+            // Detectar cuando el target aparece
+            target.addEventListener('targetFound', () => {
+                const country = target.getAttribute('data-country');
+                targetActual = country;
+                const indice = paisMap[country];
+                
+                // Mostrar botón y establecer href
+                btnEstadisticas.href = `estadisticas.html?pais=${indice}`;
+                btnEstadisticas.classList.remove('boton-oculto');
+            });
+
+            // Detectar cuando el target desaparece
+            target.addEventListener('targetLost', () => {
+                targetActual = null;
+                // Ocultar botón
+                btnEstadisticas.classList.add('boton-oculto');
+            });
+        });
+    </script>
 </body>
 
 </html>
