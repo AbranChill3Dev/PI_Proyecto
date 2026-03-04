@@ -127,7 +127,7 @@
         const ctx = fireworksCanvas.getContext('2d');
         let targetActual = null;
         let particles = [];
-        let animationType = 0;
+        let currentAnim = 0; // 0 = explosion, 1 = fireworks
         let showText = false;
         let textOpacity = 0;
 
@@ -263,29 +263,26 @@
         }
 
         // Fuegos rojos y blancos (explosión clásica)
-        function createRedFireworks(x, y) {
-            for (let i = 0; i < 120; i++) {
-                const colors = ['#FF0000', '#FF4444', '#FFFFFF'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color, Math.random() * 6 + 3, 18));
-            }
-        }
-
-        // Fuegos verdes (estilo cascada)
-        function createGreenFireworks(x, y) {
-            for (let i = 0; i < 100; i++) {
-                const colors = ['#00FF00', '#00DD00', '#44FF44'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color, Math.random() * 5 + 2, 15));
-            }
-        }
-
-        // Fuegos azules (estilo lluvia)
-        function createBlueFireworks(x, y) {
-            for (let i = 0; i < 90; i++) {
-                const colors = ['#0000FF', '#0044FF', '#4444FF'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color, Math.random() * 7 + 4, 20));
+        // funcion genérica para crear fuegos artificiales realistas
+        function createRealFireworks(x, y) {
+            const baseColors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+            for (let i = 0; i < 150; i++) {
+                const color = baseColors[Math.floor(Math.random() * baseColors.length)];
+                // gradiente radial
+                const grad = ctx.createRadialGradient(x, y, 0, x, y, Math.random() * 10 + 5);
+                grad.addColorStop(0, color);
+                grad.addColorStop(0.5, color + '88');
+                grad.addColorStop(1, color + '00');
+                particles.push({
+                    x,
+                    y,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: (Math.random() - 0.5) * 20,
+                    size: Math.random() * 6 + 4,
+                    opacity: 1,
+                    decay: Math.random() * 0.02 + 0.01,
+                    gradient: grad
+                });
             }
         }
 
@@ -311,10 +308,25 @@
             ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 
             for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw(ctx);
-
-                if (particles[i].opacity <= 0) {
+                const p = particles[i];
+                // soporte para partículas personalizadas de fuegos artificiales
+                if (p.update) {
+                    p.update();
+                    p.draw(ctx);
+                } else {
+                    // objeto simple con gradient
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.opacity -= p.decay;
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fillStyle = p.gradient;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                if (p.opacity <= 0) {
                     particles.splice(i, 1);
                 }
             }
@@ -348,46 +360,35 @@
         // Evento del botón animaciones
         btnAnimaciones.addEventListener('click', (e) => {
             e.preventDefault();
-            fireworksCanvas.style.display = 'block';
-            
-            // Seleccionar tipo de fuego (rojo, verde, azul)
-            const fireType = animationType % 3;
-            animationType++;
+            // limpiar cualquier animación anterior
+            particles = [];
+            showText = false;
+            textOpacity = 0;
 
-            if (fireType === 0) {
-                // Fuegos rojos - explosión central grande CENTRADA + texto "GOOOL"
+            fireworksCanvas.style.display = 'block';
+
+            if (currentAnim === 0) {
+                // animación de explosión realista con texto
                 const centerX = window.innerWidth / 2;
                 const centerY = window.innerHeight / 2;
-
-                // mostrar texto
                 showText = true;
                 textOpacity = 1;
-
                 createBigExplosion(centerX, centerY);
-
-                for (let i = 0; i < 2; i++) {
-                    setTimeout(() => {
-                        createBigExplosion(centerX, centerY);
-                    }, (i + 1) * 250);
-                }
-            } else if (fireType === 1) {
-                // Fuegos verdes - cascada desde arriba
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const x = Math.random() * window.innerWidth;
-                        createGreenFireworks(x, 50);
-                    }, i * 100);
-                }
+                // repetir un par de veces para efecto prolongado
+                setTimeout(() => createBigExplosion(centerX, centerY), 250);
+                setTimeout(() => createBigExplosion(centerX, centerY), 500);
             } else {
-                // Fuegos azules - lluvia desde arriba
+                // animación de fuegos artificiales realistas
                 for (let i = 0; i < 4; i++) {
                     setTimeout(() => {
                         const x = Math.random() * window.innerWidth;
-                        createBlueFireworks(x, 80);
-                    }, i * 150);
+                        const y = Math.random() * window.innerHeight / 2;
+                        createRealFireworks(x, y);
+                    }, i * 200);
                 }
             }
-            
+
+            currentAnim = (currentAnim + 1) % 2;
             animateFireworks();
         });
     </script>
