@@ -193,6 +193,73 @@
             }
         }
 
+        // Clase para partículas de fuego con gradiente
+        class FireParticle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type; // 'core', 'spark', 'smoke'
+                this.opacity = 1;
+                
+                if (type === 'core') {
+                    this.size = Math.random() * 20 + 15;
+                    this.speedX = (Math.random() - 0.5) * 8;
+                    this.speedY = (Math.random() - 0.5) * 8 - 1;
+                    this.decay = Math.random() * 0.03 + 0.02;
+                } else if (type === 'spark') {
+                    this.size = Math.random() * 8 + 4;
+                    this.speedX = (Math.random() - 0.5) * 16;
+                    this.speedY = (Math.random() - 0.5) * 16 - 2;
+                    this.decay = Math.random() * 0.025 + 0.012;
+                } else { // smoke
+                    this.size = Math.random() * 30 + 20;
+                    this.speedX = (Math.random() - 0.5) * 4;
+                    this.speedY = -Math.random() * 3 - 1;
+                    this.decay = Math.random() * 0.008 + 0.003;
+                }
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.type !== 'smoke') {
+                    this.speedY += 0.15;
+                }
+                this.opacity -= this.decay;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                
+                if (this.type === 'core') {
+                    // Núcleo amarillo-naranja
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(255, 255, 100, 0.8)');
+                    gradient.addColorStop(0.5, 'rgba(255, 180, 0, 0.6)');
+                    gradient.addColorStop(1, 'rgba(255, 80, 0, 0)');
+                    ctx.fillStyle = gradient;
+                } else if (this.type === 'spark') {
+                    // Chispas rojas
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(255, 100, 0, 1)');
+                    gradient.addColorStop(1, 'rgba(200, 0, 0, 0)');
+                    ctx.fillStyle = gradient;
+                } else {
+                    // Humo gris
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, 'rgba(100, 100, 100, 0.3)');
+                    gradient.addColorStop(1, 'rgba(50, 50, 50, 0)');
+                    ctx.fillStyle = gradient;
+                }
+                
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
         // Fuegos rojos y blancos (explosión clásica)
         function createRedFireworks(x, y) {
             for (let i = 0; i < 120; i++) {
@@ -220,12 +287,21 @@
             }
         }
 
-        // Explosión grande de centro
+        // Explosión grande de centro con efecto realista de fuego
         function createBigExplosion(x, y) {
-            for (let i = 0; i < 200; i++) {
-                const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF', '#FFD700'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push(new Particle(x, y, color, Math.random() * 8 + 5, 25));
+            // Núcleo central amarillo-naranja
+            for (let i = 0; i < 40; i++) {
+                particles.push(new FireParticle(x, y, 'core'));
+            }
+            
+            // Chispas rojas que salen disparadas
+            for (let i = 0; i < 80; i++) {
+                particles.push(new FireParticle(x, y, 'spark'));
+            }
+            
+            // Humo que sube
+            for (let i = 0; i < 30; i++) {
+                particles.push(new FireParticle(x, y, 'smoke'));
             }
         }
 
@@ -258,14 +334,16 @@
             animationType++;
 
             if (fireType === 0) {
-                // Fuegos rojos - explosión central grande
-                createBigExplosion(window.innerWidth / 2, window.innerHeight / 2);
-                for (let i = 0; i < 3; i++) {
+                // Fuegos rojos - explosión central grande CENTRADA
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                createBigExplosion(centerX, centerY);
+                
+                for (let i = 0; i < 2; i++) {
                     setTimeout(() => {
-                        const x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
-                        const y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
-                        createRedFireworks(x, y);
-                    }, (i + 1) * 200);
+                        createBigExplosion(centerX, centerY);
+                    }, (i + 1) * 250);
                 }
             } else if (fireType === 1) {
                 // Fuegos verdes - cascada desde arriba
