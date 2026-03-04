@@ -107,7 +107,8 @@
         </button>
     </div>
 
-    <canvas id="fireworks-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none;"></canvas>
+    <canvas id="fireworks-canvas"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none;"></canvas>
     <script>
         // Mapeo de países a índices en estadísticas.js
         const paisMap = {
@@ -148,7 +149,7 @@
                 const country = target.getAttribute('data-country');
                 targetActual = country;
                 const indice = paisMap[country];
-                
+
                 // Mostrar botones y establecer href
                 btnEstadisticas.href = `estadisticas.html?pais=${indice}`;
                 btnEstadisticas.classList.remove('boton-oculto');
@@ -202,7 +203,7 @@
                 this.y = y;
                 this.type = type; // 'core', 'spark', 'smoke'
                 this.opacity = 1;
-                
+
                 if (type === 'core') {
                     this.size = Math.random() * 20 + 15;
                     this.speedX = (Math.random() - 0.5) * 8;
@@ -233,7 +234,7 @@
             draw(ctx) {
                 ctx.save();
                 ctx.globalAlpha = this.opacity;
-                
+
                 if (this.type === 'core') {
                     // Núcleo amarillo-naranja
                     const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
@@ -254,7 +255,7 @@
                     gradient.addColorStop(1, 'rgba(50, 50, 50, 0)');
                     ctx.fillStyle = gradient;
                 }
-                
+
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -265,14 +266,12 @@
         // Fuegos rojos y blancos (explosión clásica)
         // función para crear fuego normal desde una posición inicial hacia arriba
         function createGroundFire(x, y) {
-            for (let i = 0; i < 120; i++) {
-                // variaciones de naranja/amarillo
+            for (let i = 0; i < 100; i++) {
                 const colors = ['#FF4500', '#FF8C00', '#FFA500', '#FFD700'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                const p = new Particle(x + (Math.random() - 0.5) * 100, y, color, Math.random() * 6 + 6, 10);
-                // flama hacia arriba con dispersión
-                p.speedY = - (Math.random() * 4 + 2);
-                p.speedX = (Math.random() - 0.5) * 2;
+                // Reducimos la velocidad inicial y la gravedad dentro de la clase para esta animación
+                const p = new Particle(x + (Math.random() - 0.5) * 150, y, color, Math.random() * 6 + 4, 15);
+                p.speedY = -(Math.random() * 12 + 5); // ¡Más impulso hacia arriba!
                 particles.push(p);
             }
         }
@@ -283,12 +282,12 @@
             for (let i = 0; i < 40; i++) {
                 particles.push(new FireParticle(x, y, 'core'));
             }
-            
+
             // Chispas rojas que salen disparadas
             for (let i = 0; i < 80; i++) {
                 particles.push(new FireParticle(x, y, 'spark'));
             }
-            
+
             // Humo que sube
             for (let i = 0; i < 30; i++) {
                 particles.push(new FireParticle(x, y, 'smoke'));
@@ -307,65 +306,57 @@
                 }
             }
 
-            // dibujar texto encima si se debe mostrar
             if (showText) {
                 ctx.save();
                 ctx.globalAlpha = textOpacity;
                 ctx.fillStyle = 'yellow';
-                ctx.font = 'bold 120px sans-serif';
+                ctx.font = 'bold 80px Zen Dots'; // Usando la fuente que importaste
                 ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
                 ctx.fillText('GOOOL', fireworksCanvas.width / 2, fireworksCanvas.height / 2);
                 ctx.restore();
-
-                // disminuir opacidad
                 textOpacity -= 0.01;
-                if (textOpacity <= 0) {
-                    showText = false;
-                    textOpacity = 0;
-                }
+                if (textOpacity <= 0) showText = false;
             }
 
             if (particles.length > 0 || showText) {
                 requestAnimationFrame(animateFireworks);
             } else {
                 fireworksCanvas.style.display = 'none';
+                isAnimating = false; // Liberar la bandera
             }
         }
 
-        // Evento del botón animaciones
         btnAnimaciones.addEventListener('click', (e) => {
             e.preventDefault();
-            // limpiar cualquier animación anterior
-            particles = [];
-            showText = false;
-            textOpacity = 0;
+
+            // Si ya hay una animación corriendo, no encimamos otra violentamente
+            if (isAnimating && particles.length > 50) return;
 
             fireworksCanvas.style.display = 'block';
+            isAnimating = true;
 
             if (currentAnim === 0) {
-                // animación de explosión realista con texto
+                // ANIMACIÓN 1: GOAL
                 const centerX = window.innerWidth / 2;
                 const centerY = window.innerHeight / 2;
                 showText = true;
                 textOpacity = 1;
                 createBigExplosion(centerX, centerY);
-                // repetir un par de veces para efecto prolongado
-                setTimeout(() => createBigExplosion(centerX, centerY), 250);
-                setTimeout(() => createBigExplosion(centerX, centerY), 500);
+                setTimeout(() => createBigExplosion(centerX, centerY), 200);
             } else {
-                // animación de fuego normal desde el fondo hasta la mitad
+                // ANIMACIÓN 2: FUEGO (Desde abajo)
                 const groundY = window.innerHeight;
-                const midY = window.innerHeight / 2;
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const x = window.innerWidth / 2;
-                        createGroundFire(x, groundY);
-                    }, i * 200);
-                }
+                const centerX = window.innerWidth / 2;
+                createGroundFire(centerX, groundY);
+                // Lanzar ráfagas adicionales
+                setTimeout(() => createGroundFire(centerX - 100, groundY), 200);
+                setTimeout(() => createGroundFire(centerX + 100, groundY), 400);
             }
 
+            // Cambiar para la próxima vez
             currentAnim = (currentAnim + 1) % 2;
+
+            // Solo iniciar el loop si no estaba corriendo
             animateFireworks();
         });
     </script>
