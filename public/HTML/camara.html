@@ -101,7 +101,13 @@
             <i class="fas fa-chart-bar"></i>
             <span>ESTADISTICAS</span>
         </a>
+        <button id="btn-animaciones" class="boton-flotante boton-oculto">
+            <i class="fas fa-wand-magic-sparkles"></i>
+            <span>ANIMACIONES</span>
+        </button>
     </div>
+
+    <canvas id="fireworks-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none;"></canvas>
     <script>
         // Mapeo de países a índices en estadísticas.js
         const paisMap = {
@@ -116,7 +122,19 @@
         };
 
         const btnEstadisticas = document.getElementById('btn-estadisticas');
+        const btnAnimaciones = document.getElementById('btn-animaciones');
+        const fireworksCanvas = document.getElementById('fireworks-canvas');
+        const ctx = fireworksCanvas.getContext('2d');
         let targetActual = null;
+        let particles = [];
+
+        // Configurar canvas
+        function resizeCanvas() {
+            fireworksCanvas.width = window.innerWidth;
+            fireworksCanvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         // Obtener todas las entidades con mindar-image-target
         const targets = document.querySelectorAll('[mindar-image-target]');
@@ -128,17 +146,92 @@
                 targetActual = country;
                 const indice = paisMap[country];
                 
-                // Mostrar botón y establecer href
+                // Mostrar botones y establecer href
                 btnEstadisticas.href = `estadisticas.html?pais=${indice}`;
                 btnEstadisticas.classList.remove('boton-oculto');
+                btnAnimaciones.classList.remove('boton-oculto');
             });
 
             // Detectar cuando el target desaparece
             target.addEventListener('targetLost', () => {
                 targetActual = null;
-                // Ocultar botón
+                // Ocultar botones
                 btnEstadisticas.classList.add('boton-oculto');
+                btnAnimaciones.classList.add('boton-oculto');
             });
+        });
+
+        // Función para crear fuegos artificiales
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = (Math.random() - 0.5) * 12;
+                this.speedY = (Math.random() - 0.5) * 12 - 2;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.opacity = 1;
+                this.decay = Math.random() * 0.02 + 0.015;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.2; // gravedad
+                this.opacity -= this.decay;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createFireworks(x, y) {
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function animateFireworks() {
+            ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw(ctx);
+
+                if (particles[i].opacity <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            if (particles.length > 0) {
+                requestAnimationFrame(animateFireworks);
+            } else {
+                fireworksCanvas.style.display = 'none';
+            }
+        }
+
+        // Evento del botón animaciones
+        btnAnimaciones.addEventListener('click', (e) => {
+            e.preventDefault();
+            fireworksCanvas.style.display = 'block';
+            
+            // Crear múltiples explosiones
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * (window.innerHeight * 0.6);
+                    createFireworks(x, y);
+                }, i * 150);
+            }
+            
+            animateFireworks();
         });
     </script>
 </body>
