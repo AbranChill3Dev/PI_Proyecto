@@ -1,78 +1,133 @@
-/* --- ESTILOS BASE Y FONDO --- */
+/* TUS ESTILOS ORIGINALES (NO TOCADOS) */
 .fondo-estadisticas {
-    width: 100%; min-height: 100vh;
+    width: 100%; min-height: 100vh; height: auto; 
     background-image: url('../MULTIMEDIA/Background.jpg');
-    background-size: cover; background-position: center; background-attachment: fixed;
+    background-size: cover; background-position: center; background-repeat: repeat; background-attachment: fixed;
     display: flex; justify-content: center; align-items: flex-start;
-    padding-top: 100px; padding-bottom: 50px;
+    padding-top: 100px; padding-bottom: 50px; box-sizing: border-box;
 }
 
-/* --- NAVEGACIÓN RESTAURADA --- */
-.navegacion-pais {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;
+body { overflow-y: auto !important; height: auto !important; }
+
+.header-stats {
+    width: 100%; height: 60px; background-color: #000000;
+    display: flex; justify-content: center; align-items: center;
+    border-bottom: 2px solid rgba(0, 255, 47, 0.821);
+    position: fixed; top: 0; z-index: 1000;
 }
 
-.btn-nav {
-    background: none; border: none; font-size: 1.5rem; color: #333;
-    cursor: pointer; padding: 10px; transition: 0.2s;
+.header-stats h1 { font-family: "Zen Dots", sans-serif; color: #ffffff; font-size: 1.2rem; letter-spacing: 3px; }
+
+.boton-volver { position: absolute; left: 20px; color: #ffffff; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+
+.tarjeta-informe {
+    width: 90%; max-width: 450px; height: auto !important; display: block; 
+    background-color: #ffffff; border: 2px solid #000000; border-radius: 20px;
+    padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background: linear-gradient(to bottom, #ffffff 85%, #d1ffd4 100%);
+    margin-bottom: 20px; overflow: hidden;
 }
 
-.btn-nav:hover { color: #10be39; transform: scale(1.1); }
+.navegacion-pais { display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+.titulo-pais { font-family: "Zen Dots", sans-serif; color: #10be39; font-size: 1.8rem; text-transform: uppercase; text-align: center; }
+.btn-nav { background: none; border: none; font-size: 1.5rem; color: #333; cursor: pointer; padding: 10px; }
+.contenedor-interno { width: 100%; text-align: center; }
+.subtitulo { font-family: "Zen Dots", sans-serif; font-size: 0.8rem; color: #000; margin-bottom: 20px; }
+.contenedor-grafico { position: relative; width: 220px; height: 220px; margin: 0 auto 20px auto; max-width: 100%; }
+.grafico-pastel { width: 100%; height: 100%; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.5s ease; }
+.leyenda-datos { display: flex; justify-content: space-between; width: 100%; padding: 0 10px; margin-bottom: 25px; gap: 15px; }
+.columna-leyenda { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.item-leyenda { display: flex; align-items: center; background-color: rgba(255, 255, 255, 0.6); padding: 5px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05); }
+.punto-color { width: 15px; height: 15px; border-radius: 4px; margin-right: 8px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.2); }
+.item-leyenda span { font-family: Arial, sans-serif; font-weight: bold; font-size: 0.75rem; color: #333; line-height: 1.2; }
 
-.titulo-pais { font-family: "Zen Dots", sans-serif; font-size: 1.6rem; text-align: center; margin: 0; }
+/* --- NUEVAS CLASES PARA EL REPRODUCTOR CUSTOM --- */
 
-/* --- REPRODUCTOR EN MINI-CARDS --- */
 .thumbnail-container {
-    position: relative; width: 100%; background: #000; border-radius: 8px; overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: black;
+    cursor: pointer;
 }
 
 .video-preview {
-    width: 100%; height: 100px; object-fit: cover; display: block; transition: 0.3s;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s ease;
 }
 
 .custom-controls {
-    position: absolute; bottom: 0; left: 0; right: 0; height: 35px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 35px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 10px; opacity: 0; transition: 0.3s; z-index: 10;
+    padding: 0 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
 }
 
 .thumbnail-container:hover .custom-controls,
-.thumbnail-container:fullscreen .custom-controls { opacity: 1; }
+.thumbnail-container:fullscreen .custom-controls {
+    opacity: 1;
+}
 
-.custom-controls button { background: transparent; border: none; color: white; cursor: pointer; font-size: 1rem; }
+.custom-controls button {
+    background: transparent; border: none;
+    color: white; font-size: 1rem; cursor: pointer;
+}
+
+.right-controls { display: flex; align-items: center; gap: 8px; }
+
+.video-settings { position: relative; }
 
 .filters-menu {
-    display: none; position: absolute; bottom: 45px; right: 0;
-    background: #000; border: 1px solid #10be39; border-radius: 8px;
-    padding: 8px; width: 130px; z-index: 100;
+    display: none;
+    position: absolute;
+    bottom: 40px; right: 0;
+    background: #000;
+    border: 1px solid rgba(0, 255, 47, 0.8);
+    border-radius: 8px;
+    padding: 8px; width: 130px;
 }
 
 .filters-menu.active { display: block; }
 
-.filters-menu p { font-family: "Zen Dots", sans-serif; font-size: 0.5rem; color: #10be39; text-align: center; margin-bottom: 5px; }
-
-.filters-menu button {
-    display: block; width: 100%; color: white; text-align: left;
-    padding: 5px; font-size: 0.7rem; border: none; background: transparent; cursor: pointer;
+.filters-menu p {
+    font-family: "Zen Dots", sans-serif;
+    font-size: 0.5rem; color: rgba(0, 255, 47, 0.8);
+    text-align: center; margin-bottom: 5px;
 }
 
-.filters-menu button:hover { background: rgba(16, 190, 57, 0.2); color: #10be39; }
+.filters-menu button {
+    display: block; width: 100%;
+    color: white; font-size: 0.7rem;
+    padding: 5px; text-align: left;
+}
+
+.filters-menu button:hover { background: rgba(0, 255, 47, 0.2); }
 
 /* --- FILTROS --- */
 .filter-blur { filter: blur(10px); }
 .filter-pixel { filter: contrast(150%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(3) contrast(1.5); }
 
-/* --- PANTALLA COMPLETA --- */
-.thumbnail-container:fullscreen { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
-.thumbnail-container:fullscreen .video-preview { height: 100vh; width: 100vw; object-fit: contain; }
+/* PANTALLA COMPLETA */
+.thumbnail-container:fullscreen {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+}
+.thumbnail-container:fullscreen .video-preview {
+    height: 100vh; width: 100vw; object-fit: contain;
+}
 
-/* --- TUS OTROS ESTILOS (IGUALES) --- */
-.tarjeta-informe { width: 90%; max-width: 450px; background: white; border-radius: 20px; padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5); margin: auto; }
-.grafico-pastel { width: 220px; height: 220px; margin: auto; border-radius: 50%; }
-.lista-jugadores { text-align: center; margin-top: 20px; }
-.mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-.mini-card { background: #f9f9f9; border-radius: 10px; overflow: hidden; border: 1px solid #ddd; }
-.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; padding: 8px; margin: 0; text-align: center; }
+/* --- CONTINUACIÓN DE TUS ESTILOS --- */
+.lista-jugadores { width: 100%; text-align: center; }
+.info-tecnica h4, .lista-jugadores h4 { font-family: "Zen Dots", sans-serif; font-size: 1rem; margin-top: 20px; margin-bottom: 10px; color: #000; text-decoration: underline; text-transform: uppercase; }
+.info-tecnica p, .lista-jugadores p { font-family: "Zen Dots", sans-serif; font-size: 0.85rem; margin-bottom: 5px; color: #333; }
+.mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-top: 15px; padding-bottom: 10px; }
+.mini-card { background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; color: #333; padding: 8px 5px; text-align: center; margin: 0; width: 100%; background-color: white; border-top: 1px solid #eee; }
