@@ -11,10 +11,103 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>FifaScan</title>
+    <title>FifaScan - Galería</title>
+
+    <style>
+        /* ESTILOS PARA LOS AJUSTES Y FILTROS */
+        .thumbnail-container {
+            position: relative;
+            overflow: visible; /* Para que el menú no se corte */
+        }
+
+        .video-preview {
+            width: 100%;
+            transition: filter 0.3s ease;
+            display: block;
+        }
+
+        .video-settings {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+
+        .settings-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg);
+            background: #00ff00;
+            color: black;
+        }
+
+        .filters-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 45px;
+            background: #111;
+            border: 1px solid #00ff00;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            width: 140px;
+        }
+
+        .filters-menu.active {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .filters-menu p {
+            color: #00ff00;
+            font-family: 'Zen Dots', sans-serif;
+            font-size: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filters-menu button {
+            display: block;
+            width: 100%;
+            background: transparent;
+            color: #eee;
+            border: none;
+            padding: 8px 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .filters-menu button:hover {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+        }
+
+        /* --- CLASES DE FILTROS --- */
+        .filter-blur { filter: blur(8px); }
+        .filter-pixel { filter: contrast(150%) brightness(110%) blur(1px); image-rendering: pixelated; }
+        .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(300%) contrast(150%); }
+    </style>
 </head>
 
 <body>
@@ -22,7 +115,6 @@
         <a href="../index.html" class="boton-volver">
             <i class="fas fa-chevron-left"></i>
         </a>
-
         <h1>GALERIA</h1>
     </header>
 
@@ -35,6 +127,17 @@
                         <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
                     </video>
                     <span class="duracion">0:26</span>
+                    
+                    <div class="video-settings">
+                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>Filtros</p>
+                            <button onclick="applyFilter(this, 'none')">Normal</button>
+                            <button onclick="applyFilter(this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-titulo">MEX VS ALE 2018</h3>
@@ -50,6 +153,17 @@
                         <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
                     </video>
                     <span class="duracion">0:26</span>
+
+                    <div class="video-settings">
+                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>Filtros</p>
+                            <button onclick="applyFilter(this, 'none')">Normal</button>
+                            <button onclick="applyFilter(this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-titulo">GOLES MÉXICO</h3>
@@ -65,6 +179,17 @@
                         <source src="/MULTIMEDIA/ESPAMA.mp4" type="video/mp4">
                     </video>
                     <span class="duracion">0:26</span>
+
+                    <div class="video-settings">
+                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>Filtros</p>
+                            <button onclick="applyFilter(this, 'none')">Normal</button>
+                            <button onclick="applyFilter(this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-titulo">ESPAÑA CAMPEON 2010</h3>
@@ -74,100 +199,52 @@
                 </div>
             </div>
 
-            <div class="video-card">
-                <div class="thumbnail-container">
-                    <video controls class="video-preview" poster="/MULTIMEDIA/GOLCOREA.jpg">
-                        <source src="/MULTIMEDIA/GOLCOREA.mp4" type="video/mp4">
-                    </video>
-                    <span class="duracion">0:26</span>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-titulo">GOL DE COREA CONTRA ALEMANIA</h3>
-                    <div class="meta-data">
-                        <span><i class="fas fa-flag"></i> Corea</span>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <video controls class="video-preview" poster="/MULTIMEDIA/iniesta.jpg">
-                            <source src="/MULTIMEDIA/espania.mp4" type="video/mp4">
-                        </video>
-                        <span class="duracion">0:26</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-titulo">GOLES IMPRESIONANTES DE ESPANA</h3>
-                        <div class="meta-data">
-                            <span><i class="fas fa-flag"></i> Espana</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <video controls class="video-preview" poster="/MULTIMEDIA/URUGUAY.jpg">
-                            <source src="/MULTIMEDIA/uruguaygol.mp4" type="video/mp4">
-                        </video>
-                        <span class="duracion">0:26</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-titulo">LOS GOLES MAS IMPORTANTES DE URUGUAY</h3>
-                        <div class="meta-data">
-                            <span><i class="fas fa-flag"></i> URUGUAY</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <video controls class="video-preview" poster="/MULTIMEDIA/COLOMBIA.jpg">
-                            <source src="/MULTIMEDIA/colombia goles.mp4" type="video/mp4">
-                        </video>
-                        <span class="duracion">0:26</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-titulo">LOS GOLES DE COLOMBIA MUNDIAL 2018</h3>
-                        <div class="meta-data">
-                            <span><i class="fas fa-flag"></i> COLOMBIA</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <video controls class="video-preview" poster="/MULTIMEDIA/JAPON.jpg">
-                            <source src="/MULTIMEDIA/japon goles.mp4" type="video/mp4">
-                        </video>
-                        <span class="duracion">0:26</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-titulo">JAPON Y SUS MEJORES GOLES EN EL MUNDIAL 2022</h3>
-                        <div class="meta-data">
-                            <span><i class="fas fa-flag"></i> JAPON</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <video controls class="video-preview" poster="/MULTIMEDIA/TUNEZ.jpg">
-                            <source src="/MULTIMEDIA/TUNEZ GOLES.mp4" type="video/mp4">
-                        </video>
-                        <span class="duracion">0:26</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-titulo">TUNEZ Y SUS MEJORES GOLES</h3>
-                        <div class="meta-data">
-                            <span><i class="fas fa-flag"></i> TUNEZ</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-        </div>
     </section>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Manejo de la apertura de menús
+            const settingsBtns = document.querySelectorAll('.settings-btn');
+            
+            settingsBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const menu = btn.nextElementSibling;
+                    
+                    // Cerrar otros menús que pudieran estar abiertos
+                    document.querySelectorAll('.filters-menu').forEach(m => {
+                        if(m !== menu) m.classList.remove('active');
+                    });
+                    
+                    menu.classList.toggle('active');
+                });
+            });
+
+            // Cerrar menú si se hace clic en cualquier otra parte de la pantalla
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.filters-menu').forEach(m => m.classList.remove('active'));
+            });
+        });
+
+        // Función para aplicar el filtro al video específico
+        function applyFilter(element, filterType) {
+            // Buscamos el contenedor padre más cercano y luego el video
+            const container = element.closest('.thumbnail-container');
+            const video = container.querySelector('video');
+            
+            // Removemos todas las clases de filtro existentes
+            video.classList.remove('filter-blur', 'filter-pixel', 'filter-thermal');
+            
+            // Aplicamos la nueva clase si no es 'none'
+            if (filterType !== 'none') {
+                video.classList.add(`filter-${filterType}`);
+            }
+            
+            // Cerramos el menú después de seleccionar
+            element.parentElement.classList.remove('active');
+        }
+    </script>
 </body>
 
 </html>
