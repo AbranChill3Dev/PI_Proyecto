@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href=/CSS/default.css">
     <link rel="stylesheet" href="/CSS/galeria.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
                     const card = `
                     <div class="video-card">
                         <div class="thumbnail-container">
-                            <video class="video-preview" poster="${vid.poster}" preload="none">
-                                <source data-src="${vid.src}" type="video/mp4">
+                            <video class="video-preview" poster="${vid.poster}">
+                                <source src="${vid.src}" type="video/mp4">
                             </video>
                             <span class="duracion">0:26</span>
                             
@@ -90,14 +90,6 @@
 
                 const togglePlay = (e) => {
                     e.stopPropagation();
-                    
-                    // Lógica de carga bajo demanda
-                    const source = video.querySelector('source');
-                    if (!video.src && source.dataset.src) {
-                        video.src = source.dataset.src;
-                        video.load();
-                    }
-
                     if (video.paused) {
                         video.play();
                         playBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -106,7 +98,6 @@
                         playBtn.innerHTML = '<i class="fas fa-play"></i>';
                     }
                 };
-
                 playBtn.addEventListener('click', togglePlay);
                 video.addEventListener('click', togglePlay);
 
