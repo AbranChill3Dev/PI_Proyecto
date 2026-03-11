@@ -6,6 +6,10 @@ const datosPaises = [
         stats: { victorias: "12.5%", empates: "12.5%", derrotas: "12.5%", favor: "25%", contra: "37.5%" },
         coloresLeyenda: { victorias: "#228B22", empates: "#1E7E68", derrotas: "#458B74", favor: "#6CA6CD", contra: "#87CEEB" },
         gradiente: `conic-gradient(#228B22 0% 12.5%, #1E7E68 12.5% 25%, #458B74 25% 37.5%, #6CA6CD 37.5% 62.5%, #87CEEB 62.5% 100%)`,
+        videos: [
+            { titulo: "MEX VS ALE 2018", poster: "/MULTIMEDIA/MEXVSAL.jpg", src: "/MULTIMEDIA/ALEMANIAVSMEX.mp4" },
+            { titulo: "GOLES MÉXICO", poster: "/MULTIMEDIA/GOLESME.jpg", src: "/MULTIMEDIA/GolesMexico.mp4" }
+        ],
         plantilla: `
             <div class="info-tecnica">
                 <h4>DIRECCIÓN TÉCNICA</h4>
@@ -48,6 +52,10 @@ const datosPaises = [
         stats: { victorias: "50%", empates: "20%", derrotas: "10%", favor: "10%", contra: "10%" },
         coloresLeyenda: { victorias: "#C60B1E", empates: "#FFC400", derrotas: "#000080", favor: "#FFFFFF", contra: "#A9A9A9" },
         gradiente: `conic-gradient(#C60B1E 0% 50%, #FFC400 50% 70%, #000080 70% 80%, #FFFFFF 80% 90%, #A9A9A9 90% 100%)`,
+        videos: [
+            { titulo: "ESPAÑA CAMPEÓN 2010", poster: "/MULTIMEDIA/españa.jpg", src: "/MULTIMEDIA/ESPAMA.mp4" },
+            { titulo: "GOLES IMPRESIONANTES", poster: "/MULTIMEDIA/iniesta.jpg", src: "/MULTIMEDIA/espania.mp4" }
+        ],
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #C60B1E">DIRECCIÓN TÉCNICA</h4>
@@ -88,6 +96,9 @@ const datosPaises = [
         stats: { victorias: "45%", empates: "25%", derrotas: "10%", favor: "10%", contra: "10%" },
         coloresLeyenda: { victorias: "#5cb8ff", empates: "#000000", derrotas: "#FFFFFF", favor: "#FCD116", contra: "#808080" },
         gradiente: `conic-gradient(#5cb8ff 0% 45%, #000000 45% 70%, #FFFFFF 70% 80%, #FCD116 80% 90%, #808080 90% 100%)`,
+        videos: [
+            { titulo: "GOLES IMPORTANTES", poster: "/MULTIMEDIA/URUGUAY.jpg", src: "/MULTIMEDIA/uruguaygol.mp4" }
+        ],
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #5cb8ff">DIRECCIÓN TÉCNICA</h4>
@@ -125,6 +136,9 @@ const datosPaises = [
         stats: { victorias: "40%", empates: "30%", derrotas: "10%", favor: "15%", contra: "5%" },
         coloresLeyenda: { victorias: "#FCD116", empates: "#003893", derrotas: "#CE1126", favor: "#FFFFFF", contra: "#000000" },
         gradiente: `conic-gradient(#FCD116 0% 40%, #003893 40% 70%, #CE1126 70% 80%, #FFFFFF 80% 95%, #000000 95% 100%)`,
+        videos: [
+            { titulo: "GOLES MUNDIAL 2018", poster: "/MULTIMEDIA/COLOMBIA.jpg", src: "/MULTIMEDIA/colombia goles.mp4" }
+        ],
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #CE1126">DIRECCIÓN TÉCNICA</h4>
@@ -164,6 +178,9 @@ const datosPaises = [
         stats: { victorias: "50%", empates: "12.5%", derrotas: "12.5%", favor: "15%", contra: "10%" },
         coloresLeyenda: { victorias: "#00008b", empates: "#87CEEB", derrotas: "#FFFFFF", favor: "#1E90FF", contra: "#B0C4DE" },
         gradiente: `conic-gradient(#00008b 0% 50%, #87CEEB 50% 62.5%, #FFFFFF 62.5% 75%, #1E90FF 75% 90%, #B0C4DE 90% 100%)`,
+        videos: [
+            { titulo: "SUS MEJORES GOLES", poster: "/MULTIMEDIA/JAPON.jpg", src: "/MULTIMEDIA/japon goles.mp4" }
+        ],
         plantilla: `
             <div class="info-tecnica">
                 <h4 style="color: #00008b">DIRECCIÓN TÉCNICA</h4>
@@ -203,6 +220,9 @@ const datosPaises = [
         stats: { victorias: "37.5%", empates: "25%", derrotas: "12.5%", favor: "15%", contra: "10%" },
         coloresLeyenda: { victorias: "#EC0F31", empates: "#000000", derrotas: "#0047A0", favor: "#FFFFFF", contra: "#FFA07A" },
         gradiente: `conic-gradient(#EC0F31 0% 37.5%, #000000 37.5% 62.5%, #0047A0 62.5% 75%, #FFFFFF 75% 90%, #FFA07A 90% 100%)`,
+        videos: [
+            { titulo: "GOL VS ALEMANIA", poster: "/MULTIMEDIA/GOLCOREA.jpg", src: "/MULTIMEDIA/GOLCOREA.mp4" }
+        ],
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #EC0F31">DIRECCIÓN TÉCNICA</h4>
@@ -241,6 +261,9 @@ const datosPaises = [
         stats: { victorias: "35%", empates: "30%", derrotas: "15%", favor: "10%", contra: "10%" },
         coloresLeyenda: { victorias: "#007749", empates: "#FFC425", derrotas: "#000000", favor: "#FFFFFF", contra: "#E03C31" },
         gradiente: `conic-gradient(#007749 0% 35%, #FFC425 35% 65%, #000000 65% 80%, #FFFFFF 80% 90%, #E03C31 90% 100%)`,
+        videos: [
+            { titulo: "Tshabalala  2010", poster: "/MULTIMEDIA/Celebracion.jpg", src: "/MULTIMEDIA/Suadafrica.mp4" }
+        ], 
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #007749">DIRECCIÓN TÉCNICA</h4>
@@ -278,6 +301,9 @@ const datosPaises = [
         stats: { victorias: "30%", empates: "35%", derrotas: "20%", favor: "10%", contra: "5%" },
         coloresLeyenda: { victorias: "#E70013", empates: "#FFFFFF", derrotas: "#000000", favor: "#A52A2A", contra: "#808080" },
         gradiente: `conic-gradient(#E70013 0% 30%, #FFFFFF 30% 65%, #000000 65% 85%, #A52A2A 85% 95%, #808080 95% 100%)`,
+        videos: [
+            { titulo: "SUS MEJORES GOLES", poster: "/MULTIMEDIA/TUNEZ.jpg", src: "/MULTIMEDIA/TUNEZ GOLES.mp4" }
+        ],
         plantilla: `
              <div class="info-tecnica">
                 <h4 style="color: #E70013">DIRECCIÓN TÉCNICA</h4>
@@ -323,6 +349,7 @@ if (paisParam !== null && !isNaN(paisParam)) {
 const tituloPais = document.getElementById('titulo-pais');
 const grafico = document.getElementById('grafico');
 const listaJugadores = document.getElementById('lista-jugadores');
+const contenedorVideos = document.getElementById('contenedor-videos'); // NUEVA REFERENCIA
 const btnAnt = document.getElementById('btn-ant');
 const btnSig = document.getElementById('btn-sig');
 
@@ -375,7 +402,107 @@ function cargarPais(indice) {
     colores.contra.style.backgroundColor = datos.coloresLeyenda.contra;
 
     listaJugadores.innerHTML = datos.plantilla;
+
+    // --- CARGAR VIDEOS DINÁMICOS ---
+    contenedorVideos.innerHTML = ''; // Limpiamos los videos anteriores
+
+    if (datos.videos.length > 0) {
+        datos.videos.forEach(vid => {
+            const cardHTML = `
+            <div class="mini-card">
+                <div class="thumbnail-container">
+                    <video class="video-preview" poster="${vid.poster}">
+                        <source src="${vid.src}" type="video/mp4">
+                    </video>
+                    <div class="custom-controls">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                        <div class="right-controls">
+                            <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                            <div class="video-settings">
+                                <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                <div class="filters-menu">
+                                    <p>FILTROS</p>
+                                    <button data-filter="none">Normal</button>
+                                    <button data-filter="blur">Desenfoque</button>
+                                    <button data-filter="pixel">Pixelado</button>
+                                    <button data-filter="thermal">Térmica</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>${vid.titulo}</p>
+            </div>
+            `;
+            contenedorVideos.innerHTML += cardHTML;
+        });
+    } else {
+        // Si un país no tiene videos (como Sudáfrica)
+        contenedorVideos.innerHTML = `<p style="grid-column: 1/-1; text-align:center; font-family:'Zen Dots', sans-serif; font-size: 0.8rem; color:#666;">Próximamente más videos...</p>`;
+    }
+
+    // Volver a activar las funciones de los botones de video
+    activarControlesVideo();
 }
+
+// Función para darle vida a los controles personalizados
+function activarControlesVideo() {
+    document.querySelectorAll('.thumbnail-container').forEach(container => {
+        const video = container.querySelector('video');
+        const playBtn = container.querySelector('.play-btn');
+        const fsBtn = container.querySelector('.fullscreen-btn');
+        const settingsBtn = container.querySelector('.settings-btn');
+        const filtersMenu = container.querySelector('.filters-menu');
+
+        // Play/Pause
+        const togglePlay = (e) => {
+            e.stopPropagation();
+            if (video.paused) {
+                video.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        };
+        playBtn.addEventListener('click', togglePlay);
+        video.addEventListener('click', togglePlay);
+
+        // Fullscreen del CONTENEDOR
+        fsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!document.fullscreenElement) {
+                container.requestFullscreen();
+                fsBtn.innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                document.exitFullscreen();
+                fsBtn.innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        });
+
+        // Menu Filtros
+        settingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filtersMenu.classList.toggle('active');
+        });
+
+        // Aplicar Filtro
+        container.querySelectorAll('.filters-menu button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const filter = btn.dataset.filter;
+                video.classList.remove("filter-blur", "filter-pixel", "filter-thermal");
+                if (filter !== "none") video.classList.add("filter-" + filter);
+                filtersMenu.classList.remove("active");
+            });
+        });
+    });
+}
+
+// Cerrar filtros al clickear fuera
+document.addEventListener("click", () => {
+    document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
+});
 
 btnAnt.addEventListener('click', () => {
     indiceActual--;
