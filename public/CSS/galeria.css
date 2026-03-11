@@ -1,325 +1,127 @@
+/* MANTENER TU DISEÑO ORIGINAL */
 .fondo-galeria {
-width:100%;
-min-height:100vh;
-
-background-image:url('../MULTIMEDIA/Background.jpg');
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-
-padding-top:80px;
-padding-bottom:30px;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../MULTIMEDIA/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 30px;
 }
 
-.header-galeria{
-
-width:100%;
-height:60px;
-
-background:#000;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-border-bottom:2px solid rgba(0,255,47,0.8);
-
-position:fixed;
-top:0;
-z-index:1000;
-
+.header-galeria {
+    width: 100%; height: 60px;
+    background: #000;
+    display: flex; justify-content: center; align-items: center;
+    border-bottom: 2px solid rgba(0, 255, 47, 0.8);
+    position: fixed; top: 0; z-index: 1000;
 }
 
-.header-galeria h1{
-
-font-family:"Zen Dots",sans-serif;
-color:#fff;
-font-size:1.2rem;
-letter-spacing:3px;
-
+.header-galeria h1 {
+    font-family: "Zen Dots", sans-serif;
+    color: #fff; font-size: 1.2rem; letter-spacing: 3px;
 }
 
-.boton-volver{
-
-position:absolute;
-left:20px;
-
-color:white;
-
-font-size:1.5rem;
-
-text-decoration:none;
-
+.wrapper-contenido {
+    width: 90%; margin: auto;
+    display: flex; flex-direction: column; gap: 20px;
 }
 
-.wrapper-contenido{
-
-width:90%;
-margin:auto;
-
-display:flex;
-flex-direction:column;
-
-gap:20px;
-
+.video-card {
+    width: 100%; background: black;
+    border-radius: 15px; overflow: hidden;
+    border: 1px solid #333; transition: .3s;
 }
 
-.video-card{
-
-width:100%;
-
-background:black;
-
-border-radius:15px;
-
-overflow:hidden;
-
-border:1px solid #333;
-
-transition:.3s;
-
+.thumbnail-container {
+    position: relative; width: 100%; cursor: pointer;
+    background: black;
 }
 
-.thumbnail-container{
-
-position:relative;
-
-width:100%;
-
-cursor:pointer;
-
+.video-preview {
+    width: 100%; aspect-ratio: 16/9;
+    object-fit: cover; display: block;
+    transition: filter 0.3s;
 }
 
-.video-preview{
-
-width:100%;
-
-aspect-ratio:16/9;
-
-object-fit:cover;
-
-display:block;
-
+/* --- NUEVOS CONTROLES CUSTOM --- */
+.custom-controls {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 15px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
 }
 
-.duracion{
-
-position:absolute;
-bottom:8px;
-right:8px;
-
-background:rgba(0,0,0,0.8);
-
-color:white;
-
-padding:2px 6px;
-
-border-radius:4px;
-
-font-size:11px;
-
+.thumbnail-container:hover .custom-controls,
+.thumbnail-container:fullscreen .custom-controls {
+    opacity: 1;
 }
 
-.video-info{
-
-padding:15px;
-
+.custom-controls button {
+    background: transparent; border: none;
+    color: white; font-size: 1.3rem;
+    cursor: pointer; transition: 0.2s;
 }
 
-.video-titulo{
-
-font-family:"Zen Dots",sans-serif;
-
-font-size:.85rem;
-
-color:rgba(0,255,47,0.8);
-
-margin-bottom:8px;
-
+.custom-controls button:hover {
+    color: rgba(0, 255, 47, 0.8);
 }
 
-.meta-data{
-
-color:#aaa;
-
-font-size:.75rem;
-
+.right-controls {
+    display: flex; align-items: center; gap: 15px;
 }
 
-.meta-data i{
-color:rgba(0,255,47,0.8);
+/* ENGRANAJE Y MENÚ */
+.video-settings { position: relative; }
+
+.filters-menu {
+    display: none;
+    position: absolute;
+    bottom: 70px; right: 0;
+    background: #000;
+    border: 2px solid rgba(0, 255, 47, 0.8);
+    border-radius: 10px;
+    padding: 10px; width: 160px;
 }
 
+.filters-menu.active { display: block; }
 
-/* FULLSCREEN */
-
-.thumbnail-container:fullscreen{
-
-width:100vw;
-height:100vh;
-
-background:black;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
+.filters-menu p {
+    font-family: "Zen Dots", sans-serif;
+    font-size: .7rem; color: rgba(0, 255, 47, 0.8);
+    text-align: center; margin-bottom: 10px;
 }
 
-.thumbnail-container:fullscreen video{
-
-width:100%;
-height:100%;
-
-object-fit:contain;
-
+.filters-menu button {
+    display: block; width: 100%;
+    color: white; text-align: left;
+    padding: 8px; font-size: 0.8rem;
 }
 
-
-/* ENGRANAJE */
-
-.video-settings{
-
-position:absolute;
-
-top:20px;
-right:20px;
-
-z-index:9999;
-
-display:none;
-
+/* PANTALLA COMPLETA FIX */
+.thumbnail-container:fullscreen {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
 }
 
-.thumbnail-container:fullscreen .video-settings{
-display:block;
+.thumbnail-container:fullscreen .video-preview {
+    height: 100vh; width: 100vw; object-fit: contain;
 }
-
-
-/* BOTON */
-
-.settings-btn{
-
-background:rgba(0,0,0,0.8);
-
-color:rgba(0,255,47,0.9);
-
-border:2px solid rgba(0,255,47,0.8);
-
-border-radius:50%;
-
-width:45px;
-height:45px;
-
-font-size:20px;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.settings-btn:hover{
-
-transform:rotate(90deg);
-
-background:rgba(0,255,47,0.9);
-
-color:black;
-
-}
-
-
-/* MENU */
-
-.filters-menu{
-
-display:none;
-
-position:absolute;
-
-top:60px;
-right:0;
-
-background:#000;
-
-border:2px solid rgba(0,255,47,0.9);
-
-border-radius:10px;
-
-padding:10px;
-
-width:160px;
-
-}
-
-.filters-menu.active{
-display:block;
-}
-
-.filters-menu p{
-
-font-family:"Zen Dots",sans-serif;
-
-font-size:.7rem;
-
-color:rgba(0,255,47,0.8);
-
-margin-bottom:8px;
-
-text-align:center;
-
-}
-
-.filters-menu button{
-
-display:block;
-
-width:100%;
-
-background:transparent;
-
-color:white;
-
-border:none;
-
-padding:8px;
-
-cursor:pointer;
-
-text-align:left;
-
-}
-
-.filters-menu button:hover{
-
-background:rgba(0,255,47,0.2);
-
-color:rgba(0,255,47,1);
-
-}
-
 
 /* FILTROS */
+.filter-blur { filter: blur(15px); }
+.filter-pixel { filter: contrast(180%) brightness(110%) blur(1px); image-rendering: pixelated; }
+.filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%); }
 
-.filter-blur{
-filter:blur(15px);
-}
-
-.filter-pixel{
-
-filter:contrast(180%) brightness(110%) blur(1px);
-
-image-rendering:pixelated;
-
-}
-
-.filter-thermal{
-
-filter:invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%);
-
-}
+.video-info { padding: 15px; }
+.video-titulo { font-family: "Zen Dots", sans-serif; font-size: .85rem; color: rgba(0, 255, 47, 0.8); }
+.meta-data { color: #aaa; font-size: .75rem; }

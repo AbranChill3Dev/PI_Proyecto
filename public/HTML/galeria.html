@@ -1,384 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="/CSS/default.css">
     <link rel="stylesheet" href="/CSS/galeria.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <title>FifaScan</title>
+    <title>FifaScan - Galería</title>
 </head>
-
 <body>
 
     <header class="header-galeria">
-        <a href="../index.html" class="boton-volver">
-            <i class="fas fa-chevron-left"></i>
-        </a>
+        <a href="../index.html" class="boton-volver"><i class="fas fa-chevron-left"></i></a>
         <h1>GALERIA</h1>
     </header>
 
     <section class="fondo-galeria">
-
         <div class="wrapper-contenido">
 
-            <!-- VIDEO CARD -->
-            <div class="video-card">
-                <div class="thumbnail-container">
+            <script>
+                const listaVideos = [
+                    { titulo: "MEX VS ALE 2018", poster: "/MULTIMEDIA/MEXVSAL.jpg", src: "/MULTIMEDIA/ALEMANIAVSMEX.mp4", pais: "MÉXICO" },
+                    { titulo: "GOLES MÉXICO", poster: "/MULTIMEDIA/GOLESME.jpg", src: "/MULTIMEDIA/GolesMexico.mp4", pais: "MÉXICO" },
+                    { titulo: "ESPAÑA CAMPEON 2010", poster: "/MULTIMEDIA/españa.jpg", src: "/MULTIMEDIA/ESPAMA.mp4", pais: "ESPAÑA" },
+                    { titulo: "GOL DE COREA CONTRA ALEMANIA", poster: "/MULTIMEDIA/GOLCOREA.jpg", src: "/MULTIMEDIA/GOLCOREA.mp4", pais: "COREA" },
+                    { titulo: "GOLES IMPRESIONANTES DE ESPAÑA", poster: "/MULTIMEDIA/iniesta.jpg", src: "/MULTIMEDIA/espania.mp4", pais: "ESPAÑA" },
+                    { titulo: "LOS GOLES MAS IMPORTANTES DE URUGUAY", poster: "/MULTIMEDIA/URUGUAY.jpg", src: "/MULTIMEDIA/uruguaygol.mp4", pais: "URUGUAY" },
+                    { titulo: "LOS GOLES DE COLOMBIA MUNDIAL 2018", poster: "/MULTIMEDIA/COLOMBIA.jpg", src: "/MULTIMEDIA/colombia goles.mp4", pais: "COLOMBIA" },
+                    { titulo: "JAPON Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/JAPON.jpg", src: "/MULTIMEDIA/japon goles.mp4", pais: "JAPÓN" },
+                    { titulo: "TUNEZ Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/TUNEZ.jpg", src: "/MULTIMEDIA/TUNEZ GOLES.mp4", pais: "TUNEZ" }
+                ];
 
-                    <video class="video-preview" poster="/MULTIMEDIA/MEXVSAL.jpg">
-                        <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
-                    </video>
+                const wrapper = document.querySelector('.wrapper-contenido');
 
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-
-                        <button class="settings-btn">
-                            <i class="fas fa-cog"></i>
-                        </button>
-
-                        <div class="filters-menu">
-
-                            <p>FILTROS</p>
-
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-
+                listaVideos.forEach((vid, index) => {
+                    const card = `
+                    <div class="video-card">
+                        <div class="thumbnail-container">
+                            <video class="video-preview" poster="${vid.poster}">
+                                <source src="${vid.src}" type="video/mp4">
+                            </video>
+                            <span class="duracion">0:26</span>
+                            
+                            <div class="custom-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                
+                                <div class="right-controls">
+                                    <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
+                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                    
+                                    <div class="video-settings">
+                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                        <div class="filters-menu">
+                                            <p>FILTROS</p>
+                                            <button data-filter="none">Normal</button>
+                                            <button data-filter="blur">Desenfoque</button>
+                                            <button data-filter="pixel">Pixelado</button>
+                                            <button data-filter="thermal">Cámara térmica</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">MEX VS ALE 2018</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> MÉXICO</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/GOLESME.jpg">
-                        <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
+                        <div class="video-info">
+                            <h3 class="video-titulo">${vid.titulo}</h3>
+                            <div class="meta-data"><span><i class="fas fa-flag"></i> ${vid.pais}</span></div>
                         </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">GOLES MÉXICO</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> MÉXICO</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/españa.jpg">
-                        <source src="/MULTIMEDIA/ESPAMA.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">ESPAÑA CAMPEON 2010</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> ESPAÑA</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/GOLCOREA.jpg">
-                        <source src="/MULTIMEDIA/GOLCOREA.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">GOL DE COREA CONTRA ALEMANIA</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> COREA</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/iniesta.jpg">
-                        <source src="/MULTIMEDIA/espania.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">GOLES IMPRESIONANTES DE ESPAÑA</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> ESPAÑA</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/URUGUAY.jpg">
-                        <source src="/MULTIMEDIA/uruguaygol.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">LOS GOLES MAS IMPORTANTES DE URUGUAY</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> URUGUAY</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/COLOMBIA.jpg">
-                        <source src="/MULTIMEDIA/colombia goles.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">LOS GOLES DE COLOMBIA MUNDIAL 2018</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> COLOMBIA</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/JAPON.jpg">
-                        <source src="/MULTIMEDIA/japon goles.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">JAPON Y SUS MEJORES GOLES EN EL MUNDIAL 2022</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> JAPÓN</span></div>
-                </div>
-            </div>
-
-
-            <div class="video-card">
-                <div class="thumbnail-container">
-
-                    <video class="video-preview" poster="/MULTIMEDIA/TUNEZ.jpg">
-                        <source src="/MULTIMEDIA/TUNEZ GOLES.mp4" type="video/mp4">
-                    </video>
-
-                    <span class="duracion">0:26</span>
-
-                    <div class="video-settings">
-                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-
-                        <div class="filters-menu">
-                            <p>FILTROS</p>
-                            <button data-filter="none">Normal</button>
-                            <button data-filter="blur">Desenfoque</button>
-                            <button data-filter="pixel">Pixelado</button>
-                            <button data-filter="thermal">Cámara térmica</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="video-info">
-                    <h3 class="video-titulo">TUNEZ Y SUS MEJORES GOLES</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> TUNEZ</span></div>
-                </div>
-            </div>
+                    </div>`;
+                    wrapper.innerHTML += card;
+                });
+            </script>
 
         </div>
     </section>
 
-
     <script>
+        // Lógica de funcionamiento para todos los reproductores
+        document.addEventListener('DOMContentLoaded', () => {
+            const containers = document.querySelectorAll('.thumbnail-container');
 
-        const videos = document.querySelectorAll(".video-preview");
+            containers.forEach(container => {
+                const video = container.querySelector('video');
+                const playBtn = container.querySelector('.play-btn');
+                const fsBtn = container.querySelector('.fullscreen-btn');
+                const volumeBtn = container.querySelector('.volume-btn');
+                const settingsBtn = container.querySelector('.settings-btn');
+                const filtersMenu = container.querySelector('.filters-menu');
 
-        videos.forEach(video => {
+                // 1. Play/Pause
+                const togglePlay = (e) => {
+                    e.stopPropagation();
+                    if (video.paused) {
+                        video.play();
+                        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        video.pause();
+                        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                };
+                playBtn.addEventListener('click', togglePlay);
+                video.addEventListener('click', togglePlay);
 
-            video.addEventListener("click", () => {
-
-                const container = video.closest(".thumbnail-container");
-
-                container.requestFullscreen();
-
-                video.setAttribute("controls", "true");
-
-            });
-
-        });
-
-        document.querySelectorAll(".settings-btn").forEach(btn => {
-
-            btn.addEventListener("click", e => {
-
-                e.stopPropagation();
-
-                const menu = btn.nextElementSibling;
-
-                document.querySelectorAll(".filters-menu").forEach(m => {
-                    if (m !== menu) m.classList.remove("active")
+                // 2. Fullscreen (Maximizar CONTENEDOR)
+                fsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!document.fullscreenElement) {
+                        container.requestFullscreen();
+                        fsBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                    } else {
+                        document.exitFullscreen();
+                        fsBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                    }
                 });
 
-                menu.classList.toggle("active");
+                // 3. Volumen
+                volumeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    video.muted = !video.muted;
+                    volumeBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+                });
 
+                // 4. Menú de Ajustes
+                settingsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    filtersMenu.classList.toggle('active');
+                });
+
+                // 5. Aplicar Filtros
+                container.querySelectorAll('.filters-menu button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const filter = btn.dataset.filter;
+                        video.classList.remove("filter-blur", "filter-pixel", "filter-thermal");
+                        if (filter !== "none") video.classList.add("filter-" + filter);
+                        filtersMenu.classList.remove("active");
+                    });
+                });
             });
 
-        });
-
-        document.querySelectorAll(".filters-menu button").forEach(btn => {
-
-            btn.addEventListener("click", e => {
-
-                e.stopPropagation();
-
-                const filter = btn.dataset.filter;
-
-                const container = btn.closest(".thumbnail-container");
-
-                const video = container.querySelector("video");
-
-                video.classList.remove(
-                    "filter-blur",
-                    "filter-pixel",
-                    "filter-thermal"
-                );
-
-                if (filter !== "none") {
-                    video.classList.add("filter-" + filter);
-                }
-
-                btn.parentElement.classList.remove("active");
-
+            // Cerrar menús al hacer click fuera
+            document.addEventListener("click", () => {
+                document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
             });
-
         });
-
-        document.addEventListener("click", () => {
-            document.querySelectorAll(".filters-menu")
-                .forEach(m => m.classList.remove("active"))
-        });
-
     </script>
-
 </body>
-
 </html>
