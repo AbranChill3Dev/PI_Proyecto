@@ -137,3 +137,97 @@
     width: 100vw;
     height: 100vh;
 }
+
+/* --- NUEVOS AJUSTES DE FILTROS --- */
+
+/* Oculto por defecto */
+.video-settings {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2147483647;
+    display: none; 
+}
+
+/* Solo visible cuando el contenedor está maximizado */
+.thumbnail-container:fullscreen .video-settings,
+.thumbnail-container:-webkit-full-screen .video-settings {
+    display: block;
+}
+
+.settings-btn {
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 255, 47, 0.821);
+    border: 1px solid rgba(0, 255, 47, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.settings-btn:hover {
+    transform: rotate(90deg);
+    background: rgba(0, 255, 47, 0.8);
+    color: black;
+}
+
+.filters-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: #000;
+    border: 1px solid rgba(0, 255, 47, 0.821);
+    padding: 10px;
+    border-radius: 8px;
+    width: 150px;
+}
+
+.filters-menu.active {
+    display: block;
+}
+
+.filters-menu p {
+    font-family: "Zen Dots", sans-serif;
+    font-size: 0.7rem;
+    color: rgba(0, 255, 47, 0.821);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.filters-menu button {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+.filters-menu button:hover {
+    background: rgba(0, 255, 47, 0.2);
+    color: rgba(0, 255, 47, 1);
+}
+
+/* --- ESTILOS DE LOS FILTROS (PIXELADO EXTREMO) --- */
+
+.filter-blur { 
+    filter: blur(15px); 
+}
+
+.filter-pixel {
+    /* Combinación para pixelado agresivo */
+    filter: contrast(180%) brightness(110%) blur(1px);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.filter-thermal {
+    filter: invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%);
+}

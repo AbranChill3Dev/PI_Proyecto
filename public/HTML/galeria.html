@@ -1,257 +1,270 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FifaScan - Galería Pro</title>
 
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/galeria.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        :root {
-            --neon-green: #00ff00;
-            --bg-dark: #0a0a0a;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            font-family: 'Zen Dots', sans-serif;
-            text-align: center;
-            color: var(--neon-green);
-        }
-
-        .wrapper-contenido {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .video-card {
-            background: #151515;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-
-        /* CONTENEDOR PRINCIPAL */
-        .thumbnail-container {
-            position: relative;
-            background: black;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        video {
-            width: 100%;
-            display: block;
-            transition: filter 0.2s ease;
-        }
-
-        /* ICONO DE ENGRANAJE - OCULTO POR DEFECTO */
-        .video-settings {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 2147483647; /* Para estar sobre el video en Fullscreen */
-            display: none; 
-        }
-
-        /* SOLO MOSTRAR EN PANTALLA COMPLETA */
-        .thumbnail-container:fullscreen .video-settings,
-        .thumbnail-container:-webkit-full-screen .video-settings {
-            display: block;
-        }
-
-        .settings-btn {
-            background: rgba(0, 0, 0, 0.8);
-            color: var(--neon-green);
-            border: 2px solid var(--neon-green);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-
-        /* MENÚ DE FILTROS */
-        .filters-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 55px;
-            background: rgba(10, 10, 10, 0.95);
-            border: 1px solid var(--neon-green);
-            padding: 15px;
-            border-radius: 8px;
-            width: 160px;
-            backdrop-filter: blur(5px);
-        }
-
-        .filters-menu.active {
-            display: block;
-        }
-
-        .filters-menu p {
-            font-family: 'Zen Dots', sans-serif;
-            font-size: 10px;
-            margin: 0 0 10px 0;
-            color: var(--neon-green);
-            text-align: center;
-        }
-
-        .filters-menu button {
-            display: block;
-            width: 100%;
-            background: transparent;
-            color: white;
-            border: none;
-            padding: 10px;
-            text-align: left;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .filters-menu button:hover {
-            background: var(--neon-green);
-            color: black;
-        }
-
-        /* --- FILTROS EXTREMOS --- */
-
-        /* Pixelado Pro: Bajamos resolución visual con mosaic */
-        .filter-pixel {
-            filter: blur(2px) contrast(150%) brightness(120%);
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
-            transform: scale(1.02); /* Evita bordes blancos */
-        }
-
-        .filter-thermal {
-            filter: invert(100%) hue-rotate(180deg) saturate(5) contrast(1.5);
-        }
-
-        .filter-blur {
-            filter: blur(20px);
-        }
-
-        .video-info {
-            padding: 15px;
-        }
-    </style>
+    <title>FifaScan</title>
 </head>
 
 <body>
+    <header class="header-galeria">
+        <a href="../index.html" class="boton-volver">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <h1>GALERIA</h1>
+    </header>
 
-    <h1>FIFASCAN GALLERY</h1>
+    <section class="fondo-galeria">
+        <div class="wrapper-contenido">
 
-    <section class="wrapper-contenido">
-        <div class="video-card">
-            <div class="thumbnail-container" onclick="openFullscreen(this)">
-                <video class="video-preview" poster="/MULTIMEDIA/MEXVSAL.jpg">
-                    <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
-                </video>
-                
-                <div class="video-settings">
-                    <button class="settings-btn" onclick="toggleMenu(event, this)">
-                        <i class="fas fa-cog"></i>
-                    </button>
-                    <div class="filters-menu">
-                        <p>MODOS DE VISIÓN</p>
-                        <button onclick="applyFilter(event, this, 'none')">ESTÁNDAR</button>
-                        <button onclick="applyFilter(event, this, 'blur')">DESENFOQUE</button>
-                        <button onclick="applyFilter(event, this, 'pixel')">PIXELADO 8-BIT</button>
-                        <button onclick="applyFilter(event, this, 'thermal')">TÉRMICA</button>
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/MEXVSAL.jpg">
+                        <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="video-info">
-                <h3>MÉXICO VS ALEMANIA</h3>
-            </div>
-        </div>
-
-        <div class="video-card">
-            <div class="thumbnail-container" onclick="openFullscreen(this)">
-                <video class="video-preview" poster="/MULTIMEDIA/GOLESME.jpg">
-                    <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
-                </video>
-                <div class="video-settings">
-                    <button class="settings-btn" onclick="toggleMenu(event, this)">
-                        <i class="fas fa-cog"></i>
-                    </button>
-                    <div class="filters-menu">
-                        <p>MODOS DE VISIÓN</p>
-                        <button onclick="applyFilter(event, this, 'none')">ESTÁNDAR</button>
-                        <button onclick="applyFilter(event, this, 'blur')">DESENFOQUE</button>
-                        <button onclick="applyFilter(event, this, 'pixel')">PIXELADO 8-BIT</button>
-                        <button onclick="applyFilter(event, this, 'thermal')">TÉRMICA</button>
-                    </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">MEX VS ALE 2018</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> MÉXICO</span></div>
                 </div>
             </div>
-            <div class="video-info">
-                <h3>GOLES MÉXICO</h3>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/GOLESME.jpg">
+                        <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">GOLES MÉXICO</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> MÉXICO</span></div>
+                </div>
             </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/españa.jpg">
+                        <source src="/MULTIMEDIA/ESPAMA.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">ESPAÑA CAMPEON 2010</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> MÉXICO</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/GOLCOREA.jpg">
+                        <source src="/MULTIMEDIA/GOLCOREA.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">GOL DE COREA CONTRA ALEMANIA</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> Corea</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/iniesta.jpg">
+                        <source src="/MULTIMEDIA/espania.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">GOLES IMPRESIONANTES DE ESPANA</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> Espana</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/URUGUAY.jpg">
+                        <source src="/MULTIMEDIA/uruguaygol.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">LOS GOLES MAS IMPORTANTES DE URUGUAY</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> URUGUAY</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/COLOMBIA.jpg">
+                        <source src="/MULTIMEDIA/colombia goles.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">LOS GOLES DE COLOMBIA MUNDIAL 2018</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> COLOMBIA</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/JAPON.jpg">
+                        <source src="/MULTIMEDIA/japon goles.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">JAPON Y SUS MEJORES GOLES EN EL MUNDIAL 2022</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> JAPON</span></div>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video controls class="video-preview" poster="/MULTIMEDIA/TUNEZ.jpg">
+                        <source src="/MULTIMEDIA/TUNEZ GOLES.mp4" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    <div class="video-settings">
+                        <button class="settings-btn" onclick="toggleMenu(event, this)"><i class="fas fa-cog"></i></button>
+                        <div class="filters-menu">
+                            <p>FILTROS</p>
+                            <button onclick="applyFilter(event, this, 'none')">Normal</button>
+                            <button onclick="applyFilter(event, this, 'blur')">Desenfoque</button>
+                            <button onclick="applyFilter(event, this, 'pixel')">Pixelados</button>
+                            <button onclick="applyFilter(event, this, 'thermal')">Cámara Térmica</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">TUNEZ Y SUS MEJORES GOLES</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> TUNEZ</span></div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <script>
-        // Función para maximizar el contenedor (no solo el video)
-        function openFullscreen(elem) {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari */
-                elem.webkitRequestFullscreen();
-            }
-            
-            // Iniciar reproducción al maximizar
-            const video = elem.querySelector('video');
-            video.play();
-            video.controls = true; // Mostrar controles nativos en grande
-        }
-
-        // Mostrar/Ocultar menú de engranaje
         function toggleMenu(event, btn) {
-            event.stopPropagation(); // Evita salir de fullscreen
+            event.stopPropagation();
             const menu = btn.nextElementSibling;
+            // Cerrar otros menús activos
+            document.querySelectorAll('.filters-menu').forEach(m => {
+                if (m !== menu) m.classList.remove('active');
+            });
             menu.classList.toggle('active');
         }
 
-        // Aplicar los filtros
         function applyFilter(event, btn, filterType) {
             event.stopPropagation();
             const container = btn.closest('.thumbnail-container');
             const video = container.querySelector('video');
             
-            // Limpiar clases
             video.classList.remove('filter-blur', 'filter-pixel', 'filter-thermal');
-            
-            // Aplicar nueva
             if (filterType !== 'none') {
                 video.classList.add(`filter-${filterType}`);
             }
-
-            // Cerrar menú
             btn.parentElement.classList.remove('active');
         }
 
-        // Cerrar menú al hacer clic fuera del engranaje
+        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', () => {
             document.querySelectorAll('.filters-menu').forEach(m => m.classList.remove('active'));
         });
     </script>
-
 </body>
 </html>
