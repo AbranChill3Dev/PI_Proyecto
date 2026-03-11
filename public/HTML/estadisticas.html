@@ -1,33 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="/CSS/default.css">
     <link rel="stylesheet" href="/CSS/estadisticas.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <title>FifaScan - Estadísticas</title>
 </head>
-
 <body>
 
     <header class="header-stats">
-        <a href="../index.html" class="boton-volver">
-            <i class="fas fa-chevron-left"></i>
-        </a>
+        <a href="../index.html" class="boton-volver"><i class="fas fa-chevron-left"></i></a>
         <h1>ESTADISTICAS</h1>
     </header>
 
     <section class="fondo-estadisticas">
-        
         <div class="tarjeta-informe">
             
             <div class="navegacion-pais">
@@ -58,7 +48,6 @@
                             <span id="lbl-derrotas">Derrotas</span>
                         </div>
                     </div>
-
                     <div class="columna-leyenda">
                         <div class="item-leyenda">
                             <div class="punto-color" id="color-favor"></div>
@@ -176,17 +165,14 @@
                         </div>
                         <p>RESUMEN</p>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </section>
 
     <script src="/JS/estadisticas.js"></script>
     
     <script>
-        // Lógica para los controles de los videos destacados
         document.querySelectorAll('.thumbnail-container').forEach(container => {
             const video = container.querySelector('video');
             const playBtn = container.querySelector('.play-btn');
@@ -194,39 +180,26 @@
             const settingsBtn = container.querySelector('.settings-btn');
             const filtersMenu = container.querySelector('.filters-menu');
 
-            // Play / Pause
             const togglePlay = (e) => {
                 e.stopPropagation();
-                if (video.paused) {
-                    video.play();
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                } else {
-                    video.pause();
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                }
+                if (video.paused) { video.play(); playBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
+                else { video.pause(); playBtn.innerHTML = '<i class="fas fa-play"></i>'; }
             };
+
             playBtn.addEventListener('click', togglePlay);
             video.addEventListener('click', togglePlay);
 
-            // Fullscreen del CONTENEDOR (mantiene el engranaje visible)
             fsBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (!document.fullscreenElement) {
-                    container.requestFullscreen();
-                    fsBtn.innerHTML = '<i class="fas fa-compress"></i>';
-                } else {
-                    document.exitFullscreen();
-                    fsBtn.innerHTML = '<i class="fas fa-expand"></i>';
-                }
+                if (!document.fullscreenElement) { container.requestFullscreen(); fsBtn.innerHTML = '<i class="fas fa-compress"></i>'; }
+                else { document.exitFullscreen(); fsBtn.innerHTML = '<i class="fas fa-expand"></i>'; }
             });
 
-            // Abrir menú de filtros
             settingsBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 filtersMenu.classList.toggle('active');
             });
 
-            // Aplicar filtros
             container.querySelectorAll('.filters-menu button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -238,12 +211,9 @@
             });
         });
 
-        // Cerrar menús al hacer click fuera
         document.addEventListener("click", () => {
             document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
         });
     </script>
-
 </body>
-
 </html>

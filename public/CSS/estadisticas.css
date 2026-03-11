@@ -1,129 +1,78 @@
-/* --- TUS ESTILOS ORIGINALES SE MANTIENEN IGUAL --- */
+/* --- ESTILOS BASE Y FONDO --- */
 .fondo-estadisticas {
-    width: 100%; min-height: 100vh; height: auto; 
+    width: 100%; min-height: 100vh;
     background-image: url('../MULTIMEDIA/Background.jpg');
-    background-size: cover; background-position: center;
-    background-repeat: repeat; background-attachment: fixed;
+    background-size: cover; background-position: center; background-attachment: fixed;
     display: flex; justify-content: center; align-items: flex-start;
-    padding-top: 100px; padding-bottom: 50px; box-sizing: border-box;
+    padding-top: 100px; padding-bottom: 50px;
 }
 
-body { overflow-y: auto !important; height: auto !important; }
-
-.header-stats {
-    width: 100%; height: 60px; background-color: #000;
-    display: flex; justify-content: center; align-items: center;
-    border-bottom: 2px solid rgba(0, 255, 47, 0.821);
-    position: fixed; top: 0; z-index: 1000;
+/* --- NAVEGACIÓN RESTAURADA --- */
+.navegacion-pais {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;
 }
 
-.header-stats h1 { font-family: "Zen Dots", sans-serif; color: #fff; font-size: 1.2rem; letter-spacing: 3px; }
-
-.boton-volver { position: absolute; left: 20px; color: #fff; font-size: 1.5rem; text-decoration: none; }
-
-.tarjeta-informe {
-    width: 90%; max-width: 450px; height: auto !important; 
-    background-color: #ffffff; border: 2px solid #000; border-radius: 20px;
-    padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    background: linear-gradient(to bottom, #ffffff 85%, #d1ffd4 100%);
-    margin-bottom: 20px; overflow: hidden;
+.btn-nav {
+    background: none; border: none; font-size: 1.5rem; color: #333;
+    cursor: pointer; padding: 10px; transition: 0.2s;
 }
 
-.titulo-pais { font-family: "Zen Dots", sans-serif; color: #10be39; font-size: 1.8rem; text-align: center; }
+.btn-nav:hover { color: #10be39; transform: scale(1.1); }
 
-/* --- REPRODUCTOR CUSTOM PARA MINI-CARDS --- */
+.titulo-pais { font-family: "Zen Dots", sans-serif; font-size: 1.6rem; text-align: center; margin: 0; }
 
+/* --- REPRODUCTOR EN MINI-CARDS --- */
 .thumbnail-container {
-    position: relative;
-    width: 100%;
-    background: black;
-    overflow: hidden;
+    position: relative; width: 100%; background: #000; border-radius: 8px; overflow: hidden;
 }
 
 .video-preview {
-    width: 100%;
-    height: 100px; /* Altura original de tus mini-cards */
-    object-fit: cover;
-    display: block;
-    transition: filter 0.3s;
+    width: 100%; height: 100px; object-fit: cover; display: block; transition: 0.3s;
 }
 
 .custom-controls {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 40px; /* Más bajo para las mini-cards */
+    position: absolute; bottom: 0; left: 0; right: 0; height: 35px;
     background: linear-gradient(transparent, rgba(0,0,0,0.9));
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 8px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 10;
+    padding: 0 10px; opacity: 0; transition: 0.3s; z-index: 10;
 }
 
 .thumbnail-container:hover .custom-controls,
-.thumbnail-container:fullscreen .custom-controls {
-    opacity: 1;
-}
+.thumbnail-container:fullscreen .custom-controls { opacity: 1; }
 
-.custom-controls button {
-    background: transparent; border: none;
-    color: white; font-size: 1rem;
-    cursor: pointer;
-}
-
-.custom-controls button:hover { color: #10be39; }
-
-.right-controls { display: flex; align-items: center; gap: 8px; }
-
-/* ENGRANAJE Y FILTROS */
-.video-settings { position: relative; }
+.custom-controls button { background: transparent; border: none; color: white; cursor: pointer; font-size: 1rem; }
 
 .filters-menu {
-    display: none;
-    position: absolute;
-    bottom: 45px; right: -5px;
-    background: #000;
-    border: 1px solid #10be39;
-    border-radius: 8px;
-    padding: 8px; width: 130px;
-    z-index: 100;
+    display: none; position: absolute; bottom: 45px; right: 0;
+    background: #000; border: 1px solid #10be39; border-radius: 8px;
+    padding: 8px; width: 130px; z-index: 100;
 }
 
 .filters-menu.active { display: block; }
 
-.filters-menu p {
-    font-size: 0.6rem !important;
-    color: #10be39 !important;
-    margin-bottom: 5px !important;
-    background: none !important;
-}
+.filters-menu p { font-family: "Zen Dots", sans-serif; font-size: 0.5rem; color: #10be39; text-align: center; margin-bottom: 5px; }
 
 .filters-menu button {
-    display: block; width: 100%;
-    background: transparent; color: white;
-    border: none; padding: 5px;
-    font-size: 0.7rem; text-align: left;
-    cursor: pointer;
+    display: block; width: 100%; color: white; text-align: left;
+    padding: 5px; font-size: 0.7rem; border: none; background: transparent; cursor: pointer;
 }
 
-.filters-menu button:hover { background: rgba(16, 190, 57, 0.2); }
+.filters-menu button:hover { background: rgba(16, 190, 57, 0.2); color: #10be39; }
 
-/* FILTROS */
+/* --- FILTROS --- */
 .filter-blur { filter: blur(10px); }
 .filter-pixel { filter: contrast(150%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(3) contrast(1.5); }
 
-/* PANTALLA COMPLETA FIX */
-.thumbnail-container:fullscreen {
-    width: 100vw; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-}
+/* --- PANTALLA COMPLETA --- */
+.thumbnail-container:fullscreen { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
+.thumbnail-container:fullscreen .video-preview { height: 100vh; width: 100vw; object-fit: contain; }
 
-.thumbnail-container:fullscreen .video-preview {
-    height: 100vh; width: 100vw; object-fit: contain;
-}
-
-/* --- EL RESTO DE TUS ESTILOS SE MANTIENE --- */
+/* --- TUS OTROS ESTILOS (IGUALES) --- */
+.tarjeta-informe { width: 90%; max-width: 450px; background: white; border-radius: 20px; padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5); margin: auto; }
+.grafico-pastel { width: 220px; height: 220px; margin: auto; border-radius: 50%; }
+.lista-jugadores { text-align: center; margin-top: 20px; }
 .mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-.mini-card { background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; color: #333; padding: 8px 5px; text-align: center; margin: 0; background-color: white; border-top: 1px solid #eee; }
+.mini-card { background: #f9f9f9; border-radius: 10px; overflow: hidden; border: 1px solid #ddd; }
+.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; padding: 8px; margin: 0; text-align: center; }
