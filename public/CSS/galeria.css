@@ -1,7 +1,7 @@
 .fondo-galeria {
     width: 100%;
     min-height: 100vh;
-    background-image: url('../MULTIMEDIA/Background.jpg');
+    background-image: url('/MULTIMEDIA/Background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -42,9 +42,14 @@
 }
 
 .video-preview {
-    width: 100%; aspect-ratio: 16/9;
-    object-fit: cover; display: block;
+    width: 100%; 
+    aspect-ratio: 16/9;
+    object-fit: cover; 
+    display: block;
     transition: filter 0.3s;
+    /* ESTO MEJORA EL RENDIMIENTO CON FILTROS */
+    will-change: filter;
+    transform: translateZ(0); 
 }
 
 .custom-controls {
