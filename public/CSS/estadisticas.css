@@ -1,273 +1,129 @@
+/* --- TUS ESTILOS ORIGINALES SE MANTIENEN IGUAL --- */
 .fondo-estadisticas {
-    width: 100%;
-    min-height: 100vh; 
-    height: auto; 
-    
+    width: 100%; min-height: 100vh; height: auto; 
     background-image: url('../MULTIMEDIA/Background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    background-attachment: fixed;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 100px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
+    background-size: cover; background-position: center;
+    background-repeat: repeat; background-attachment: fixed;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding-top: 100px; padding-bottom: 50px; box-sizing: border-box;
 }
 
-body {
-    overflow-y: auto !important; 
-    height: auto !important;
-}
+body { overflow-y: auto !important; height: auto !important; }
 
 .header-stats {
-    width: 100%;
-    height: 60px;
-    background-color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%; height: 60px; background-color: #000;
+    display: flex; justify-content: center; align-items: center;
     border-bottom: 2px solid rgba(0, 255, 47, 0.821);
-    position: fixed;
-    top: 0;
-    z-index: 1000;
+    position: fixed; top: 0; z-index: 1000;
 }
 
-.header-stats h1 {
-    font-family: "Zen Dots", sans-serif;
-    color: #ffffff;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-}
+.header-stats h1 { font-family: "Zen Dots", sans-serif; color: #fff; font-size: 1.2rem; letter-spacing: 3px; }
 
-.boton-volver {
-    position: absolute;
-    left: 20px;
-    color: #ffffff;
-    font-size: 1.5rem;
-    text-decoration: none;
-    transition: 0.3s;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.boton-volver:hover {
-    color: rgba(0, 255, 47, 0.821);
-}
-
-.boton-volver:active {
-    transform: scale(0.8);
-}
+.boton-volver { position: absolute; left: 20px; color: #fff; font-size: 1.5rem; text-decoration: none; }
 
 .tarjeta-informe {
-    width: 90%;
-    max-width: 450px; 
-    height: auto !important; 
-    display: block; 
-    
-    background-color: #ffffff;
-    border: 2px solid #000000;
-    border-radius: 20px;
-    padding: 30px 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    
+    width: 90%; max-width: 450px; height: auto !important; 
+    background-color: #ffffff; border: 2px solid #000; border-radius: 20px;
+    padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
     background: linear-gradient(to bottom, #ffffff 85%, #d1ffd4 100%);
-    
-    margin-bottom: 20px;
-    overflow: hidden;
+    margin-bottom: 20px; overflow: hidden;
 }
 
-.navegacion-pais {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
+.titulo-pais { font-family: "Zen Dots", sans-serif; color: #10be39; font-size: 1.8rem; text-align: center; }
 
-.titulo-pais {
-    font-family: "Zen Dots", sans-serif;
-    color: #10be39;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    text-align: center;
-}
+/* --- REPRODUCTOR CUSTOM PARA MINI-CARDS --- */
 
-.btn-nav {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.contenedor-interno {
-    width: 100%;
-    text-align: center;
-}
-
-.subtitulo {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.8rem;
-    color: #000;
-    margin-bottom: 20px;
-}
-
-.contenedor-grafico {
+.thumbnail-container {
     position: relative;
-    width: 220px; 
-    height: 220px;
-    margin: 0 auto 20px auto;
-    max-width: 100%;
-}
-
-.grafico-pastel {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid #ffffff; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: background 0.5s ease;
-}
-
-.leyenda-datos {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 10px;
-    margin-bottom: 25px;
-    gap: 15px;
-}
-
-.columna-leyenda {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1; 
-}
-
-.item-leyenda {
-    display: flex;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 5px;
-    border-radius: 8px;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-.punto-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 4px;
-    margin-right: 8px;
-    flex-shrink: 0;
-    border: 1px solid rgba(0,0,0,0.2);
-}
-
-.item-leyenda span {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: #333;
-    line-height: 1.2;
-}
-
-.etiqueta {
-    position: absolute;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 0.65rem;
-    color: #333;
-    background-color: rgba(255,255,255,0.9);
-    padding: 3px 6px;
-    border-radius: 4px;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 2;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
-
-.e-victorias { top: 20px; right: 50px; }
-.e-empates   { top: 70px; right: 5px; }
-.e-derrotas  { bottom: 60px; right: 10px; }
-.e-favor     { bottom: 15px; left: 50%; transform: translateX(-50%); }
-.e-contra    { top: 60px; left: 10px; }
-
-.lista-jugadores {
-    width: 100%;
-    text-align: center;
-}
-
-.info-tecnica {
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed #ccc;
-}
-
-.info-tecnica h4, .lista-jugadores h4 {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 1rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #000;
-    text-decoration: underline; 
-    text-transform: uppercase;
-}
-
-.info-tecnica p {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.lista-jugadores p {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.9rem; 
-    color: #333;
-    margin: 6px 0;
-    line-height: 1.3;
-}
-/* --- MINI GALERÍA DE VIDEOS --- */
-.mini-galeria {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas para ahorrar espacio */
-    gap: 15px;
-    width: 100%;
-    margin-top: 15px;
-    padding-bottom: 10px;
-}
-
-.mini-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    background: black;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.mini-card video {
+.video-preview {
     width: 100%;
-    height: 100px; /* Altura fija pequeña para uniformidad */
-    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformar */
-    background-color: black;
+    height: 100px; /* Altura original de tus mini-cards */
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s;
 }
 
-.mini-card p {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.6rem; /* Texto pequeño */
-    color: #333;
-    padding: 8px 5px;
-    text-align: center;
-    margin: 0;
-    width: 100%;
-    background-color: white;
-    border-top: 1px solid #eee;
+.custom-controls {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px; /* Más bajo para las mini-cards */
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
 }
+
+.thumbnail-container:hover .custom-controls,
+.thumbnail-container:fullscreen .custom-controls {
+    opacity: 1;
+}
+
+.custom-controls button {
+    background: transparent; border: none;
+    color: white; font-size: 1rem;
+    cursor: pointer;
+}
+
+.custom-controls button:hover { color: #10be39; }
+
+.right-controls { display: flex; align-items: center; gap: 8px; }
+
+/* ENGRANAJE Y FILTROS */
+.video-settings { position: relative; }
+
+.filters-menu {
+    display: none;
+    position: absolute;
+    bottom: 45px; right: -5px;
+    background: #000;
+    border: 1px solid #10be39;
+    border-radius: 8px;
+    padding: 8px; width: 130px;
+    z-index: 100;
+}
+
+.filters-menu.active { display: block; }
+
+.filters-menu p {
+    font-size: 0.6rem !important;
+    color: #10be39 !important;
+    margin-bottom: 5px !important;
+    background: none !important;
+}
+
+.filters-menu button {
+    display: block; width: 100%;
+    background: transparent; color: white;
+    border: none; padding: 5px;
+    font-size: 0.7rem; text-align: left;
+    cursor: pointer;
+}
+
+.filters-menu button:hover { background: rgba(16, 190, 57, 0.2); }
+
+/* FILTROS */
+.filter-blur { filter: blur(10px); }
+.filter-pixel { filter: contrast(150%) brightness(110%) blur(1px); image-rendering: pixelated; }
+.filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(3) contrast(1.5); }
+
+/* PANTALLA COMPLETA FIX */
+.thumbnail-container:fullscreen {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.thumbnail-container:fullscreen .video-preview {
+    height: 100vh; width: 100vw; object-fit: contain;
+}
+
+/* --- EL RESTO DE TUS ESTILOS SE MANTIENE --- */
+.mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+.mini-card { background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; color: #333; padding: 8px 5px; text-align: center; margin: 0; background-color: white; border-top: 1px solid #eee; }

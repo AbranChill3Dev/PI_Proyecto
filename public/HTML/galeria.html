@@ -77,7 +77,6 @@
     </section>
 
     <script>
-        // Lógica de funcionamiento para todos los reproductores
         document.addEventListener('DOMContentLoaded', () => {
             const containers = document.querySelectorAll('.thumbnail-container');
 
@@ -89,7 +88,6 @@
                 const settingsBtn = container.querySelector('.settings-btn');
                 const filtersMenu = container.querySelector('.filters-menu');
 
-                // 1. Play/Pause
                 const togglePlay = (e) => {
                     e.stopPropagation();
                     if (video.paused) {
@@ -103,7 +101,6 @@
                 playBtn.addEventListener('click', togglePlay);
                 video.addEventListener('click', togglePlay);
 
-                // 2. Fullscreen (Maximizar CONTENEDOR)
                 fsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (!document.fullscreenElement) {
@@ -115,20 +112,17 @@
                     }
                 });
 
-                // 3. Volumen
                 volumeBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     video.muted = !video.muted;
                     volumeBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
                 });
 
-                // 4. Menú de Ajustes
                 settingsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     filtersMenu.classList.toggle('active');
                 });
 
-                // 5. Aplicar Filtros
                 container.querySelectorAll('.filters-menu button').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -140,7 +134,6 @@
                 });
             });
 
-            // Cerrar menús al hacer click fuera
             document.addEventListener("click", () => {
                 document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
             });

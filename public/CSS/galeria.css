@@ -1,4 +1,3 @@
-/* MANTENER TU DISEÑO ORIGINAL */
 .fondo-galeria {
     width: 100%;
     min-height: 100vh;
@@ -48,7 +47,6 @@
     transition: filter 0.3s;
 }
 
-/* --- NUEVOS CONTROLES CUSTOM --- */
 .custom-controls {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -80,7 +78,6 @@
     display: flex; align-items: center; gap: 15px;
 }
 
-/* ENGRANAJE Y MENÚ */
 .video-settings { position: relative; }
 
 .filters-menu {
@@ -117,7 +114,6 @@
     height: 100vh; width: 100vw; object-fit: contain;
 }
 
-/* FILTROS */
 .filter-blur { filter: blur(15px); }
 .filter-pixel { filter: contrast(180%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%); }

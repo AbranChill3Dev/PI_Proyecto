@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>FifaScan</title>
+    <title>FifaScan - Estadísticas</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 
                 <div class="contenedor-grafico">
                     <div class="grafico-pastel" id="grafico"></div>
-                    </div>
+                </div>
 
                 <div class="leyenda-datos">
                     <div class="columna-leyenda">
@@ -72,48 +72,177 @@
                 </div>
 
                 <h3 class="titulo-seccion">PLANTILLA</h3>
+                <div class="lista-jugadores" id="lista-jugadores"></div>
 
-                <div class="lista-jugadores" id="lista-jugadores">
-                    </div>
-                    <h3 class="titulo-seccion">VIDEOS DESTACADOS</h3>
+                <h3 class="titulo-seccion">VIDEOS DESTACADOS</h3>
                 
                 <div class="mini-galeria">
                     <div class="mini-card">
-                        <video controls poster="/MULTIMEDIA/españa.jpg">
-                            <source src="/MULTIMEDIA/ESPAMA.mp4" type="video/mp4">
-                        </video>
+                        <div class="thumbnail-container">
+                            <video class="video-preview" poster="/MULTIMEDIA/españa.jpg">
+                                <source src="/MULTIMEDIA/ESPAMA.mp4" type="video/mp4">
+                            </video>
+                            <div class="custom-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                <div class="right-controls">
+                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                    <div class="video-settings">
+                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                        <div class="filters-menu">
+                                            <p>FILTROS</p>
+                                            <button data-filter="none">Normal</button>
+                                            <button data-filter="blur">Desenfoque</button>
+                                            <button data-filter="pixel">Pixelado</button>
+                                            <button data-filter="thermal">Térmica</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <p>GOLES</p>
                     </div>
 
                     <div class="mini-card">
-                        <video controls poster="/MULTIMEDIA/MEXVSAL.jpg">
-                            <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
-                        </video>
+                        <div class="thumbnail-container">
+                            <video class="video-preview" poster="/MULTIMEDIA/MEXVSAL.jpg">
+                                <source src="/MULTIMEDIA/ALEMANIAVSMEX.mp4" type="video/mp4">
+                            </video>
+                            <div class="custom-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                <div class="right-controls">
+                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                    <div class="video-settings">
+                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                        <div class="filters-menu">
+                                            <p>FILTROS</p>
+                                            <button data-filter="none">Normal</button>
+                                            <button data-filter="blur">Desenfoque</button>
+                                            <button data-filter="pixel">Pixelado</button>
+                                            <button data-filter="thermal">Térmica</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <p>JUGADAS CLAVE</p>
                     </div>
 
                     <div class="mini-card">
-                        <video controls poster="/MULTIMEDIA/GOLESME.jpg">
-                            <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
-                        </video>
+                        <div class="thumbnail-container">
+                            <video class="video-preview" poster="/MULTIMEDIA/GOLESME.jpg">
+                                <source src="/MULTIMEDIA/GolesMexico.mp4" type="video/mp4">
+                            </video>
+                            <div class="custom-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                <div class="right-controls">
+                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                    <div class="video-settings">
+                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                        <div class="filters-menu">
+                                            <p>FILTROS</p>
+                                            <button data-filter="none">Normal</button>
+                                            <button data-filter="blur">Desenfoque</button>
+                                            <button data-filter="pixel">Pixelado</button>
+                                            <button data-filter="thermal">Térmica</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <p>ENTREVISTAS</p>
                     </div>
 
                     <div class="mini-card">
-                        <video controls poster="/MULTIMEDIA/GOLCOREA.jpg">
-                            <source src="/MULTIMEDIA/GOLCOREA.mp4" type="video/mp4">
-                        </video>
+                        <div class="thumbnail-container">
+                            <video class="video-preview" poster="/MULTIMEDIA/GOLCOREA.jpg">
+                                <source src="/MULTIMEDIA/GOLCOREA.mp4" type="video/mp4">
+                            </video>
+                            <div class="custom-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                <div class="right-controls">
+                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                    <div class="video-settings">
+                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                        <div class="filters-menu">
+                                            <p>FILTROS</p>
+                                            <button data-filter="none">Normal</button>
+                                            <button data-filter="blur">Desenfoque</button>
+                                            <button data-filter="pixel">Pixelado</button>
+                                            <button data-filter="thermal">Térmica</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <p>RESUMEN</p>
                     </div>
-                </div>
+
                 </div>
             </div>
-
         </div>
 
     </section>
 
     <script src="/JS/estadisticas.js"></script>
+    
+    <script>
+        // Lógica para los controles de los videos destacados
+        document.querySelectorAll('.thumbnail-container').forEach(container => {
+            const video = container.querySelector('video');
+            const playBtn = container.querySelector('.play-btn');
+            const fsBtn = container.querySelector('.fullscreen-btn');
+            const settingsBtn = container.querySelector('.settings-btn');
+            const filtersMenu = container.querySelector('.filters-menu');
+
+            // Play / Pause
+            const togglePlay = (e) => {
+                e.stopPropagation();
+                if (video.paused) {
+                    video.play();
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    video.pause();
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            };
+            playBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay);
+
+            // Fullscreen del CONTENEDOR (mantiene el engranaje visible)
+            fsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!document.fullscreenElement) {
+                    container.requestFullscreen();
+                    fsBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                } else {
+                    document.exitFullscreen();
+                    fsBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                }
+            });
+
+            // Abrir menú de filtros
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                filtersMenu.classList.toggle('active');
+            });
+
+            // Aplicar filtros
+            container.querySelectorAll('.filters-menu button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const filter = btn.dataset.filter;
+                    video.classList.remove("filter-blur", "filter-pixel", "filter-thermal");
+                    if (filter !== "none") video.classList.add("filter-" + filter);
+                    filtersMenu.classList.remove("active");
+                });
+            });
+        });
+
+        // Cerrar menús al hacer click fuera
+        document.addEventListener("click", () => {
+            document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
+        });
+    </script>
 
 </body>
 
