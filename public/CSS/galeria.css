@@ -25,6 +25,8 @@
     color: #fff; font-size: 1.2rem; letter-spacing: 3px;
 }
 
+.boton-volver { position: absolute; left: 20px; color: #ffffff; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+
 .wrapper-contenido {
     width: 90%; margin: auto;
     display: flex; flex-direction: column; gap: 20px;
