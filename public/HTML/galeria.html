@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/default.css">
     <link rel="stylesheet" href="/CSS/galeria.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
@@ -13,71 +13,96 @@
 <body>
 
     <header class="header-galeria">
-        <a href="../index.html" class="boton-volver"><i class="fas fa-chevron-left"></i></a>
+        <a href="../index.html" class="boton-volver">
+            <i class="fas fa-chevron-left"></i>
+        </a>
         <h1>GALERIA</h1>
     </header>
 
     <section class="fondo-galeria">
         <div class="wrapper-contenido">
-
-            <script>
-                const listaVideos = [
-                    { titulo: "MEX VS ALE 2018", poster: "/MULTIMEDIA/MEXVSAL.jpg", src: "/MULTIMEDIA/ALEMANIAVSMEX.mp4", pais: "MÉXICO" },
-                    { titulo: "GOLES MÉXICO", poster: "/MULTIMEDIA/GOLESME.jpg", src: "/MULTIMEDIA/GolesMexico.mp4", pais: "MÉXICO" },
-                    { titulo: "ESPAÑA CAMPEON 2010", poster: "/MULTIMEDIA/españa.jpg", src: "/MULTIMEDIA/ESPAMA.mp4", pais: "ESPAÑA" },
-                    { titulo: "GOL DE COREA CONTRA ALEMANIA", poster: "/MULTIMEDIA/GOLCOREA.jpg", src: "/MULTIMEDIA/GOLCOREA.mp4", pais: "COREA" },
-                    { titulo: "GOLES IMPRESIONANTES DE ESPAÑA", poster: "/MULTIMEDIA/iniesta.jpg", src: "/MULTIMEDIA/espania.mp4", pais: "ESPAÑA" },
-                    { titulo: "LOS GOLES MAS IMPORTANTES DE URUGUAY", poster: "/MULTIMEDIA/URUGUAY.jpg", src: "/MULTIMEDIA/uruguaygol.mp4", pais: "URUGUAY" },
-                    { titulo: "LOS GOLES DE COLOMBIA MUNDIAL 2018", poster: "/MULTIMEDIA/COLOMBIA.jpg", src: "/MULTIMEDIA/colombia goles.mp4", pais: "COLOMBIA" },
-                    { titulo: "JAPON Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/JAPON.jpg", src: "/MULTIMEDIA/japon goles.mp4", pais: "JAPÓN" },
-                    { titulo: "TUNEZ Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/TUNEZ.jpg", src: "/MULTIMEDIA/TUNEZ GOLES.mp4", pais: "TUNEZ" }
-                ];
-
-                const wrapper = document.querySelector('.wrapper-contenido');
-
-                listaVideos.forEach((vid, index) => {
-                    const card = `
-                    <div class="video-card">
-                        <div class="thumbnail-container">
-                            <video class="video-preview" poster="${vid.poster}">
-                                <source src="${vid.src}" type="video/mp4">
-                            </video>
-                            <span class="duracion">0:26</span>
-                            
-                            <div class="custom-controls">
-                                <button class="play-btn"><i class="fas fa-play"></i></button>
-                                
-                                <div class="right-controls">
-                                    <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
-                                    <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
-                                    
-                                    <div class="video-settings">
-                                        <button class="settings-btn"><i class="fas fa-cog"></i></button>
-                                        <div class="filters-menu">
-                                            <p>FILTROS</p>
-                                            <button data-filter="none">Normal</button>
-                                            <button data-filter="blur">Desenfoque</button>
-                                            <button data-filter="pixel">Pixelado</button>
-                                            <button data-filter="thermal">Cámara térmica</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-info">
-                            <h3 class="video-titulo">${vid.titulo}</h3>
-                            <div class="meta-data"><span><i class="fas fa-flag"></i> ${vid.pais}</span></div>
-                        </div>
-                    </div>`;
-                    wrapper.innerHTML += card;
-                });
-            </script>
-
-        </div>
+            </div>
     </section>
 
     <script>
+        // 1. Datos de los videos
+        const listaVideos = [
+            { titulo: "MEX VS ALE 2018", poster: "/MULTIMEDIA/MEXVSAL.jpg", src: "/MULTIMEDIA/ALEMANIAVSMEX.mp4", pais: "MÉXICO" },
+            { titulo: "GOLES MÉXICO", poster: "/MULTIMEDIA/GOLESME.jpg", src: "/MULTIMEDIA/GolesMexico.mp4", pais: "MÉXICO" },
+            { titulo: "ESPAÑA CAMPEON 2010", poster: "/MULTIMEDIA/españa.jpg", src: "/MULTIMEDIA/ESPAMA.mp4", pais: "ESPAÑA" },
+            { titulo: "GOL DE COREA CONTRA ALEMANIA", poster: "/MULTIMEDIA/GOLCOREA.jpg", src: "/MULTIMEDIA/GOLCOREA.mp4", pais: "COREA" },
+            { titulo: "GOLES IMPRESIONANTES DE ESPAÑA", poster: "/MULTIMEDIA/iniesta.jpg", src: "/MULTIMEDIA/espania.mp4", pais: "ESPAÑA" },
+            { titulo: "LOS GOLES MAS IMPORTANTES DE URUGUAY", poster: "/MULTIMEDIA/URUGUAY.jpg", src: "/MULTIMEDIA/uruguaygol.mp4", pais: "URUGUAY" },
+            { titulo: "LOS GOLES DE COLOMBIA MUNDIAL 2018", poster: "/MULTIMEDIA/COLOMBIA.jpg", src: "/MULTIMEDIA/colombia goles.mp4", pais: "COLOMBIA" },
+            { titulo: "JAPON Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/JAPON.jpg", src: "/MULTIMEDIA/japon goles.mp4", pais: "JAPÓN" },
+            { titulo: "TUNEZ Y SUS MEJORES GOLES", poster: "/MULTIMEDIA/TUNEZ.jpg", src: "/MULTIMEDIA/TUNEZ GOLES.mp4", pais: "TUNEZ" }
+        ];
+
+        const wrapper = document.querySelector('.wrapper-contenido');
+        let acumuladorCards = "";
+
+        // 2. Generar el HTML (Optimizado con data-src para Lazy Loading)
+        listaVideos.forEach((vid) => {
+            acumuladorCards += `
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <video class="video-preview" poster="${vid.poster}" preload="none">
+                        <source data-src="${vid.src}" type="video/mp4">
+                    </video>
+                    <span class="duracion">0:26</span>
+                    
+                    <div class="custom-controls">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                        <div class="right-controls">
+                            <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
+                            <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                            <div class="video-settings">
+                                <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                <div class="filters-menu">
+                                    <p>FILTROS</p>
+                                    <button data-filter="none">Normal</button>
+                                    <button data-filter="blur">Desenfoque</button>
+                                    <button data-filter="pixel">Pixelado</button>
+                                    <button data-filter="thermal">Cámara térmica</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-titulo">${vid.titulo}</h3>
+                    <div class="meta-data"><span><i class="fas fa-flag"></i> ${vid.pais}</span></div>
+                </div>
+            </div>`;
+        });
+
+        wrapper.innerHTML = acumuladorCards;
+
+        // 3. Lógica de Lazy Loading e Interacción
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- CONFIGURACIÓN DEL LAZY LOADING ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px 150px 0px', // Carga el video 150px antes de que entre al viewport
+                threshold: 0.1
+            };
+
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        const source = video.querySelector('source');
+                        if (source.dataset.src) {
+                            source.src = source.dataset.src;
+                            video.load(); // Inicia la carga controlada
+                            observer.unobserve(video); // Deja de vigilar una vez cargado
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // --- APLICAR LÓGICA A CADA VIDEO ---
             const containers = document.querySelectorAll('.thumbnail-container');
 
             containers.forEach(container => {
@@ -87,6 +112,9 @@
                 const volumeBtn = container.querySelector('.volume-btn');
                 const settingsBtn = container.querySelector('.settings-btn');
                 const filtersMenu = container.querySelector('.filters-menu');
+
+                // Iniciar observación para Lazy Loading
+                videoObserver.observe(video);
 
                 const togglePlay = (e) => {
                     e.stopPropagation();
@@ -98,6 +126,7 @@
                         playBtn.innerHTML = '<i class="fas fa-play"></i>';
                     }
                 };
+
                 playBtn.addEventListener('click', togglePlay);
                 video.addEventListener('click', togglePlay);
 
@@ -120,6 +149,10 @@
 
                 settingsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
+                    // Cerrar otros menús abiertos antes de abrir este
+                    document.querySelectorAll(".filters-menu").forEach(m => {
+                        if (m !== filtersMenu) m.classList.remove("active");
+                    });
                     filtersMenu.classList.toggle('active');
                 });
 
@@ -134,6 +167,7 @@
                 });
             });
 
+            // Cerrar menús al hacer clic fuera
             document.addEventListener("click", () => {
                 document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
             });
