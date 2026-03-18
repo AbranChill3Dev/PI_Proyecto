@@ -63,14 +63,15 @@ canvas {
 }
 
 .controles-camara-centered {
-    margin-top: 35px;
+    margin-top: 15px; /* Reducido de 35px a 15px */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 8px; /* Reducido de 20px a 8px para que quepan más */
     z-index: 10000;
     position: relative;
+    padding: 0 10px; /* Margen interno para que no peguen a los bordes del cel */
 }
 
 .boton-flotante {
@@ -78,20 +79,28 @@ canvas {
     background-color: rgba(0, 0, 0, 0.8);
     color: #00ff2f;
     border: 2px solid #00ff2f;
-    border-radius: 12px;
-    padding: 5px 10px;
+    border-radius: 10px; /* Un poco más sutil */
+    padding: 8px 5px; /* Más vertical, menos horizontal */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    min-width: 110px;
+    gap: 2px; /* Espacio mínimo entre icono y texto */
+    min-width: 85px; /* Reducido de 110px a 85px */
     font-family: "Zen Dots", sans-serif;
     transition: 0.3s;
     pointer-events: auto !important;
 }
 
-.boton-flotante i { font-size: 10px; margin-bottom: 5px; }
-.boton-flotante span { font-size: 5px; }
+/* Ajuste de iconos y texto para móviles */
+.boton-flotante i { 
+    font-size: 16px; /* Icono un poco más pequeño */
+    margin-bottom: 2px; 
+}
+
+.boton-flotante span { 
+    font-size: 8px; /* Texto un poco más pequeño para que no se corte */
+    text-align: center;
+}
 .boton-flotante:hover { background-color: #126611; color: white; box-shadow: 0 0 15px #10be39; }
 .boton-oculto { display: none !important; }
 
