@@ -23,6 +23,12 @@
             cursor: not-allowed !important;
             filter: grayscale(1);
         }
+        
+        /* Estilo opcional para resaltar el botón cuando el movimiento está activado */
+        .boton-activo {
+            background-color: rgba(60, 179, 113, 0.8) !important; /* Verde suave */
+            border-color: #fff !important;
+        }
     </style>
 </head>
 
@@ -54,42 +60,42 @@
 
                 <a-entity mindar-image-target="targetIndex: 0" data-country="sudafrica">
                     <a-gltf-model src="#sudafrica" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 1" data-country="tunez">
                     <a-gltf-model src="#tunez" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 2" data-country="japon">
                     <a-gltf-model src="#japon" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 3" data-country="uruguay">
                     <a-gltf-model src="#uruguay" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 4" data-country="espana">
                     <a-gltf-model src="#espana" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 5" data-country="corea">
                     <a-gltf-model src="#corea" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 6" data-country="mexico">
                     <a-gltf-model src="#mexico" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
 
                 <a-entity mindar-image-target="targetIndex: 7" data-country="colombia">
                     <a-gltf-model src="#colombia" rotation="0 0 0" position="0 0 0" scale="1 1 1"
-                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"></a-gltf-model>
+                        animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true; enabled: false"></a-gltf-model>
                 </a-entity>
             </a-scene>
         </div>
@@ -103,6 +109,10 @@
                 <i class="fas fa-info-circle"></i><span>INFORMACIÓN</span>
             </a>
             
+            <button id="btn-movimiento" class="boton-flotante boton-oculto">
+                <i class="fas fa-sync"></i><span>MOVIMIENTO</span>
+            </button>
+
             <button id="btn-animaciones" class="boton-flotante boton-oculto">
                 <i class="fas fa-wand-magic-sparkles"></i><span>ANIMACIONES</span>
             </button>
@@ -116,6 +126,7 @@
         const paisMap = { 'mexico': 0, 'espana': 1, 'uruguay': 2, 'colombia': 3, 'japon': 4, 'corea': 5, 'sudafrica': 6, 'tunez': 7 };
         const btnInfo = document.getElementById('btn-info'); 
         const btnAnimaciones = document.getElementById('btn-animaciones');
+        const btnMovimiento = document.getElementById('btn-movimiento'); // Referencia al nuevo botón
         const fireworksCanvas = document.getElementById('fireworks-canvas');
         const ctx = fireworksCanvas.getContext('2d');
         
@@ -125,6 +136,7 @@
         let textOpacity = 0;
         let isAnimating = false;
         let canClick = true;
+        let estaGirando = false; // Estado global de la rotación
 
         function resizeCanvas() {
             fireworksCanvas.width = window.innerWidth;
@@ -158,14 +170,58 @@
                 
                 btnInfo.classList.remove('boton-oculto');
                 btnAnimaciones.classList.remove('boton-oculto');
+                btnMovimiento.classList.remove('boton-oculto'); // Mostrar botón movimiento
             });
             target.addEventListener('targetLost', () => {
                 btnInfo.classList.add('boton-oculto');
                 btnAnimaciones.classList.add('boton-oculto');
+                btnMovimiento.classList.add('boton-oculto'); // Ocultar botón movimiento
+                
+                // Opcional: Detener el giro si se pierde el target
+                detenerRotacion();
             });
         });
 
-        // Lógica de partículas (sin cambios)
+        // --- LÓGICA DEL BOTÓN DE MOVIMIENTO ---
+        
+        function detenerRotacion() {
+            estaGirando = false;
+            const modelos = document.querySelectorAll('a-gltf-model');
+            modelos.forEach(modelo => {
+                // Desactivamos la animación componente por componente
+                modelo.setAttribute('animation', 'enabled', false);
+            });
+            btnMovimiento.classList.remove('boton-activo');
+            // Opcional: volver a poner el texto original si lo cambiaste
+            // btnMovimiento.querySelector('span').innerText = "MOVIMIENTO";
+        }
+
+        btnMovimiento.addEventListener('click', () => {
+            // Alternar estado
+            estaGirando = !estaGirando;
+            
+            // Buscar todos los modelos en la escena
+            const modelos = document.querySelectorAll('a-gltf-model');
+            
+            modelos.forEach(modelo => {
+                // Modificar la propiedad 'enabled' dentro del atributo 'animation'
+                modelo.setAttribute('animation', 'enabled', estaGirando);
+            });
+
+            // Feedback visual en el botón
+            if (estaGirando) {
+                btnMovimiento.classList.add('boton-activo');
+                // Opcional: cambiar el texto
+                // btnMovimiento.querySelector('span').innerText = "PARAR";
+            } else {
+                btnMovimiento.classList.remove('boton-activo');
+                // Opcional: volver a poner el texto original
+                // btnMovimiento.querySelector('span').innerText = "MOVIMIENTO";
+            }
+        });
+
+
+        // --- Lógica de partículas (sin cambios) ---
         class Particle {
             constructor(x, y, color) {
                 this.x = x; this.y = y; this.color = color;
