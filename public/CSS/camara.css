@@ -90,8 +90,8 @@ canvas {
     pointer-events: auto !important;
 }
 
-.boton-flotante i { font-size: 20px; margin-bottom: 5px; }
-.boton-flotante span { font-size: 10px; }
+.boton-flotante i { font-size: 10px; margin-bottom: 5px; }
+.boton-flotante span { font-size: 5px; }
 .boton-flotante:hover { background-color: #126611; color: white; box-shadow: 0 0 15px #10be39; }
 .boton-oculto { display: none !important; }
 
