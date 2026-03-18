@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../CSS/default.css">
+    <link rel="stylesheet" href="../CSS/info.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Zen+Dots&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <title>FifaScan - Información</title>
+</head>
+
+<body>
+
+    <header class="header-stats">
+        <a href="../index.html" class="boton-volver">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+        <h1>INFORMACIÓN</h1>
+    </header>
+
+    <section class="fondo-estadisticas">
+        
+        <div class="tarjeta-informe">
+            
+            <div class="navegacion-pais">
+                <button class="btn-nav" id="btn-ant"><i class="fas fa-chevron-left"></i></button>
+                <h2 class="titulo-pais" id="titulo-pais">MÉXICO</h2>
+                <button class="btn-nav" id="btn-sig"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="contenedor-interno">
+
+            
+
+                <h3 class="titulo-seccion"><i class="fas fa-book-open"></i> HISTORIA EN MUNDIALES</h3>
+                <p class="texto-historia" id="texto-historia">
+                    </p>
+
+                <h3 class="titulo-seccion"><i class="fas fa-lightbulb"></i> DATOS CURIOSOS</h3>
+                <ul class="lista-curiosidades" id="lista-curiosidades">
+                    </ul>
+                    <h3 class="titulo-seccion"><i class="fas fa-chart-pie"></i> ESTADÍSTICAS DEL PROCESO</h3>
+                <div class="contenedor-grafico">
+                    <div class="grafico-pastel" id="grafico"></div>
+                </div>
+
+                <div class="leyenda-datos">
+                    <div class="columna-leyenda">
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-victorias"></div>
+                            <span id="lbl-victorias">Victorias</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-empates"></div>
+                            <span id="lbl-empates">Empates</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-derrotas"></div>
+                            <span id="lbl-derrotas">Derrotas</span>
+                        </div>
+                    </div>
+
+                    <div class="columna-leyenda">
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-favor"></div>
+                            <span id="lbl-favor">Goles Favor</span>
+                        </div>
+                        <div class="item-leyenda">
+                            <div class="punto-color" id="color-contra"></div>
+                            <span id="lbl-contra">Goles Contra</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="titulo-seccion"><i class="fas fa-users"></i> PLANTILLA</h3>
+                <div class="lista-jugadores" id="lista-jugadores"></div>
+
+                <h3 class="titulo-seccion"><i class="fas fa-video"></i> VIDEOS DESTACADOS</h3>
+                <div class="mini-galeria" id="contenedor-videos">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../JS/info.js"></script> </body>
+</html>

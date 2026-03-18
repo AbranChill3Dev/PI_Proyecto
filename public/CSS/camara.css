@@ -26,14 +26,14 @@ body, html {
 }
 
 .ar-window {
-    width: 80vw; 
-    height: 60vh;
+    width: 85vw; 
+    height: 75vh;
     position: relative;
     border: 4px solid #00ff2f;
     border-radius: 20px;
     box-shadow: 0 0 30px rgba(0,0,0,0.8);
     overflow: hidden; 
-    position: relative;
+   
     background: transparent;
 }
 
@@ -63,7 +63,7 @@ canvas {
 }
 
 .controles-camara-centered {
-    margin-top: 25px;
+    margin-top: 35px;
     width: 100%;
     display: flex;
     justify-content: center;

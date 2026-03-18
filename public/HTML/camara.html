@@ -8,8 +8,8 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-    <link rel="stylesheet" href="/CSS/default.css">
-    <link rel="stylesheet" href="/CSS/camara.css">
+    <link rel="stylesheet" href="../CSS/default.css">
+    <link rel="stylesheet" href="../CSS/camara.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,13 +94,15 @@
             </a-scene>
         </div>
 
-        <div class="controles-camara-centered">
-            <a href="../index.html" class="boton-flotante">
+            <div class="controles-camara-centered">
+            <a href="/index.html" class="boton-flotante">
                 <i class="fas fa-arrow-left"></i><span>VOLVER</span>
             </a>
-            <a id="btn-estadisticas" href="#" class="boton-flotante boton-oculto">
-                <i class="fas fa-chart-bar"></i><span>ESTADISTICAS</span>
+            
+            <a id="btn-info" href="#" class="boton-flotante boton-oculto">
+                <i class="fas fa-info-circle"></i><span>INFORMACIÓN</span>
             </a>
+            
             <button id="btn-animaciones" class="boton-flotante boton-oculto">
                 <i class="fas fa-wand-magic-sparkles"></i><span>ANIMACIONES</span>
             </button>
@@ -112,7 +114,7 @@
 
     <script>
         const paisMap = { 'mexico': 0, 'espana': 1, 'uruguay': 2, 'colombia': 3, 'japon': 4, 'corea': 5, 'sudafrica': 6, 'tunez': 7 };
-        const btnEstadisticas = document.getElementById('btn-estadisticas');
+        const btnInfo = document.getElementById('btn-info'); 
         const btnAnimaciones = document.getElementById('btn-animaciones');
         const fireworksCanvas = document.getElementById('fireworks-canvas');
         const ctx = fireworksCanvas.getContext('2d');
@@ -151,12 +153,14 @@
         targets.forEach(target => {
             target.addEventListener('targetFound', () => {
                 const country = target.getAttribute('data-country');
-                btnEstadisticas.href = `estadisticas.html?pais=${paisMap[country]}`;
-                btnEstadisticas.classList.remove('boton-oculto');
+              
+                btnInfo.href = `info.html?pais=${paisMap[country]}`; 
+                
+                btnInfo.classList.remove('boton-oculto');
                 btnAnimaciones.classList.remove('boton-oculto');
             });
             target.addEventListener('targetLost', () => {
-                btnEstadisticas.classList.add('boton-oculto');
+                btnInfo.classList.add('boton-oculto');
                 btnAnimaciones.classList.add('boton-oculto');
             });
         });

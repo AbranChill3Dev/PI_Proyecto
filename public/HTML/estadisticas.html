@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/CSS/default.css">
-    <link rel="stylesheet" href="/CSS/estadisticas.css">
+    <link rel="stylesheet" href="../CSS/default.css">
+    <link rel="stylesheet" href="../CSS/estadisticas.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,38 +37,48 @@
             </div>
             
             <div class="contenedor-interno">
-                <h3 class="subtitulo">INFORME DE SELECCIÓN<br>(PROCESO 2026)</h3>
+                <h3 class="titulo-seccion">RENDIMIENTO (ÚLTIMOS 10 JUEGOS)</h3>
+                <div class="rendimiento-api">
+                    <div class="stat-box">
+                        <span id="api-victorias">-</span>
+                        <p>VICTORIAS</p>
+                    </div>
+                    <div class="stat-box">
+                        <span id="api-empates">-</span>
+                        <p>EMPATES</p>
+                    </div>
+                    <div class="stat-box">
+                        <span id="api-derrotas">-</span>
+                        <p>DERROTAS</p>
+                    </div>
 
-                <div class="contenedor-grafico">
-                    <div class="grafico-pastel" id="grafico"></div>
+                    <div class="metricas-avanzadas">
+                    <div class="bloque-metrica">
+                        <p class="titulo-metrica">RACHA RECIENTE (Últimos 5)</p>
+                        <div class="racha-bolitas" id="racha-bolitas">
+                            </div>
+                    </div>
+
+                    <div class="bloque-metrica goles-balance">
+                        <div>
+                            <p class="titulo-metrica">GOLES A FAVOR</p>
+                            <span class="goles-num verde" id="api-gf">-</span>
+                        </div>
+                        <div>
+                            <p class="titulo-metrica">GOLES EN CONTRA</p>
+                            <span class="goles-num rojo" id="api-gc">-</span>
+                        </div>
+                    </div>
+
+                    <div class="bloque-metrica">
+                        <p class="titulo-metrica">EFECTIVIDAD DE VICTORIAS</p>
+                        <div class="barra-fondo">
+                            <div class="barra-progreso" id="barra-efectividad"></div>
+                        </div>
+                        <p class="texto-efectividad" id="texto-efectividad">0%</p>
+                    </div>
                 </div>
-
-                <div class="leyenda-datos">
-                    <div class="columna-leyenda">
-                        <div class="item-leyenda">
-                            <div class="punto-color" id="color-victorias"></div>
-                            <span id="lbl-victorias">Victorias</span>
-                        </div>
-                        <div class="item-leyenda">
-                            <div class="punto-color" id="color-empates"></div>
-                            <span id="lbl-empates">Empates</span>
-                        </div>
-                        <div class="item-leyenda">
-                            <div class="punto-color" id="color-derrotas"></div>
-                            <span id="lbl-derrotas">Derrotas</span>
-                        </div>
-                    </div>
-
-                    <div class="columna-leyenda">
-                        <div class="item-leyenda">
-                            <div class="punto-color" id="color-favor"></div>
-                            <span id="lbl-favor">Goles Favor</span>
-                        </div>
-                        <div class="item-leyenda">
-                            <div class="punto-color" id="color-contra"></div>
-                            <span id="lbl-contra">Goles Contra</span>
-                        </div>
-                    </div>
+                
                 </div>
 
                 <h3 class="titulo-seccion">PLANTILLA</h3>
@@ -86,7 +96,7 @@
         </div>
     </section>
 
-    <script src="/JS/estadisticas.js"></script>
+    <script src="../JS/estadisticas.js"></script>
 
 </body>
 </html>

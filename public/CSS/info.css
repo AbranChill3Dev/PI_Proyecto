@@ -1,0 +1,55 @@
+@import url('./estadisticas.css');
+
+.titulo-seccion {
+    font-family: "Zen Dots", sans-serif;
+    font-size: 1rem;
+    color: #000;
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    text-align: left;
+    width: 100%;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo-seccion i {
+    color: #555;
+}
+
+/* --- DATOS CURIOSOS --- */
+.lista-curiosidades {
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.lista-curiosidades li {
+    font-family: "Rajdhani", sans-serif; 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.lista-curiosidades li::marker {
+    color: #10be39; 
+    font-size: 1.2em;
+}
+
+/* --- HISTORIA --- */
+.texto-historia {
+    font-family: "Rajdhani", sans-serif; 
+    font-weight: 500;
+    color: #444;
+    line-height: 1.5;
+    text-align: justify;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #000; 
+}
