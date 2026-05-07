@@ -8,15 +8,15 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-    <link rel="stylesheet" href="../CSS/default.css">
-    <link rel="stylesheet" href="../CSS/camara.css">
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/camara.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>FifaScan</title>
+    <title>FifaScan - Cámara</title>
     <style>
         .boton-deshabilitado {
             opacity: 0.5 !important;
@@ -37,7 +37,7 @@
 
         <div class="ar-window">
             <a-scene class="pantalla-AR" 
-                mindar-image="imageTargetSrc: /Modelos/targets(2).mind; uiScanning: #none; autoStart: true; filterMinCF:0.001; filterBeta: 0.01;" 
+                mindar-image="imageTargetSrc:/Modelos/targets(2).mind; uiScanning: #none; autoStart: true; filterMinCF:0.001; filterBeta: 0.01;" 
                 embedded
                 color-space="sRGB" 
                 renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
@@ -99,8 +99,8 @@
             </a-scene>
         </div>
 
-            <div class="controles-camara-centered">
-            <a href="/index.html" class="boton-flotante">
+        <div class="controles-camara-centered">
+            <a href="../index.html" class="boton-flotante">
                 <i class="fas fa-arrow-left"></i><span>VOLVER</span>
             </a>
             
@@ -122,10 +122,17 @@
     <canvas id="fireworks-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; display: none; z-index: 10000;"></canvas>
 
     <script>
+        // LÓGICA DE PERSISTENCIA DEL TEMA
+        const rootElement = document.documentElement;
+        const temaGuardado = localStorage.getItem('temaGuardado');
+        if (temaGuardado === 'dark') {
+            rootElement.setAttribute('data-theme', 'dark');
+        }
+
         const paisMap = { 'mexico': 0, 'espana': 1, 'uruguay': 2, 'colombia': 3, 'japon': 4, 'corea': 5, 'sudafrica': 6, 'tunez': 7 };
         const btnInfo = document.getElementById('btn-info'); 
         const btnAnimaciones = document.getElementById('btn-animaciones');
-        const btnMovimiento = document.getElementById('btn-movimiento'); // Referencia al nuevo botón
+        const btnMovimiento = document.getElementById('btn-movimiento');
         const fireworksCanvas = document.getElementById('fireworks-canvas');
         const ctx = fireworksCanvas.getContext('2d');
         
@@ -135,7 +142,7 @@
         let textOpacity = 0;
         let isAnimating = false;
         let canClick = true;
-        let estaGirando = false; // Estado global de la rotación
+        let estaGirando = false;
 
         function resizeCanvas() {
             fireworksCanvas.width = window.innerWidth;
@@ -144,15 +151,12 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // --- CORRECCIÓN CRÍTICA PARA CAPAS Y VISIBILIDAD DE MODELOS ---
         document.querySelector('a-scene').addEventListener('renderstart', () => {
             const sceneEl = document.querySelector('a-scene');
             setTimeout(() => {
-                // Forzamos el redimensionado del motor de MindAR
                 if (sceneEl.components['mindar-image']) {
                     sceneEl.components['mindar-image'].resize();
                 }
-                // Buscamos el video inyectado y lo traemos al frente del contenedor
                 const videoEl = document.querySelector('video');
                 if (videoEl) {
                     videoEl.style.zIndex = "1";
@@ -164,63 +168,41 @@
         targets.forEach(target => {
             target.addEventListener('targetFound', () => {
                 const country = target.getAttribute('data-country');
-              
                 btnInfo.href = `info.html?pais=${paisMap[country]}`; 
-                
                 btnInfo.classList.remove('boton-oculto');
                 btnAnimaciones.classList.remove('boton-oculto');
-                btnMovimiento.classList.remove('boton-oculto'); // Mostrar botón movimiento
+                btnMovimiento.classList.remove('boton-oculto');
             });
             target.addEventListener('targetLost', () => {
                 btnInfo.classList.add('boton-oculto');
                 btnAnimaciones.classList.add('boton-oculto');
-                btnMovimiento.classList.add('boton-oculto'); // Ocultar botón movimiento
-                
-                // Opcional: Detener el giro si se pierde el target
+                btnMovimiento.classList.add('boton-oculto');
                 detenerRotacion();
             });
         });
 
-        // --- LÓGICA DEL BOTÓN DE MOVIMIENTO ---
-        
         function detenerRotacion() {
             estaGirando = false;
             const modelos = document.querySelectorAll('a-gltf-model');
             modelos.forEach(modelo => {
-                // Desactivamos la animación componente por componente
                 modelo.setAttribute('animation', 'enabled', false);
             });
             btnMovimiento.classList.remove('boton-activo');
-            // Opcional: volver a poner el texto original si lo cambiaste
-            // btnMovimiento.querySelector('span').innerText = "MOVIMIENTO";
         }
 
         btnMovimiento.addEventListener('click', () => {
-            // Alternar estado
             estaGirando = !estaGirando;
-            
-            // Buscar todos los modelos en la escena
             const modelos = document.querySelectorAll('a-gltf-model');
-            
             modelos.forEach(modelo => {
-                // Modificar la propiedad 'enabled' dentro del atributo 'animation'
                 modelo.setAttribute('animation', 'enabled', estaGirando);
             });
-
-            // Feedback visual en el botón
             if (estaGirando) {
                 btnMovimiento.classList.add('boton-activo');
-                // Opcional: cambiar el texto
-                // btnMovimiento.querySelector('span').innerText = "PARAR";
             } else {
                 btnMovimiento.classList.remove('boton-activo');
-                // Opcional: volver a poner el texto original
-                // btnMovimiento.querySelector('span').innerText = "MOVIMIENTO";
             }
         });
 
-
-        // --- Lógica de partículas (sin cambios) ---
         class Particle {
             constructor(x, y, color) {
                 this.x = x; this.y = y; this.color = color;

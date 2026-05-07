@@ -1,260 +1,157 @@
-/* TUS ESTILOS ORIGINALES (NO TOCADOS) */
+/* CONFIGURACIÓN DE VARIABLES DINÁMICAS */
+:root {
+    --bg-image: url('../MULTIMEDIA/Background.jpg');
+    --card-bg: #ffffff;
+    --card-border: #000000;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-muted: #666666;
+    --box-bg: #f9f9f9;
+    --box-border: #dddddd;
+    --header-bg: #000000;
+    --header-text: #ffffff;
+    --gradient-card: linear-gradient(to bottom, #ffffff 85%, #d1ffd4 100%);
+}
+
+[data-theme="dark"] {
+    --bg-image: url('../MULTIMEDIA/Background2.png');
+    --card-bg: #1a1a1a;
+    --card-border: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #aaaaaa;
+    --box-bg: #2d2d2d;
+    --box-border: #444444;
+    --header-bg: #ffffff;
+    --header-text: #000000;
+    --gradient-card: linear-gradient(to bottom, #1a1a1a 85%, #0a240c 100%);
+}
+
+body { 
+    margin: 0; 
+    padding: 0; 
+    overflow-y: auto !important; 
+    height: auto !important; 
+    background-color: var(--card-bg);
+}
+
 .fondo-estadisticas {
     width: 100%; min-height: 100vh; height: auto; 
-    background-image: url('../MULTIMEDIA/Background.jpg');
+    background-image: var(--bg-image);
     background-size: cover; background-position: center; background-repeat: repeat; background-attachment: fixed;
     display: flex; justify-content: center; align-items: flex-start;
     padding-top: 100px; padding-bottom: 50px; box-sizing: border-box;
+    transition: background-image 0.5s ease;
 }
 
-body { overflow-y: auto !important; height: auto !important; }
-
 .header-stats {
-    width: 100%; height: 60px; background-color: #000000;
+    width: 100%; height: 60px; background-color: var(--header-bg);
     display: flex; justify-content: center; align-items: center;
     border-bottom: 2px solid rgba(0, 255, 47, 0.821);
     position: fixed; top: 0; z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
-.header-stats h1 { font-family: "Zen Dots", sans-serif; color: #ffffff; font-size: 1.2rem; letter-spacing: 3px; }
+.header-stats h1 { font-family: "Zen Dots", sans-serif; color: var(--header-text); font-size: 1.2rem; letter-spacing: 3px; margin: 0; }
 
-.boton-volver { position: absolute; left: 20px; color: #ffffff; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+.boton-volver { position: absolute; left: 20px; color: var(--header-text); font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
 
 .tarjeta-informe {
     width: 90%; max-width: 450px; height: auto !important; display: block; 
-    background-color: #ffffff; border: 2px solid #000000; border-radius: 20px;
+    background: var(--gradient-card); 
+    border: 2px solid var(--card-border); 
+    border-radius: 20px;
     padding: 30px 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    background: linear-gradient(to bottom, #ffffff 85%, #d1ffd4 100%);
     margin-bottom: 20px; overflow: hidden;
+    transition: background 0.3s ease;
 }
 
-.navegacion-pais { display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
-.titulo-pais { font-family: "Zen Dots", sans-serif; color: #10be39; font-size: 1.8rem; text-transform: uppercase; text-align: center; }
-.btn-nav { background: none; border: none; font-size: 1.5rem; color: #333; cursor: pointer; padding: 10px; }
-.contenedor-interno { width: 100%; text-align: center; }
-.subtitulo { font-family: "Zen Dots", sans-serif; font-size: 0.8rem; color: #000; margin-bottom: 20px; }
-.contenedor-grafico { position: relative; width: 220px; height: 220px; margin: 0 auto 20px auto; max-width: 100%; }
-.grafico-pastel { width: 100%; height: 100%; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.5s ease; }
-.leyenda-datos { display: flex; justify-content: space-between; width: 100%; padding: 0 10px; margin-bottom: 25px; gap: 15px; }
-.columna-leyenda { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.item-leyenda { display: flex; align-items: center; background-color: rgba(255, 255, 255, 0.6); padding: 5px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05); }
-.punto-color { width: 15px; height: 15px; border-radius: 4px; margin-right: 8px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.2); }
-.item-leyenda span { font-family: Arial, sans-serif; font-weight: bold; font-size: 0.75rem; color: #333; line-height: 1.2; }
+.navegacion-pais { display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 2px solid var(--box-border); padding-bottom: 10px; margin-bottom: 20px; }
+.titulo-pais { font-family: "Zen Dots", sans-serif; color: #10be39; font-size: 1.8rem; text-transform: uppercase; text-align: center; margin: 0; }
+.btn-nav { background: none; border: none; font-size: 1.5rem; color: var(--text-primary); cursor: pointer; padding: 10px; }
 
-/* --- NUEVAS CLASES PARA EL REPRODUCTOR CUSTOM --- */
+.titulo-seccion { font-family: "Zen Dots", sans-serif; font-size: 1rem; margin-top: 25px; margin-bottom: 15px; color: var(--text-primary); text-decoration: underline; text-transform: uppercase; text-align: center; }
 
-.thumbnail-container {
-    position: relative;
-    width: 100%;
-    background: black;
-    cursor: pointer;
+/* RENDIMIENTO API */
+.rendimiento-api { display: flex; flex-direction: column; width: 100%; margin-bottom: 25px; gap: 15px; }
+
+.stat-box {
+    background: var(--box-bg);
+    border: 1px solid var(--box-border);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.video-preview {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    display: block;
-    transition: filter 0.3s ease;
+.stat-box span { font-size: 1.5rem; font-weight: bold; font-family: "Zen Dots", sans-serif; color: var(--text-primary); display: block; margin-bottom: 5px; }
+.stat-box p { font-size: 0.65rem; margin: 0; font-family: "Zen Dots", sans-serif; color: var(--text-muted); }
+
+/* MÉTRICAS AVANZADAS */
+.metricas-avanzadas { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; width: 100%; }
+.bloque-metrica { background: var(--box-bg); border: 1px solid var(--box-border); border-radius: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
+.titulo-metrica { font-family: "Zen Dots", sans-serif; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 10px; margin-top: 0; }
+
+.racha-bolitas { display: flex; justify-content: center; gap: 10px; }
+.bolita { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.bolita.v { background-color: #10be39; }
+.bolita.e { background-color: #8c8c8c; }
+.bolita.d { background-color: #e70013; }
+
+.goles-balance { display: flex; flex-direction: column; gap: 15px; }
+.goles-num { font-family: "Zen Dots", sans-serif; font-size: 2rem; display: block; }
+.goles-num.verde { color: #10be39; }
+.goles-num.rojo { color: #e70013; }
+
+.barra-fondo { width: 100%; height: 18px; background-color: var(--box-border); border-radius: 10px; overflow: hidden; margin-bottom: 5px; }
+.barra-progreso { height: 100%; width: 0%; background: linear-gradient(90deg, #e70013, #FFC400, #10be39); transition: width 1.5s ease-in-out; border-radius: 10px; }
+.texto-efectividad { font-family: "Zen Dots", sans-serif; font-size: 0.9rem; color: var(--text-primary); margin: 0; }
+
+/* PLANTILLA */
+.lista-jugadores { width: 100%; text-align: center; }
+.lista-jugadores h4 { font-family: "Zen Dots", sans-serif; font-size: 0.9rem; margin-top: 20px; margin-bottom: 10px; color: var(--text-primary); text-decoration: underline; }
+
+.jugador-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    background: var(--box-bg);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid var(--box-border);
 }
 
-.custom-controls {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 35px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 10px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 10;
-}
+.foto-jugador { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #10be39; object-fit: cover; }
+.jugador-item p { font-size: 0.75rem; margin: 0; font-family: "Zen Dots", sans-serif; color: var(--text-secondary); }
 
-.thumbnail-container:hover .custom-controls,
-.thumbnail-container:fullscreen .custom-controls {
-    opacity: 1;
-}
+/* VIDEOS */
+.mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-top: 15px; }
+.mini-card { background-color: var(--box-bg); border: 1px solid var(--box-border); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; color: var(--text-secondary); padding: 8px 5px; text-align: center; margin: 0; width: 100%; border-top: 1px solid var(--box-border); }
 
-.custom-controls button {
-    background: transparent; border: none;
-    color: white; font-size: 1rem; cursor: pointer;
-}
+.thumbnail-container { position: relative; width: 100%; background: black; cursor: pointer; }
+.video-preview { width: 100%; height: 100px; object-fit: cover; display: block; }
+.custom-controls { position: absolute; bottom: 0; left: 0; right: 0; height: 35px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; opacity: 0; transition: opacity 0.3s; z-index: 10; }
+.thumbnail-container:hover .custom-controls { opacity: 1; }
+.custom-controls button { background: transparent; border: none; color: white; font-size: 1rem; cursor: pointer; }
 
-.right-controls { display: flex; align-items: center; gap: 8px; }
-
-.video-settings { position: relative; }
-
-.filters-menu {
-    display: none;
-    position: absolute;
-    bottom: 40px; right: 0;
-    background: #000;
-    border: 1px solid rgba(0, 255, 47, 0.8);
-    border-radius: 8px;
-    padding: 8px; width: 130px;
-}
-
-.filters-menu.active { display: block; }
-
-.filters-menu p {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.5rem; color: rgba(0, 255, 47, 0.8);
-    text-align: center; margin-bottom: 5px;
-}
-
-.filters-menu button {
-    display: block; width: 100%;
-    color: white; font-size: 0.7rem;
-    padding: 5px; text-align: left;
-}
-
-.filters-menu button:hover { background: rgba(0, 255, 47, 0.2); }
-
-/* --- FILTROS --- */
+/* FILTROS */
 .filter-blur { filter: blur(10px); }
 .filter-pixel { filter: contrast(150%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(3) contrast(1.5); }
 
-/* PANTALLA COMPLETA */
 .thumbnail-container:fullscreen {
-    width: 100vw; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-}
-.thumbnail-container:fullscreen .video-preview {
-    height: 100vh; width: 100vw; object-fit: contain;
-}
-
-/* --- CONTINUACIÓN DE TUS ESTILOS --- */
-.lista-jugadores { width: 100%; text-align: center; }
-.info-tecnica h4, .lista-jugadores h4 { font-family: "Zen Dots", sans-serif; font-size: 1rem; margin-top: 20px; margin-bottom: 10px; color: #000; text-decoration: underline; text-transform: uppercase; }
-.info-tecnica p, .lista-jugadores p { font-family: "Zen Dots", sans-serif; font-size: 0.85rem; margin-bottom: 5px; color: #333; }
-.mini-galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-top: 15px; padding-bottom: 10px; }
-.mini-card { background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.mini-card p { font-family: "Zen Dots", sans-serif; font-size: 0.6rem; color: #333; padding: 8px 5px; text-align: center; margin: 0; width: 100%; background-color: white; border-top: 1px solid #eee; }
-
-/* --- RENDIMIENTO API --- */
-/* --- RENDIMIENTO API --- */
-.rendimiento-api {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    flex-direction: column; /* ESTO HACE QUE SE APILEN HACIA ABAJO */
-    width: 100%;
-    margin-bottom: 25px;
-    gap: 15px; /* Espacio de separación entre cada caja */
-}
-
-.stat-box {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    flex: 1;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.stat-box span {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: "Zen Dots", sans-serif;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.stat-box p {
-    font-size: 0.65rem;
-    margin: 0;
-    font-family: "Zen Dots", sans-serif;
-    color: #666;
-}
-/* --- MÉTRICAS AVANZADAS --- */
-.metricas-avanzadas {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
-    width: 100%;
-}
-
-.bloque-metrica {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-.titulo-metrica {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.7rem;
-    color: #555;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-/* Racha Bolitas */
-.racha-bolitas {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.bolita {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    color: white;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    justify-content: center;
+    background-color: black;
 }
 
-.bolita.v { background-color: #10be39; } /* Verde Victoria */
-.bolita.e { background-color: #8c8c8c; } /* Gris Empate */
-.bolita.d { background-color: #e70013; } /* Rojo Derrota */
-
-/* Goles Balance */
-.goles-balance {
-    display: flex;
-    flex-direction: column; /* Apila los goles hacia abajo */
-    gap: 15px;
-}
-
-.goles-num {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 2rem;
-    display: block;
-}
-.goles-num.verde { color: #10be39; }
-.goles-num.rojo { color: #e70013; }
-
-/* Barra Efectividad */
-.barra-fondo {
+.thumbnail-container:fullscreen .video-preview {
     width: 100%;
-    height: 18px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 5px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.barra-progreso {
     height: 100%;
-    width: 0%; /* Se anima y llena con JS */
-    background: linear-gradient(90deg, #e70013, #FFC400, #10be39);
-    transition: width 1.5s ease-in-out;
-    border-radius: 10px;
-}
-
-.texto-efectividad {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.9rem;
-    color: #333;
-    margin: 0;
+    object-fit: contain;
 }

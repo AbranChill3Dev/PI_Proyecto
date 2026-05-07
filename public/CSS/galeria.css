@@ -1,75 +1,155 @@
+/* CONFIGURACIÓN DE VARIABLES DINÁMICAS */
+:root {
+    --bg-image: url('../MULTIMEDIA/Background.jpg');
+    --body-bg: #ffffff;      /* Fondo sólido blanco por defecto */
+    --header-bg: #000000;
+    --header-text: #ffffff;
+    --card-bg: #000000;
+    --accent-color: rgba(0, 255, 47, 0.8);
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg-image: url('../MULTIMEDIA/Background2.png');
+    --body-bg: #000000;      /* Fondo sólido negro en modo oscuro */
+    --header-bg: #ffffff;
+    --header-text: #000000;
+    --card-bg: #1a1a1a;
+    --accent-color: #ffffff;
+}
+
+/* ESTILOS GENERALES Y ARREGLO DEL FONDO */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    /* Usa la variable para que cambie entre blanco y negro */
+    background-color: var(--body-bg); 
+    transition: background-color var(--transition-speed) ease;
+}
+
 .fondo-galeria {
     width: 100%;
     min-height: 100vh;
-    background-image: url('/MULTIMEDIA/Background.jpg');
+    background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 80px;
     padding-bottom: 30px;
+    box-sizing: border-box;
+    transition: background-image 0.5s ease;
 }
 
+/* HEADER */
 .header-galeria {
-    width: 100%; height: 60px;
-    background: #000;
-    display: flex; justify-content: center; align-items: center;
+    width: 100%; 
+    height: 60px;
+    background: var(--header-bg);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     border-bottom: 2px solid rgba(0, 255, 47, 0.8);
-    position: fixed; top: 0; z-index: 1000;
+    position: fixed; 
+    top: 0; 
+    z-index: 1000;
+    transition: background var(--transition-speed), color var(--transition-speed);
 }
 
 .header-galeria h1 {
     font-family: "Zen Dots", sans-serif;
-    color: #fff; font-size: 1.2rem; letter-spacing: 3px;
+    color: var(--header-text);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin: 0;
 }
 
-.boton-volver { position: absolute; left: 20px; color: #ffffff; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+.boton-volver {
+    position: absolute;
+    left: 20px;
+    color: var(--header-text);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
 
+/* CONTENEDOR DE CARDS */
 .wrapper-contenido {
-    width: 90%; margin: auto;
-    display: flex; flex-direction: column; gap: 20px;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .video-card {
-    width: 100%; background: black;
-    border-radius: 15px; overflow: hidden;
-    border: 1px solid #333; transition: .3s;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: var(--transition-speed);
 }
 
 .thumbnail-container {
-    position: relative; width: 100%; cursor: pointer;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
     background: black;
 }
 
 .video-preview {
-    width: 100%; aspect-ratio: 16/9;
-    object-fit: cover; display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
     transition: filter 0.3s;
 }
 
+.duracion {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-family: sans-serif;
+}
+
+/* CONTROLES */
 .custom-controls {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 60px;
     background: linear-gradient(transparent, rgba(0,0,0,0.9));
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 15px;
     opacity: 0;
     transition: opacity 0.3s;
     z-index: 10;
 }
 
-.thumbnail-container:hover .custom-controls,
-.thumbnail-container:fullscreen .custom-controls {
+.thumbnail-container:hover .custom-controls {
     opacity: 1;
 }
 
 .custom-controls button {
-    background: transparent; border: none;
-    color: white; font-size: 1.3rem;
-    cursor: pointer; transition: 0.2s;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .custom-controls button:hover {
@@ -77,7 +157,9 @@
 }
 
 .right-controls {
-    display: flex; align-items: center; gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .video-settings { position: relative; }
@@ -89,37 +171,40 @@
     background: #000;
     border: 2px solid rgba(0, 255, 47, 0.8);
     border-radius: 10px;
-    padding: 10px; width: 160px;
+    padding: 10px;
+    width: 160px;
 }
 
 .filters-menu.active { display: block; }
 
 .filters-menu p {
     font-family: "Zen Dots", sans-serif;
-    font-size: .7rem; color: rgba(0, 255, 47, 0.8);
-    text-align: center; margin-bottom: 10px;
+    font-size: .7rem;
+    color: rgba(0, 255, 47, 0.8);
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .filters-menu button {
-    display: block; width: 100%;
-    color: white; text-align: left;
-    padding: 8px; font-size: 0.8rem;
+    display: block;
+    width: 100%;
+    color: white;
+    text-align: left;
+    padding: 8px;
+    font-size: 0.8rem;
 }
 
-/* PANTALLA COMPLETA FIX */
-.thumbnail-container:fullscreen {
-    width: 100vw; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-}
-
-.thumbnail-container:fullscreen .video-preview {
-    height: 100vh; width: 100vw; object-fit: contain;
-}
-
+/* FILTROS */
 .filter-blur { filter: blur(15px); }
 .filter-pixel { filter: contrast(180%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%); }
 
+/* INFO */
 .video-info { padding: 15px; }
-.video-titulo { font-family: "Zen Dots", sans-serif; font-size: .85rem; color: rgba(0, 255, 47, 0.8); }
+.video-titulo {
+    font-family: "Zen Dots", sans-serif;
+    font-size: .85rem;
+    color: var(--accent-color);
+    transition: color var(--transition-speed);
+}
 .meta-data { color: #aaa; font-size: .75rem; }

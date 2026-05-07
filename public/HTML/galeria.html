@@ -25,7 +25,13 @@
     </section>
 
     <script>
-        // 1. Datos de los videos
+        // LÓGICA DE PERSISTENCIA DEL TEMA
+        const rootElement = document.documentElement;
+        const temaGuardado = localStorage.getItem('temaGuardado');
+        if (temaGuardado === 'dark') {
+            rootElement.setAttribute('data-theme', 'dark');
+        }
+
         const listaVideos = [
             { titulo: "MEX VS ALE 2018", poster: "/MULTIMEDIA/MEXVSAL.jpg", src: "/MULTIMEDIA/ALEMANIAVSMEX.mp4", pais: "MÉXICO" },
             { titulo: "GOLES MÉXICO", poster: "/MULTIMEDIA/GOLESME.jpg", src: "/MULTIMEDIA/GolesMexico.mp4", pais: "MÉXICO" },
@@ -41,7 +47,6 @@
         const wrapper = document.querySelector('.wrapper-contenido');
         let acumuladorCards = "";
 
-        // 2. Generar el HTML (Optimizado con data-src para Lazy Loading)
         listaVideos.forEach((vid) => {
             acumuladorCards += `
             <div class="video-card">
@@ -50,7 +55,6 @@
                         <source data-src="${vid.src}" type="video/mp4">
                     </video>
                     <span class="duracion">0:26</span>
-                    
                     <div class="custom-controls">
                         <button class="play-btn"><i class="fas fa-play"></i></button>
                         <div class="right-controls">
@@ -75,19 +79,10 @@
                 </div>
             </div>`;
         });
-
         wrapper.innerHTML = acumuladorCards;
 
-        // 3. Lógica de Lazy Loading e Interacción
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- CONFIGURACIÓN DEL LAZY LOADING ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px 0px 150px 0px', // Carga el video 150px antes de que entre al viewport
-                threshold: 0.1
-            };
-
+            const observerOptions = { root: null, rootMargin: '0px 0px 150px 0px', threshold: 0.1 };
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -95,16 +90,14 @@
                         const source = video.querySelector('source');
                         if (source.dataset.src) {
                             source.src = source.dataset.src;
-                            video.load(); // Inicia la carga controlada
-                            observer.unobserve(video); // Deja de vigilar una vez cargado
+                            video.load();
+                            observer.unobserve(video);
                         }
                     }
                 });
             }, observerOptions);
 
-            // --- APLICAR LÓGICA A CADA VIDEO ---
             const containers = document.querySelectorAll('.thumbnail-container');
-
             containers.forEach(container => {
                 const video = container.querySelector('video');
                 const playBtn = container.querySelector('.play-btn');
@@ -113,7 +106,6 @@
                 const settingsBtn = container.querySelector('.settings-btn');
                 const filtersMenu = container.querySelector('.filters-menu');
 
-                // Iniciar observación para Lazy Loading
                 videoObserver.observe(video);
 
                 const togglePlay = (e) => {
@@ -149,7 +141,6 @@
 
                 settingsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    // Cerrar otros menús abiertos antes de abrir este
                     document.querySelectorAll(".filters-menu").forEach(m => {
                         if (m !== filtersMenu) m.classList.remove("active");
                     });
@@ -167,7 +158,6 @@
                 });
             });
 
-            // Cerrar menús al hacer clic fuera
             document.addEventListener("click", () => {
                 document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
             });

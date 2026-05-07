@@ -1,97 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/default.css">
     <link rel="stylesheet" href="/CSS/asistencia.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <title>FifaScan</title>
+    <title>FifaScan - Ayuda</title>
 </head>
-
 <body>
 
     <header class="header-asistencia">
         <a href="../index.html" class="boton-volver">
             <i class="fas fa-chevron-left"></i>
         </a>
-
-        <h1>GALERIA</h1>
+        <h1>AYUDA</h1>
     </header>
 
     <section class="fondo-asistencia">
-        <div class="wrapped-contenido">
-            <h2>Como escanear</h2>
-
-            <h3>Paso 1:</h3>
-            <img src="/MULTIMEDIA/tuto1.png" alt="Paso1">
-            <h4>Presiona el icono de la camara que se encuentra en la pagina principal</h4>
-
-            <h3> Paso 2</h3>
-            <img src="/MULTIMEDIA/tuto2.png" alt="Paso2">
-            <h4>Enfoca la bandera a la camara</h4>
-
-            <h3>Paso 3</h3>
-            <img src="/MULTIMEDIA/tuto3.png" alt="Paso3">
-            <h4>Disfruta</h4>
-
-            <h2>Como cambiar los filtros</h2>
-
-            <h3>Paso 1:</h3>
-            <img src="/MULTIMEDIA/GaleriaT1.jpeg" alt="Paso1">
-            <h4>Selecciona el video que quieras modificar</h4>
-
-            <h3> Paso 2</h3>
-            <img src="/MULTIMEDIA/GaleriaT2.jpeg" alt="Paso2">
-            <h4>Dale click a la ranura de ajustes y selecciona el filtro que desees</h4>
-
-            <h3>Paso 3</h3>
-            <img src="/MULTIMEDIA/GaleriaT3.jpeg" alt="Paso3">
-            <h4>Disfruta de tu video modificado!</h4>
-
-            <h3>Paso 4</h3>
-            <img src="/MULTIMEDIA/GaleriaT4.jpeg" alt="Paso4">
-            <h4>Diviertete editando la cantidad de videos que quieras</h4>
-
-            <h2>Como funcionan las trivias</h2>
-
-            <h3>Paso 1:</h3>
-            <img src="/MULTIMEDIA/Trivia1.jpeg" alt="Paso1">
-            <h4>Ingresa a la seccion de trivias y selecciona la trivia que mas te llame la atencion</h4>
-
-            <h3> Paso 2</h3>
-            <img src="/MULTIMEDIA/Trivia2.jpeg" alt="Paso2">
-            <h4>Comienza a responder y pon en reto tus conocimientos</h4>
-
-            <h3>Paso 3</h3>
-            <img src="/MULTIMEDIA/Trivia3.jpeg" alt="Paso3">
-            <h4>Ve tus resultados para saber que tal te fue, puedes regresar al menu o intentar con otra trivia</h4>
-
-            <h2>Estadisticas, ¿de que sirven?</h2>
-
-            <h3>Paso 1:</h3>
-            <img src=/MULTIMEDIA/Estadisticas.jpeg" alt="Paso1">
-            <h4>Ingresa a la seccion de estadisticas ya sea mediante el boton en el menu o desde el escaneo del pais, en esta podras ver la graficas de partidos goles, etc y la informacion de la plantilla que estara jugando este mundial</h4>
-
-            <h3> Paso 2</h3>
-            <img src="/MULTIMEDIA/Estadisticas1.jpeg" alt="Paso2">
-            <h4>Al final de cada hoja de estadisticas podras ver cuatro videos referentes a la seleccion</h4>
-
-            <h3>Paso 3</h3>
-            <img src="/MULTIMEDIA/Estadisticas3.jpeg" alt="Paso3">
-            <h4>Diviertete viendo las estadisticas de las distintas selecciones que estaran participando en este mundial</h4>
-
-
+        <div class="menu-ayuda">
+            <h2 class="titulo-principal">Selecciona un tema:</h2>
+            <button class="btn-categoria" onclick="abrirTutorial(0)">COMO ESCANEAR</button>
+            <button class="btn-categoria" onclick="abrirTutorial(1)">CAMBIAR FILTROS</button>
+            <button class="btn-categoria" onclick="abrirTutorial(2)">TRIVIAS</button>
+            <button class="btn-categoria" onclick="abrirTutorial(3)">ESTADISTICAS</button>
         </div>
     </section>
 
-</body>
+    <div id="modal-tutorial" class="modal-oculto">
+        <div class="contenido-tutorial">
+            <div id="paso-actual">
+                </div>
+            
+            <div class="zona-click zona-izquierda" onclick="cambiarPaso(-1)"></div>
+            <div class="zona-click zona-derecha" onclick="cambiarPaso(1)"></div>
 
+            <button id="btn-cerrar-tuto" class="btn-cerrar" onclick="cerrarTutorial()">VOLVER A AYUDA</button>
+        </div>
+    </div>
+
+    <script>
+        // Persistencia del tema
+        if (localStorage.getItem('temaGuardado') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        const tutoriales = [
+            {
+                titulo: "COMO ESCANEAR",
+                pasos: [
+                    { img: "/MULTIMEDIA/tuto1.png", txt: "Presiona el icono de la camara en la pagina principal" },
+                    { img: "/MULTIMEDIA/tuto2.png", txt: "Enfoca la bandera a la camara" },
+                    { img: "/MULTIMEDIA/tuto3.png", txt: "¡Disfruta del modelo 3D!" }
+                ]
+            },
+            {
+                titulo: "CAMBIAR FILTROS",
+                pasos: [
+                    { img: "/MULTIMEDIA/GaleriaT1.jpeg", txt: "Selecciona el video que quieras modificar" },
+                    { img: "/MULTIMEDIA/GaleriaT2.jpeg", txt: "Presiona ajustes y selecciona el filtro" },
+                    { img: "/MULTIMEDIA/GaleriaT3.jpeg", txt: "¡Disfruta de tu video modificado!" },
+                    { img: "/MULTIMEDIA/GaleriaT4.jpeg", txt: "Edita la cantidad de videos que quieras" }
+                ]
+            },
+            {
+                titulo: "TRIVIAS",
+                pasos: [
+                    { img: "/MULTIMEDIA/Trivia1.jpeg", txt: "Ingresa a trivias y selecciona la que mas te llame la atencion" },
+                    { img: "/MULTIMEDIA/Trivia2.jpeg", txt: "Responde y pon en reto tus conocimientos" },
+                    { img: "/MULTIMEDIA/Trivia3.jpeg", txt: "Ve tus resultados y vuelve al menu o intenta otra" }
+                ]
+            },
+            {
+                titulo: "ESTADISTICAS",
+                pasos: [
+                    { img: "/MULTIMEDIA/Estadisticas.jpeg", txt: "Mira graficas de goles e informacion de plantillas" },
+                    { img: "/MULTIMEDIA/Estadisticas1.jpeg", txt: "Al final podras ver videos referentes a la seleccion" },
+                    { img: "/MULTIMEDIA/Estadisticas3.jpeg", txt: "Diviertete analizando a las distintas selecciones" }
+                ]
+            }
+        ];
+
+        let tutoActual = 0;
+        let pasoIndice = 0;
+
+        function abrirTutorial(id) {
+            tutoActual = id;
+            pasoIndice = 0;
+            const modal = document.getElementById('modal-tutorial');
+            modal.classList.remove('modal-oculto');
+            modal.classList.add('modal-visible');
+            mostrarPaso();
+        }
+
+        function mostrarPaso() {
+            const data = tutoriales[tutoActual].pasos[pasoIndice];
+            const contenedor = document.getElementById('paso-actual');
+            const btnCerrar = document.getElementById('btn-cerrar-tuto');
+
+            contenedor.innerHTML = `
+                <h3 class="paso-titulo">PASO ${pasoIndice + 1}</h3>
+                <img src="${data.img}" class="img-tuto">
+                <h4 class="txt-tuto-h4">${data.txt}</h4>
+            `;
+
+            // Botón de cierre solo al final
+            btnCerrar.style.display = (pasoIndice === tutoriales[tutoActual].pasos.length - 1) ? "block" : "none";
+        }
+
+        function cambiarPaso(direccion) {
+            const totalPasos = tutoriales[tutoActual].pasos.length;
+            pasoIndice += direccion;
+            if (pasoIndice < 0) pasoIndice = 0;
+            if (pasoIndice >= totalPasos) pasoIndice = totalPasos - 1;
+            mostrarPaso();
+        }
+
+        function cerrarTutorial() {
+            const modal = document.getElementById('modal-tutorial');
+            modal.classList.remove('modal-visible');
+            modal.classList.add('modal-oculto');
+        }
+    </script>
+</body>
 </html>

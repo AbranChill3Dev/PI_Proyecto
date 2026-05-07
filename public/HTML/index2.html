@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/default.css">
-    <link rel="stylesheet" href="../CSS/principal.css">
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/principal.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,31 +17,31 @@
 </head>
 
 <body>
- 
+
     <section class="seccion-imagen">
-        <img src="../MULTIMEDIA/Logo.png" alt="Logo" class="logo-central">
+        <img src="/MULTIMEDIA/Logo.png" alt="Logo" class="logo-central" id="logo-sitio">
     </section>
 
     <main class="seccion-contenido">
-        <a href="../HTML/camara.html">
+        <a href="/HTML/camara.html">
             <button class="boton">
                 <i class="fas fa-camera"></i>
                 <span>CAMARA</span>
             </button>
         </a>
-        <a href="../HTML/galeria.html">
+        <a href="/HTML/galeria.html">
             <button class="boton">
                 <i class="fas fa-images"></i>
                 <span>GALERIA</span>
             </button>
         </a>
-        <a href="../HTML/trivias.html">
+        <a href="/HTML/trivias.html">
             <button class="boton">
                 <i class="fas fa-question-circle"></i>
                 <span>TRIVIAS</span>
             </button>
         </a>
-        <a href="../HTML/estadisticas.html">
+        <a href="/HTML/estadisticas.html">
             <button class="boton">
                 <i class="fas fa-chart-bar"></i>
                 <span>ESTADISTICAS</span>
@@ -50,17 +50,55 @@
     </main>
 
     <main class="seccion-asistencia">
-        <a href="../HTML/asistencia.html">
+        <a href="/HTML/asistencia.html">
             <button class="botonasistencia">
-                <span>Ayuda</span>
+                <span>AYUDA</span>
             </button>
         </a>
+        <button class="botonasistencia" id="dark-mode-toggle">
+            <span>MODO OSCURO</span>
+        </button>
     </main>
 
     <footer>
         <p>&copy; FIFASCANS</p>
     </footer>
 
+    <script>
+        const btnDarkMode = document.getElementById('dark-mode-toggle');
+        const rootElement = document.documentElement;
+        const logoImg = document.getElementById('logo-sitio');
+
+        // Función para aplicar el tema
+        function aplicarTema(tema) {
+            if (tema === 'dark') {
+                rootElement.setAttribute('data-theme', 'dark');
+                btnDarkMode.querySelector('span').innerText = 'MODO CLARO';
+                logoImg.src = "/MULTIMEDIA/Logo2.png";
+                localStorage.setItem('temaGuardado', 'dark');
+            } else {
+                rootElement.setAttribute('data-theme', 'light');
+                btnDarkMode.querySelector('span').innerText = 'MODO OSCURO';
+                logoImg.src = "/MULTIMEDIA/Logo.png";
+                localStorage.setItem('temaGuardado', 'light');
+            }
+        }
+
+        // Al cargar la página, revisar si hay un tema guardado
+        const temaEnMemoria = localStorage.getItem('temaGuardado');
+        if (temaEnMemoria) {
+            aplicarTema(temaEnMemoria);
+        }
+
+        btnDarkMode.addEventListener('click', () => {
+            const currentTheme = rootElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                aplicarTema('light');
+            } else {
+                aplicarTema('dark');
+            }
+        });
+    </script>
 </body>
 
 </html>

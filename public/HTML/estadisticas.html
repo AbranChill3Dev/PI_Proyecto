@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../CSS/default.css">
-    <link rel="stylesheet" href="../CSS/estadisticas.css">
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/estadisticas.css">
+    <link rel="stylesheet" href="/CSS/galeria.css"> 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <title>FifaScan</title>
+    <title>FifaScan - Estadísticas</title>
 </head>
 
 <body>
@@ -37,7 +35,7 @@
             </div>
             
             <div class="contenedor-interno">
-                <h3 class="titulo-seccion">RENDIMIENTO (ÚLTIMOS 10 JUEGOS)</h3>
+                <h3 class="titulo-seccion">RENDIMIENTO RECIENTE</h3>
                 <div class="rendimiento-api">
                     <div class="stat-box">
                         <span id="api-victorias">-</span>
@@ -53,50 +51,46 @@
                     </div>
 
                     <div class="metricas-avanzadas">
-                    <div class="bloque-metrica">
-                        <p class="titulo-metrica">RACHA RECIENTE (Últimos 5)</p>
-                        <div class="racha-bolitas" id="racha-bolitas">
+                        <div class="bloque-metrica">
+                            <p class="titulo-metrica">RACHA (Últimos 5)</p>
+                            <div class="racha-bolitas" id="racha-bolitas"></div>
+                        </div>
+
+                        <div class="bloque-metrica goles-balance">
+                            <div>
+                                <p class="titulo-metrica">GOLES A FAVOR</p>
+                                <span class="goles-num verde" id="api-gf">-</span>
                             </div>
-                    </div>
+                            <div>
+                                <p class="titulo-metrica">GOLES EN CONTRA</p>
+                                <span class="goles-num rojo" id="api-gc">-</span>
+                            </div>
+                        </div>
 
-                    <div class="bloque-metrica goles-balance">
-                        <div>
-                            <p class="titulo-metrica">GOLES A FAVOR</p>
-                            <span class="goles-num verde" id="api-gf">-</span>
+                        <div class="bloque-metrica">
+                            <p class="titulo-metrica">EFECTIVIDAD</p>
+                            <div class="barra-fondo">
+                                <div class="barra-progreso" id="barra-efectividad"></div>
+                            </div>
+                            <p class="texto-efectividad" id="texto-efectividad">0%</p>
                         </div>
-                        <div>
-                            <p class="titulo-metrica">GOLES EN CONTRA</p>
-                            <span class="goles-num rojo" id="api-gc">-</span>
-                        </div>
-                    </div>
-
-                    <div class="bloque-metrica">
-                        <p class="titulo-metrica">EFECTIVIDAD DE VICTORIAS</p>
-                        <div class="barra-fondo">
-                            <div class="barra-progreso" id="barra-efectividad"></div>
-                        </div>
-                        <p class="texto-efectividad" id="texto-efectividad">0%</p>
                     </div>
                 </div>
-                
-                </div>
 
-                <h3 class="titulo-seccion">PLANTILLA</h3>
-
-                <div class="lista-jugadores" id="lista-jugadores"></div>
-<h3 class="titulo-seccion">PLANTILLA</h3>
-
+                <h3 class="titulo-seccion">PLANTILLA OFICIAL</h3>
                 <div class="lista-jugadores" id="lista-jugadores"></div>
 
                 <h3 class="titulo-seccion">VIDEOS DESTACADOS</h3>
-                
-                <div class="mini-galeria" id="contenedor-videos">
-                    </div>
+                <div class="wrapper-contenido" id="contenedor-videos"></div>
             </div>
         </div>
     </section>
 
-    <script src="../JS/estadisticas.js"></script>
-
+    <script src="/JS/estadisticas.js"></script>
+    <script>
+        if (localStorage.getItem('temaGuardado') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
 </body>
 </html>
