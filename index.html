@@ -17,9 +17,9 @@
 </head>
 
 <body>
- 
+
     <section class="seccion-imagen">
-        <img src="/MULTIMEDIA/Logo.png" alt="Logo" class="logo-central">
+        <img src="/MULTIMEDIA/Logo.png" alt="Logo" class="logo-central" id="logo-sitio">
     </section>
 
     <main class="seccion-contenido">
@@ -52,15 +52,53 @@
     <main class="seccion-asistencia">
         <a href="/HTML/asistencia.html">
             <button class="botonasistencia">
-                <span>Ayuda</span>
+                <span>AYUDA</span>
             </button>
         </a>
+        <button class="botonasistencia" id="dark-mode-toggle">
+            <span>MODO OSCURO</span>
+        </button>
     </main>
 
     <footer>
         <p>&copy; FIFASCANS</p>
     </footer>
 
+    <script>
+        const btnDarkMode = document.getElementById('dark-mode-toggle');
+        const rootElement = document.documentElement;
+        const logoImg = document.getElementById('logo-sitio');
+
+        // Función para aplicar el tema
+        function aplicarTema(tema) {
+            if (tema === 'dark') {
+                rootElement.setAttribute('data-theme', 'dark');
+                btnDarkMode.querySelector('span').innerText = 'MODO CLARO';
+                logoImg.src = "/MULTIMEDIA/Logo2.png";
+                localStorage.setItem('temaGuardado', 'dark');
+            } else {
+                rootElement.setAttribute('data-theme', 'light');
+                btnDarkMode.querySelector('span').innerText = 'MODO OSCURO';
+                logoImg.src = "/MULTIMEDIA/Logo.png";
+                localStorage.setItem('temaGuardado', 'light');
+            }
+        }
+
+        // Al cargar la página, revisar si hay un tema guardado
+        const temaEnMemoria = localStorage.getItem('temaGuardado');
+        if (temaEnMemoria) {
+            aplicarTema(temaEnMemoria);
+        }
+
+        btnDarkMode.addEventListener('click', () => {
+            const currentTheme = rootElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                aplicarTema('light');
+            } else {
+                aplicarTema('dark');
+            }
+        });
+    </script>
 </body>
 
 </html>
