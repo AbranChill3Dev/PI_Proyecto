@@ -8,8 +8,8 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-    <link rel="stylesheet" href="../CSS/default.css">
-    <link rel="stylesheet" href="../CSS/camara.css">
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/camara.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 
         <div class="ar-window">
             <a-scene class="pantalla-AR" 
-                mindar-image="imageTargetSrc:../Modelos/targets(2).mind; uiScanning: #none; autoStart: true; filterMinCF:0.001; filterBeta: 0.01;" 
+                mindar-image="imageTargetSrc:/Modelos/targets(2).mind; uiScanning: #none; autoStart: true; filterMinCF:0.001; filterBeta: 0.01;" 
                 embedded
                 color-space="sRGB" 
                 renderer="colorManagement: true, physicallyCorrectLights, alpha: true" 
@@ -45,14 +45,14 @@
                 device-orientation-permission-ui="enabled: false">
 
                 <a-assets>
-                    <a-asset-item id="sudafrica" src="../Modelos/Sudafrica.glb"></a-asset-item>
-                    <a-asset-item id="tunez" src="../Modelos/Tunez.glb"></a-asset-item>
-                    <a-asset-item id="japon" src="../Modelos/Japon.glb"></a-asset-item>
-                    <a-asset-item id="uruguay" src="../Modelos/Uruguay.glb"></a-asset-item>
-                    <a-asset-item id="espana" src="../Modelos/Espana.glb"></a-asset-item>
-                    <a-asset-item id="corea" src="../Modelos/Corea.glb"></a-asset-item>
-                    <a-asset-item id="mexico" src="../Modelos/Mexico.glb"></a-asset-item>
-                    <a-asset-item id="colombia" src="../Modelos/Colombia.glb"></a-asset-item>
+                    <a-asset-item id="sudafrica" src="/Modelos/Sudafrica.glb"></a-asset-item>
+                    <a-asset-item id="tunez" src="/Modelos/Tunez.glb"></a-asset-item>
+                    <a-asset-item id="japon" src="/Modelos/Japon.glb"></a-asset-item>
+                    <a-asset-item id="uruguay" src="/Modelos/Uruguay.glb"></a-asset-item>
+                    <a-asset-item id="espana" src="/Modelos/Espana.glb"></a-asset-item>
+                    <a-asset-item id="corea" src="/Modelos/Corea.glb"></a-asset-item>
+                    <a-asset-item id="mexico" src="/Modelos/Mexico.glb"></a-asset-item>
+                    <a-asset-item id="colombia" src="/Modelos/Colombia.glb"></a-asset-item>
                 </a-assets>
 
                 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -100,7 +100,7 @@
         </div>
 
         <div class="controles-camara-centered">
-            <a href="../HTML/index2.html" class="boton-flotante">
+            <a href="../index.html" class="boton-flotante">
                 <i class="fas fa-arrow-left"></i><span>VOLVER</span>
             </a>
             

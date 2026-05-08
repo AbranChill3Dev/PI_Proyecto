@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/default.css">
-    <link rel="stylesheet" href="../CSS/asistencia.css">
+    <link rel="stylesheet" href="/CSS/default.css">
+    <link rel="stylesheet" href="/CSS/asistencia.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,7 +15,7 @@
 <body>
 
     <header class="header-asistencia">
-        <a href="../HTML/index2.html" class="boton-volver">
+        <a href="../index.html" class="boton-volver">
             <i class="fas fa-chevron-left"></i>
         </a>
         <h1>AYUDA</h1>
@@ -55,10 +55,10 @@
         const modal = document.getElementById('modal-tutorial');
 
         const tutoriales = [
-            { titulo: "COMO ESCANEAR", pasos: [{ img: "../MULTIMEDIA/tuto1.png", txt: "Presiona el icono de la camara en la pagina principal" }, { img: "../MULTIMEDIA/tuto2.png", txt: "Enfoca la bandera a la camara" }, { img: "../MULTIMEDIA/tuto3.png", txt: "¡Disfruta del modelo 3D!" }] },
-            { titulo: "CAMBIAR FILTROS", pasos: [{ img: "../MULTIMEDIA/GaleriaT1.jpeg", txt: "Selecciona el video que quieras modificar" }, { img: "../MULTIMEDIA/GaleriaT2.jpeg", txt: "Presiona ajustes y selecciona el filtro" }, { img: "../MULTIMEDIA/GaleriaT3.jpeg", txt: "¡Disfruta de tu video modificado!" }, { img: "../MULTIMEDIA/GaleriaT4.jpeg", txt: "Edita la cantidad de videos que quieras" }] },
-            { titulo: "TRIVIAS", pasos: [{ img: "../MULTIMEDIA/Trivia1.jpeg", txt: "Ingresa a trivias y selecciona la que mas te llame la atencion" }, { img: "../MULTIMEDIA/Trivia2.jpeg", txt: "Responde y pon en reto tus conocimientos" }, { img: "../MULTIMEDIA/Trivia3.jpeg", txt: "Ve tus resultados y vuelve al menu o intenta otra" }] },
-            { titulo: "ESTADISTICAS", pasos: [{ img: "../MULTIMEDIA/Estadisticas.jpeg", txt: "Mira graficas de goles e informacion de plantillas" }, { img: "../MULTIMEDIA/Estadisticas1.jpeg", txt: "Al final podras ver videos referentes a la seleccion" }, { img: "../MULTIMEDIA/Estadisticas3.jpeg", txt: "Diviertete analizando a las distintas selecciones" }] }
+            { titulo: "COMO ESCANEAR", pasos: [{ img: "/MULTIMEDIA/tuto1.png", txt: "Presiona el icono de la camara en la pagina principal" }, { img: "/MULTIMEDIA/tuto2.png", txt: "Enfoca la bandera a la camara" }, { img: "/MULTIMEDIA/tuto3.png", txt: "¡Disfruta del modelo 3D!" }] },
+            { titulo: "CAMBIAR FILTROS", pasos: [{ img: "/MULTIMEDIA/GaleriaT1.jpeg", txt: "Selecciona el video que quieras modificar" }, { img: "/MULTIMEDIA/GaleriaT2.jpeg", txt: "Presiona ajustes y selecciona el filtro" }, { img: "/MULTIMEDIA/GaleriaT3.jpeg", txt: "¡Disfruta de tu video modificado!" }, { img: "/MULTIMEDIA/GaleriaT4.jpeg", txt: "Edita la cantidad de videos que quieras" }] },
+            { titulo: "TRIVIAS", pasos: [{ img: "/MULTIMEDIA/Trivia1.jpeg", txt: "Ingresa a trivias y selecciona la que mas te llame la atencion" }, { img: "/MULTIMEDIA/Trivia2.jpeg", txt: "Responde y pon en reto tus conocimientos" }, { img: "/MULTIMEDIA/Trivia3.jpeg", txt: "Ve tus resultados y vuelve al menu o intenta otra" }] },
+            { titulo: "ESTADISTICAS", pasos: [{ img: "/MULTIMEDIA/Estadisticas.jpeg", txt: "Mira graficas de goles e informacion de plantillas" }, { img: "/MULTIMEDIA/Estadisticas1.jpeg", txt: "Al final podras ver videos referentes a la seleccion" }, { img: "/MULTIMEDIA/Estadisticas3.jpeg", txt: "Diviertete analizando a las distintas selecciones" }] }
         ];
 
         let tutoActual = 0;
@@ -67,7 +67,7 @@
         function abrirTutorial(id) {
             tutoActual = id;
             pasoIndice = 0;
-            robotImg.src = "../MULTIMEDIA/robot-saludo.gif";
+            robotImg.src = "/MULTIMEDIA/robot-saludo.gif";
             modal.className = 'modal-visible';
             mostrarPaso();
         }
@@ -108,7 +108,7 @@
         function cerrarTutorial() {
             modal.className = 'modal-oculto';
             textoAsistente.innerText = "¡EXCELENTE! ¿NECESITAS AYUDA CON ALGO MÁS?";
-            robotImg.src = "../MULTIMEDIA/robot-saludo.gif";
+            robotImg.src = "/MULTIMEDIA/robot-saludo.gif";
         }
 
         if (localStorage.getItem('temaGuardado') === 'dark') {
@@ -123,7 +123,7 @@
             frame++;
             if (frame > 5) frame = 1;
             // Asumiendo que las imágenes están en la carpeta MULTIMEDIA
-            robotElement.style.backgroundImage = `url('../MULTIMEDIA/${frame}.png')`;
+            robotElement.style.backgroundImage = `url('/MULTIMEDIA/${frame}.png')`;
         }, 100);
 
     </script>
