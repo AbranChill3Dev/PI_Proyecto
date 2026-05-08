@@ -1,7 +1,7 @@
 /* CONFIGURACIÓN DE VARIABLES DINÁMICAS */
 :root {
     --bg-image: url('../MULTIMEDIA/Background.jpg');
-    --body-bg: #ffffff;      /* Fondo sólido blanco por defecto */
+    --body-bg: #ffffff;
     --header-bg: #000000;
     --header-text: #ffffff;
     --card-bg: #000000;
@@ -11,20 +11,18 @@
 
 [data-theme="dark"] {
     --bg-image: url('../MULTIMEDIA/Background2.png');
-    --body-bg: #000000;      /* Fondo sólido negro en modo oscuro */
+    --body-bg: #000000;
     --header-bg: #ffffff;
     --header-text: #000000;
     --card-bg: #1a1a1a;
     --accent-color: #ffffff;
 }
 
-/* ESTILOS GENERALES Y ARREGLO DEL FONDO */
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    /* Usa la variable para que cambie entre blanco y negro */
     background-color: var(--body-bg); 
     transition: background-color var(--transition-speed) ease;
 }
@@ -43,7 +41,6 @@ body, html {
     padding-top: 80px;
     padding-bottom: 30px;
     box-sizing: border-box;
-    transition: background-image 0.5s ease;
 }
 
 /* HEADER */
@@ -58,7 +55,6 @@ body, html {
     position: fixed; 
     top: 0; 
     z-index: 1000;
-    transition: background var(--transition-speed), color var(--transition-speed);
 }
 
 .header-galeria h1 {
@@ -75,7 +71,61 @@ body, html {
     color: var(--header-text);
     font-size: 1.5rem;
     text-decoration: none;
+}
+
+/* SECCIÓN BUSQUEDA Y FILTROS */
+.contenedor-busqueda {
+    width: 90%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.barra-busqueda {
+    position: relative;
+    width: 100%;
+}
+
+.barra-busqueda i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+}
+
+.barra-busqueda input {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid #333;
+    padding: 15px 15px 15px 45px;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.7rem;
+    outline: none;
+    box-sizing: border-box;
     transition: 0.3s;
+}
+
+.barra-busqueda input:focus {
+    border-color: rgba(0, 255, 47, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 47, 0.2);
+}
+
+.filtro-paises select {
+    width: 100%;
+    background: var(--card-bg);
+    color: white;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 12px;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.7rem;
+    cursor: pointer;
+    outline: none;
 }
 
 /* CONTENEDOR DE CARDS */
@@ -109,7 +159,6 @@ body, html {
     aspect-ratio: 16/9;
     object-fit: cover;
     display: block;
-    transition: filter 0.3s;
 }
 
 .duracion {
@@ -121,7 +170,6 @@ body, html {
     padding: 2px 8px;
     border-radius: 5px;
     font-size: 0.7rem;
-    font-family: sans-serif;
 }
 
 /* CONTROLES */
@@ -139,9 +187,7 @@ body, html {
     z-index: 10;
 }
 
-.thumbnail-container:hover .custom-controls {
-    opacity: 1;
-}
+.thumbnail-container:hover .custom-controls { opacity: 1; }
 
 .custom-controls button {
     background: transparent;
@@ -149,20 +195,9 @@ body, html {
     color: white;
     font-size: 1.3rem;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.custom-controls button:hover {
-    color: rgba(0, 255, 47, 0.8);
-}
-
-.right-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.video-settings { position: relative; }
+.custom-controls button:hover { color: rgba(0, 255, 47, 0.8); }
 
 .filters-menu {
     display: none;
@@ -181,7 +216,6 @@ body, html {
     font-family: "Zen Dots", sans-serif;
     font-size: .7rem;
     color: rgba(0, 255, 47, 0.8);
-    text-align: center;
     margin-bottom: 10px;
 }
 
@@ -194,7 +228,7 @@ body, html {
     font-size: 0.8rem;
 }
 
-/* FILTROS */
+/* FILTROS VIDEO */
 .filter-blur { filter: blur(15px); }
 .filter-pixel { filter: contrast(180%) brightness(110%) blur(1px); image-rendering: pixelated; }
 .filter-thermal { filter: invert(100%) hue-rotate(180deg) saturate(400%) contrast(150%); }
@@ -205,6 +239,5 @@ body, html {
     font-family: "Zen Dots", sans-serif;
     font-size: .85rem;
     color: var(--accent-color);
-    transition: color var(--transition-speed);
 }
 .meta-data { color: #aaa; font-size: .75rem; }

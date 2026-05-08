@@ -20,12 +20,33 @@
     </header>
 
     <section class="fondo-galeria">
-        <div class="wrapper-contenido">
+        <!-- SECCIÓN DE BÚSQUEDA Y FILTRO -->
+        <div class="contenedor-busqueda">
+            <div class="barra-busqueda">
+                <i class="fas fa-search"></i>
+                <input type="text" id="input-busqueda" placeholder="Buscar video...">
             </div>
+            
+            <div class="filtro-paises">
+                <select id="select-pais">
+                    <option value="todos">🌍 Todos los países</option>
+                    <option value="MÉXICO">MÉXICO</option>
+                    <option value="ESPAÑA">ESPAÑA</option>
+                    <option value="COREA">COREA</option>
+                    <option value="URUGUAY">URUGUAY</option>
+                    <option value="COLOMBIA">COLOMBIA</option>
+                    <option value="JAPÓN">JAPÓN</option>
+                    <option value="TUNEZ">TUNEZ</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="wrapper-contenido">
+            <!-- Los videos se cargan dinámicamente -->
+        </div>
     </section>
 
     <script>
-        // LÓGICA DE PERSISTENCIA DEL TEMA
         const rootElement = document.documentElement;
         const temaGuardado = localStorage.getItem('temaGuardado');
         if (temaGuardado === 'dark') {
@@ -45,59 +66,83 @@
         ];
 
         const wrapper = document.querySelector('.wrapper-contenido');
-        let acumuladorCards = "";
+        const inputBusqueda = document.getElementById('input-busqueda');
+        const selectPais = document.getElementById('select-pais');
 
-        listaVideos.forEach((vid) => {
-            acumuladorCards += `
-            <div class="video-card">
-                <div class="thumbnail-container">
-                    <video class="video-preview" poster="${vid.poster}" preload="none">
-                        <source data-src="${vid.src}" type="video/mp4">
-                    </video>
-                    <span class="duracion">0:26</span>
-                    <div class="custom-controls">
-                        <button class="play-btn"><i class="fas fa-play"></i></button>
-                        <div class="right-controls">
-                            <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
-                            <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
-                            <div class="video-settings">
-                                <button class="settings-btn"><i class="fas fa-cog"></i></button>
-                                <div class="filters-menu">
-                                    <p>FILTROS</p>
-                                    <button data-filter="none">Normal</button>
-                                    <button data-filter="blur">Desenfoque</button>
-                                    <button data-filter="pixel">Pixelado</button>
-                                    <button data-filter="thermal">Cámara térmica</button>
+        function renderizarVideos(videosFiltrados) {
+            let acumuladorCards = "";
+            
+            if (videosFiltrados.length === 0) {
+                wrapper.innerHTML = `<p style="color:var(--accent-color); font-family:'Zen Dots'; text-align:center; margin-top:50px;">NO SE ENCONTRARON VIDEOS</p>`;
+                return;
+            }
+
+            videosFiltrados.forEach((vid) => {
+                acumuladorCards += `
+                <div class="video-card" data-pais="${vid.pais}">
+                    <div class="thumbnail-container">
+                        <video class="video-preview" poster="${vid.poster}" preload="none">
+                            <source data-src="${vid.src}" type="video/mp4">
+                        </video>
+                        <span class="duracion">0:26</span>
+                        <div class="custom-controls">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                            <div class="right-controls">
+                                <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
+                                <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                                <div class="video-settings">
+                                    <button class="settings-btn"><i class="fas fa-cog"></i></button>
+                                    <div class="filters-menu">
+                                        <p>FILTROS</p>
+                                        <button data-filter="none">Normal</button>
+                                        <button data-filter="blur">Desenfoque</button>
+                                        <button data-filter="pixel">Pixelado</button>
+                                        <button data-filter="thermal">Cámara térmica</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-titulo">${vid.titulo}</h3>
-                    <div class="meta-data"><span><i class="fas fa-flag"></i> ${vid.pais}</span></div>
-                </div>
-            </div>`;
-        });
-        wrapper.innerHTML = acumuladorCards;
+                    <div class="video-info">
+                        <h3 class="video-titulo">${vid.titulo}</h3>
+                        <div class="meta-data"><span><i class="fas fa-flag"></i> ${vid.pais}</span></div>
+                    </div>
+                </div>`;
+            });
+            wrapper.innerHTML = acumuladorCards;
+            inicializarControles();
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = { root: null, rootMargin: '0px 0px 150px 0px', threshold: 0.1 };
+        function filtrarVideos() {
+            const texto = inputBusqueda.value.toLowerCase();
+            const paisElegido = selectPais.value;
+
+            const filtrados = listaVideos.filter(vid => {
+                const coincideTexto = vid.titulo.toLowerCase().includes(texto);
+                const coincidePais = (paisElegido === "todos" || vid.pais === paisElegido);
+                return coincideTexto && coincidePais;
+            });
+
+            renderizarVideos(filtrados);
+        }
+
+        function inicializarControles() {
+            const containers = document.querySelectorAll('.thumbnail-container');
+            
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const video = entry.target;
                         const source = video.querySelector('source');
-                        if (source.dataset.src) {
+                        if (source && source.dataset.src) {
                             source.src = source.dataset.src;
                             video.load();
                             observer.unobserve(video);
                         }
                     }
                 });
-            }, observerOptions);
+            }, { rootMargin: '0px 0px 150px 0px', threshold: 0.1 });
 
-            const containers = document.querySelectorAll('.thumbnail-container');
             containers.forEach(container => {
                 const video = container.querySelector('video');
                 const playBtn = container.querySelector('.play-btn');
@@ -141,9 +186,6 @@
 
                 settingsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    document.querySelectorAll(".filters-menu").forEach(m => {
-                        if (m !== filtersMenu) m.classList.remove("active");
-                    });
                     filtersMenu.classList.toggle('active');
                 });
 
@@ -157,11 +199,14 @@
                     });
                 });
             });
+        }
 
-            document.addEventListener("click", () => {
-                document.querySelectorAll(".filters-menu").forEach(m => m.classList.remove("active"));
-            });
-        });
+        // Listeners para buscar y filtrar
+        inputBusqueda.addEventListener('input', filtrarVideos);
+        selectPais.addEventListener('change', filtrarVideos);
+
+        // Carga inicial
+        renderizarVideos(listaVideos);
     </script>
 </body>
 </html>

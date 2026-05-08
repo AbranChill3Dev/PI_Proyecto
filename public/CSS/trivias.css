@@ -7,7 +7,9 @@
     --btn-bg: #ffffff;
     --btn-text: #000000;
     --card-bg: #ffffff;
-    --card-text: #000000;
+    --card-text: #000000; /* Texto negro en modo claro */
+    --porteria-color: #000000; /* Portería negra en modo claro */
+    --accent: #00ff2f;
     --transition-speed: 0.3s;
 }
 
@@ -18,263 +20,195 @@
     --header-text: #000000;
     --btn-bg: #000000;
     --btn-text: #ffffff;
-    --card-bg: #000000;
-    --card-text: #ffffff;
+    --card-bg: #1a1a1a; 
+    --card-text: #ffffff; /* Texto blanco en modo oscuro */
+    --porteria-color: #ffffff; /* Portería blanca en modo oscuro */
 }
 
-/* --- ANIMACIONES --- */
-@keyframes entradaTarjeta {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes sacudidaError {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-5px); }
-    40%, 80% { transform: translateX(5px); }
-}
-
-@keyframes pulsoAcierto {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes botonDesdeIzquierda {
-    from { opacity: 0; transform: translateX(-80px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes botonDesdeDerecha {
-    from { opacity: 0; transform: translateX(80px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* ESTILOS GENERALES */
+/* --- ESTILOS GENERALES --- */
 body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
+    margin: 0; padding: 0; width: 100%; min-height: 100vh;
     background-color: var(--body-bg);
-    transition: background-color var(--transition-speed);
-    /* EVITA EL ZOOM Y MOVIMIENTO DEL FONDO DURANTE ANIMACIONES */
-    overflow-x: hidden; 
+    font-family: "Zen Dots", sans-serif;
+    color: var(--card-text); 
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
 }
 
 .fondo-trivias {
-    width: 100%;
-    min-height: 100vh;
+    width: 100%; min-height: 100vh;
     background-image: var(--bg-image);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; background-position: center;
     background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 80px;
-    box-sizing: border-box;
-    transition: background-image 0.5s ease;
-    /* REFUERZO PARA EVITAR DESPLAZAMIENTOS LATERALES */
-    overflow-x: hidden;
-    position: relative;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 80px; box-sizing: border-box;
 }
 
-/* HEADER CORREGIDO: CENTRADO PERFECTO Y TAMAÑO REDUCIDO */
+/* --- HEADER --- */
 .header-trivia {
-    width: 100%;
-    height: 60px;
+    width: 100%; height: 60px;
     background-color: var(--header-bg);
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    border-bottom: 2px solid rgba(0, 255, 47, 0.821);
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    padding: 0 60px; /* Margen para que el texto no toque la flecha */
-    box-sizing: border-box;
-    transition: background-color var(--transition-speed);
+    display: flex; justify-content: center; align-items: center;
+    border-bottom: 2px solid var(--accent);
+    position: fixed; top: 0; z-index: 1000;
 }
 
-.header-trivia h1 {
-    font-family: "Zen Dots", sans-serif;
-    color: var(--header-text);
-    font-size: 0.8rem; /* TAMAÑO REDUCIDO */
-    letter-spacing: 1px;
-    margin: 0;
-    text-align: center;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Pone "..." si el nombre es muy largo */
-    flex: 1;
-    transition: color var(--transition-speed);
-}
+.header-trivia h1 { color: var(--header-text); font-size: 0.8rem; }
+.boton-volver { position: absolute; left: 15px; color: var(--header-text); font-size: 1.3rem; text-decoration: none; }
 
-.boton-volver {
-    position: absolute;
-    left: 15px;
-    color: var(--header-text);
-    font-size: 1.3rem;
-    text-decoration: none;
-    transition: 0.3s;
-    z-index: 1001;
-}
-
-.boton-volver:hover {
-    color: rgba(0, 255, 47, 0.821);
-}
-
-/* CONTENEDORES */
-.contenedor-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 90%;
-    max-width: 400px;
-    animation: entradaTarjeta 0.5s ease-out;
-}
-
-.contenedor-juego {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 90%;
-    max-width: 400px;
-    /* Eliminamos animación aquí para que no interfiera con los botones */
-    animation: none !important; 
+/* --- CONTENEDORES --- */
+.contenedor-menu, .contenedor-juego {
+    display: flex; flex-direction: column; gap: 20px;
+    width: 90%; max-width: 400px;
 }
 
 .btn-opcion {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    font-family: "Zen Dots", sans-serif;
-    font-size: 1rem;
-    padding: 20px;
-    border: 2px solid var(--btn-text);
-    border-radius: 10px;
-    cursor: pointer;
-    text-transform: uppercase;
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-    transition: all 0.2s ease;
-    text-align: center;
+    background-color: var(--btn-bg); color: var(--btn-text);
+    padding: 20px; border: 2px solid var(--btn-text);
+    border-radius: 10px; cursor: pointer; text-transform: uppercase;
+    font-family: "Zen Dots"; transition: 0.2s;
 }
 
-.btn-opcion:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-}
-
+/* --- TARJETA DE PREGUNTA CORREGIDA --- */
 .tarjeta-pregunta {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); 
     border: 2px solid var(--card-text);
-    border-radius: 15px;
-    padding: 30px 20px;
+    border-radius: 15px; 
+    padding: 25px; 
     text-align: center;
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-    transition: background-color var(--transition-speed);
-    /* Evita que el texto de la pregunta se mueva con los botones */
-    position: relative;
-    z-index: 5;
+    transition: all var(--transition-speed);
 }
 
 .tarjeta-pregunta p {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 1rem;
-    line-height: 1.4;
-    color: var(--card-text);
+    color: var(--card-text) !important; /* Fuerza el cambio de color de la pregunta */
     margin: 0;
 }
 
+/* --- CAMPO DE JUEGO Y PORTERÍA --- */
+.campo-futbol {
+    position: relative; width: 100%; height: 450px;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+}
+
+.arco-trivia {
+    width: 100%; max-width: 380px; height: 220px;
+    border: 8px solid var(--porteria-color);
+    border-bottom: none;
+    position: relative; background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px 10px 0 0;
+    transition: border-color var(--transition-speed);
+}
+
+.red-arco {
+    position: absolute; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(var(--porteria-color) 1px, transparent 1px), 
+        linear-gradient(90deg, var(--porteria-color) 1px, transparent 1px);
+    background-size: 20px 20px; opacity: 0.15;
+}
+
+#robot-portero {
+    position: absolute; bottom: -160px; left: 40%;
+    transform: translateX(-50%); width: 250px; z-index: 5; transition: 0.3s;
+}
+
+.portero-hidden { opacity: 0; pointer-events: none; }
+.portero-visible { opacity: 1; }
+
+/* --- RESPUESTAS --- */
 .grid-respuestas {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    overflow: hidden; /* IMPORTANTE: Corta el desbordamiento de los botones al entrar */
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; gap: 10px; padding: 15px; height: 100%;
 }
 
 .btn-respuesta {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    border: 1px solid var(--btn-text);
-    border-radius: 50px; 
-    padding: 15px;
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    text-align: center;
-    transition: 0.2s;
-    width: 100%;
-    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.85); color: white;
+    border: 2px solid var(--accent); border-radius: 5px;
+    font-family: 'Zen Dots', sans-serif; font-size: 0.65rem;
+    cursor: pointer; transition: 0.3s;
 }
 
-/* CLASES DE ANIMACIÓN LATERAL PARA BOTONES */
-.animar-izquierda {
-    animation: botonDesdeIzquierda 0.5s ease-out forwards;
-}
+/* --- BALÓN Y ANIMACIONES --- */
+.balon-trivia { width: 120px; height: 120px; z-index: 10; transition: transform 0.5s; }
+.disparo-gol { transform: translateY(-280px) scale(0.4) rotate(360deg); }
+.disparo-bloqueado { transform: translateY(-250px) translateX(-45px) scale(0.45) rotate(180deg); }
 
-.animar-derecha {
-    animation: botonDesdeDerecha 0.5s ease-out forwards;
-}
-
-/* ESTADOS DE RESPUESTA */
-.btn-respuesta.correcta {
-    background-color: #10be39 !important;
-    color: white !important;
-    border-color: #10be39;
-    box-shadow: 0 0 15px #10be39;
-    animation: pulsoAcierto 0.4s ease;
-}
-
-.btn-respuesta.incorrecta {
-    background-color: #d32f2f !important;
-    color: white !important;
-    border-color: #d32f2f;
-    animation: sacudidaError 0.4s ease;
-}
+.btn-respuesta.correcta { background-color: #10be39 !important; border-color: #00ff2f; box-shadow: 0 0 15px #10be39; }
+.btn-respuesta.incorrecta { background-color: #d32f2f !important; border-color: #ff0000; }
 
 .oculto { display: none !important; }
 
-/* RESULTADOS */
+/* --- RESULTADOS --- */
 .tarjeta-resultado {
-    background-color: #31af38;
-    color: #1b0202;
-    border: 2px solid #00ff2f; 
-    border-radius: 15px;
-    padding: 30px;
+    background-color: #31af38; padding: 30px;
+    border-radius: 15px; text-align: center; color: white;
+}
+
+/* --- MENSAJE DINÁMICO (CENTRO DE PANTALLA) --- */
+#mensaje-gol {
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 2.5rem; /* Tamaño impactante */
     text-align: center;
-    margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(0, 255, 47, 0.3);
-    animation: entradaTarjeta 0.6s ease-out;
+    position: fixed; /* Mantiene el centro sin importar el scroll */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 2000; /* Por encima de todo */
+    pointer-events: none;
+    transition: opacity 0.3s;
 }
 
-.tarjeta-resultado h2 {
-    font-family: "Zen Dots", sans-serif;
-    color: #ffffff;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+.mensaje-gol-oculto {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.puntaje-grande {
-    font-family: "Zen Dots", sans-serif;
-    font-size: 3rem;
-    color: #ffffff;
-    margin-top: 10px;
-    text-shadow: 2px 2px 0px #00ff2f;
+.mensaje-gol-visible {
+    opacity: 1;
+    animation: zoomInElastico 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-footer {
-    height: 5vh;
-    background-color: var(--header-bg);
-    color: var(--text-footer);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px;
-    margin-top: auto;
+/* Animación de agrandarse con efecto rebote */
+@keyframes zoomInElastico {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* --- AJUSTES EXTRA PARA COHERENCIA --- */
+
+/* Asegura que el contenedor de juego no corte el mensaje */
+.contenedor-juego {
+    position: relative;
+    overflow: visible;
+}
+
+/* Estilo de la tarjeta de pregunta para modo oscuro/claro */
+.tarjeta-pregunta {
+    background-color: var(--card-bg); 
+    border: 2px solid var(--card-text);
+    border-radius: 15px; 
+    padding: 25px; 
+    text-align: center;
+    transition: all var(--transition-speed);
+}
+
+.tarjeta-pregunta p {
+    color: var(--card-text) !important;
+    margin: 0;
+}
+
+/* Portería adaptable */
+.arco-trivia {
+    width: 100%; max-width: 380px; height: 220px;
+    border: 8px solid var(--porteria-color);
+    border-bottom: none;
+    position: relative; background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px 10px 0 0;
 }

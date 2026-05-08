@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/default.css">
-    <link rel="stylesheet" href="/CSS/principal.css">
+    <link rel="stylesheet" href="../CSS/default.css">
+    <link rel="stylesheet" href="../CSS/principal.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,29 +19,30 @@
 <body>
 
     <section class="seccion-imagen">
-        <img src="/MULTIMEDIA/Logo.png" alt="Logo" class="logo-central" id="logo-sitio">
+        <img src="../MULTIMEDIA/Comp-4.gif" alt="Logo" class="logo-central" id="logo-sitio">
+        <h1 class="titulo-logo">FIFASCANS</h1>
     </section>
 
     <main class="seccion-contenido">
-        <a href="/HTML/camara.html">
+        <a href="../HTML/camara.html">
             <button class="boton">
                 <i class="fas fa-camera"></i>
                 <span>CAMARA</span>
             </button>
         </a>
-        <a href="/HTML/galeria.html">
+        <a href="../HTML/galeria.html">
             <button class="boton">
                 <i class="fas fa-images"></i>
                 <span>GALERIA</span>
             </button>
         </a>
-        <a href="/HTML/trivias.html">
+        <a href="../HTML/trivias.html">
             <button class="boton">
                 <i class="fas fa-question-circle"></i>
                 <span>TRIVIAS</span>
             </button>
         </a>
-        <a href="/HTML/estadisticas.html">
+        <a href="../HTML/estadisticas.html">
             <button class="boton">
                 <i class="fas fa-chart-bar"></i>
                 <span>ESTADISTICAS</span>
@@ -50,13 +51,13 @@
     </main>
 
     <main class="seccion-asistencia">
-        <a href="/HTML/asistencia.html">
+        <a href="../HTML/asistencia.html">
             <button class="botonasistencia">
                 <span>AYUDA</span>
             </button>
         </a>
-        <button class="botonasistencia" id="dark-mode-toggle">
-            <span>MODO OSCURO</span>
+        <button class="botondark" id="dark-mode-toggle">
+            <i class="fas fa-moon"></i>
         </button>
     </main>
 
@@ -69,34 +70,27 @@
         const rootElement = document.documentElement;
         const logoImg = document.getElementById('logo-sitio');
 
-        // Función para aplicar el tema
         function aplicarTema(tema) {
+            const icon = btnDarkMode.querySelector('i');
             if (tema === 'dark') {
                 rootElement.setAttribute('data-theme', 'dark');
-                btnDarkMode.querySelector('span').innerText = 'MODO CLARO';
-                logoImg.src = "/MULTIMEDIA/Logo2.png";
+                icon.className = 'fas fa-sun'; // Cambia a sol
+                logoImg.src = "../MULTIMEDIA/comp-3.gif";
                 localStorage.setItem('temaGuardado', 'dark');
             } else {
                 rootElement.setAttribute('data-theme', 'light');
-                btnDarkMode.querySelector('span').innerText = 'MODO OSCURO';
-                logoImg.src = "/MULTIMEDIA/Logo.png";
+                icon.className = 'fas fa-moon'; // Cambia a luna
+                logoImg.src = "../MULTIMEDIA/comp-4.gif";
                 localStorage.setItem('temaGuardado', 'light');
             }
         }
 
-        // Al cargar la página, revisar si hay un tema guardado
         const temaEnMemoria = localStorage.getItem('temaGuardado');
-        if (temaEnMemoria) {
-            aplicarTema(temaEnMemoria);
-        }
+        if (temaEnMemoria) { aplicarTema(temaEnMemoria); }
 
         btnDarkMode.addEventListener('click', () => {
             const currentTheme = rootElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                aplicarTema('light');
-            } else {
-                aplicarTema('dark');
-            }
+            aplicarTema(currentTheme === 'dark' ? 'light' : 'dark');
         });
     </script>
 </body>

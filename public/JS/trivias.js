@@ -180,6 +180,8 @@ function iniciarJuego(indiceNivel) {
     cargarPregunta();
 }
 
+// ... (mantenemos la baseDeDatos y variables iniciales igual)
+
 function cargarPregunta() {
     if (indicePregunta >= preguntasActuales.length) {
         mostrarResultados();
@@ -187,27 +189,21 @@ function cargarPregunta() {
     }
 
     const datos = preguntasActuales[indicePregunta];
+    const balon = document.getElementById('balon-juego');
+    const portero = document.getElementById('robot-portero');
+    
+    // Resetear elementos
+    balon.className = 'balon-trivia';
+    portero.className = 'portero-hidden'; 
     textoPregunta.textContent = datos.pregunta;
     contenedorRespuestas.innerHTML = '';
 
     const respuestasConIndice = datos.respuestas.map((res, i) => ({ texto: res, original: i }));
     
-    // Mezclamos y luego iteramos usando el índice (i) para la dirección
-    mezclarArreglo(respuestasConIndice).forEach((respuesta, i) => {
+    mezclarArreglo(respuestasConIndice).forEach((respuesta) => {
         const boton = document.createElement('button');
         boton.classList.add('btn-respuesta');
         boton.textContent = respuesta.texto;
-
-        // --- LÓGICA DE DIRECCIÓN POR BOTÓN ---
-        if (i % 2 === 0) {
-            // Botón 1 y 3 vienen de la izquierda
-            boton.classList.add('animar-izquierda');
-        } else {
-            // Botón 2 y 4 vienen de la derecha
-            boton.classList.add('animar-derecha');
-        }
-        // -------------------------------------
-
         boton.onclick = () => verificarRespuesta(respuesta.original, datos.correcta, boton);
         contenedorRespuestas.appendChild(boton);
     });
@@ -215,33 +211,64 @@ function cargarPregunta() {
 
 function verificarRespuesta(indiceElegido, indiceCorrecto, botonPresionado) {
     const botones = document.querySelectorAll('.btn-respuesta');
-    botones.forEach(btn => btn.disabled = true); 
+    const balon = document.getElementById('balon-juego');
+    const portero = document.getElementById('robot-portero');
+    const mensaje = document.getElementById('mensaje-gol'); 
     
-    let stats = JSON.parse(localStorage.getItem('fifascan_stats')) || { jugadas: 0, aciertos: 0 };
-    stats.jugadas++; 
+    botones.forEach(btn => btn.disabled = true);
+    const esCorrecto = indiceElegido === indiceCorrecto;
+    
+    // 1. Mostrar mensaje con animación
+    mensaje.className = 'mensaje-gol-visible';
 
-    if (indiceElegido === indiceCorrecto) {
-        botonPresionado.classList.add('correcta');
+    if (esCorrecto) {
+        balon.classList.add('disparo-gol');
         puntaje++;
-        stats.aciertos++;
+        
+        mensaje.textContent = "GOOOOL!!!";
+        mensaje.style.color = "#00ff2f"; 
+        mensaje.style.webkitTextStroke = "2px #055a12"; 
     } else {
-        botonPresionado.classList.add('incorrecta');
-        // Buscar el botón que tiene la respuesta correcta para iluminarlo
-        // Nota: Como mezclamos respuestas, necesitamos identificarlo por texto
-        botones.forEach(btn => {
-            if (preguntasActuales[indicePregunta].respuestas[indiceCorrecto] === btn.textContent) {
-                btn.classList.add('correcta');
-            }
-        });
+        portero.className = 'portero-visible';
+        balon.classList.add('disparo-bloqueado');
+
+        mensaje.textContent = "FALLASTE";
+        mensaje.style.color = "#ff0000"; 
+        mensaje.style.webkitTextStroke = "2px #5a0505"; 
+
+        setTimeout(() => {
+            balon.style.opacity = '0';
+        }, 100); 
     }
 
-    localStorage.setItem('fifascan_stats', JSON.stringify(stats));
+    // 2. Limpiar mensaje después de la animación
+    setTimeout(() => {
+        mensaje.className = 'mensaje-gol-oculto';
+    }, 2000);
 
+    // 3. Feedback visual en botones
+    setTimeout(() => {
+        if (esCorrecto) {
+            botonPresionado.classList.add('correcta');
+        } else {
+            botonPresionado.classList.add('incorrecta');
+            botones.forEach(btn => {
+                if (preguntasActuales[indicePregunta].respuestas[indiceCorrecto] === btn.textContent) {
+                    btn.classList.add('correcta');
+                }
+            });
+        }
+    }, 500);
+
+    // 4. Preparar siguiente pregunta
     setTimeout(() => {
         indicePregunta++;
         cargarPregunta();
-    }, 1500);
+        balon.style.opacity = '1';
+    }, 2500);
 }
+
+// ... (mantenemos el resto de funciones de mezcla y resultados igual)
 
 function mostrarResultados() {
     pantallaJuego.classList.add('oculto');
@@ -249,3 +276,4 @@ function mostrarResultados() {
     txtAciertos.textContent = puntaje;
     txtTotal.textContent = preguntasActuales.length;
 }
+

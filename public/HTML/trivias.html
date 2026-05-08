@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../CSS/default.css">
     <link rel="stylesheet" href="../CSS/trivias.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <title>FifaScan2026 - Trivias</title>
 </head>
-
 <body>
-
-     <header class="header-trivia">
+    <header class="header-trivia">
         <a href="../HTML/index2.html" class="boton-volver" id="btn-volver">
             <i class="fas fa-chevron-left"></i>
         </a>
@@ -27,7 +19,6 @@
     </header>
 
     <section class="fondo-trivias">
-        
         <div class="contenedor-menu" id="menu-principal">
             <button class="btn-opcion" data-categoria="futbol">FÚTBOL</button>
             <button class="btn-opcion" data-categoria="canciones">CANCIONES</button>
@@ -39,10 +30,23 @@
 
         <div class="contenedor-juego oculto" id="pantalla-juego">
             <div class="tarjeta-pregunta">
-                <p id="texto-pregunta">Cargando pregunta...</p>
+                <p id="texto-pregunta">Cargando...</p>
             </div>
 
-            <div class="grid-respuestas" id="contenedor-respuestas"></div>
+            <!-- ELEMENTO PARA EL MENSAJE DINÁMICO -->
+            <div id="mensaje-gol" class="mensaje-gol-oculto"></div>
+
+            <div class="campo-futbol">
+                <div class="arco-trivia">
+                    <div class="red-arco"></div>
+                    <img src="../MULTIMEDIA/paro.png" id="robot-portero" class="portero-hidden" alt="Portero">
+                    <div class="grid-respuestas" id="contenedor-respuestas"></div>
+                </div>
+                
+                <div class="zona-disparo">
+                    <img src="../MULTIMEDIA/balon.png" id="balon-juego" class="balon-trivia">
+                </div>
+            </div>
         </div>
 
         <div class="contenedor-menu oculto" id="pantalla-resultados">
@@ -53,23 +57,18 @@
                     <span id="txt-aciertos">0</span> / <span id="txt-total">0</span>
                 </div>
             </div>
-
             <button class="btn-opcion" id="btn-volver-trivias">VOLVER A TRIVIAS</button>
-            <a href="../HTML/index2.html" class="btn-opcion" style="text-decoration: none;">VOLVER AL MENÚ</a>
         </div>
-
     </section>
 
     <script src="../JS/trivias.js"></script>
     <script>
-        // Lógica de persistencia del tema
+        // Lógica de persistencia del modo oscuro
         const rootElement = document.documentElement;
         const temaGuardado = localStorage.getItem('temaGuardado');
         if (temaGuardado === 'dark') {
             rootElement.setAttribute('data-theme', 'dark');
         }
     </script>
-
 </body>
-
 </html>
