@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/default.css">
-    <link rel="stylesheet" href="/CSS/asistencia.css">
+    <link rel="stylesheet" href="../CSS/default.css">
+    <link rel="stylesheet" href="../CSS/asistencia.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>FifaScan - Ayuda</title>
 </head>
+
 <body>
 
     <header class="header-asistencia">
-        <a href="../index.html" class="boton-volver">
+        <a href="../HTML/index2.html" class="boton-volver">
             <i class="fas fa-chevron-left"></i>
         </a>
         <h1>AYUDA</h1>
@@ -31,56 +33,32 @@
 
     <div id="modal-tutorial" class="modal-oculto">
         <div class="contenido-tutorial">
-            <div id="paso-actual">
-                </div>
-            
+            <div id="paso-actual"></div>
             <div class="zona-click zona-izquierda" onclick="cambiarPaso(-1)"></div>
             <div class="zona-click zona-derecha" onclick="cambiarPaso(1)"></div>
-
             <button id="btn-cerrar-tuto" class="btn-cerrar" onclick="cerrarTutorial()">VOLVER A AYUDA</button>
         </div>
     </div>
 
+    <div class="asistente-flotante" id="asistente-display">
+        <div class="burbuja-texto">
+            <p id="texto-asistente">¡HOLA! SOY TU ASISTENTE. ¿EN QUÉ PUEDO AYUDARTE?</p>
+        </div>
+        <div class="robot-contenedor">
+            <div id="robot-img" class="robot-sprite"></div>
+        </div>
+    </div>
+
     <script>
-        // Persistencia del tema
-        if (localStorage.getItem('temaGuardado') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
+        const robotImg = document.getElementById('robot-img');
+        const textoAsistente = document.getElementById('texto-asistente');
+        const modal = document.getElementById('modal-tutorial');
 
         const tutoriales = [
-            {
-                titulo: "COMO ESCANEAR",
-                pasos: [
-                    { img: "/MULTIMEDIA/tuto1.png", txt: "Presiona el icono de la camara en la pagina principal" },
-                    { img: "/MULTIMEDIA/tuto2.png", txt: "Enfoca la bandera a la camara" },
-                    { img: "/MULTIMEDIA/tuto3.png", txt: "¡Disfruta del modelo 3D!" }
-                ]
-            },
-            {
-                titulo: "CAMBIAR FILTROS",
-                pasos: [
-                    { img: "/MULTIMEDIA/GaleriaT1.jpeg", txt: "Selecciona el video que quieras modificar" },
-                    { img: "/MULTIMEDIA/GaleriaT2.jpeg", txt: "Presiona ajustes y selecciona el filtro" },
-                    { img: "/MULTIMEDIA/GaleriaT3.jpeg", txt: "¡Disfruta de tu video modificado!" },
-                    { img: "/MULTIMEDIA/GaleriaT4.jpeg", txt: "Edita la cantidad de videos que quieras" }
-                ]
-            },
-            {
-                titulo: "TRIVIAS",
-                pasos: [
-                    { img: "/MULTIMEDIA/Trivia1.jpeg", txt: "Ingresa a trivias y selecciona la que mas te llame la atencion" },
-                    { img: "/MULTIMEDIA/Trivia2.jpeg", txt: "Responde y pon en reto tus conocimientos" },
-                    { img: "/MULTIMEDIA/Trivia3.jpeg", txt: "Ve tus resultados y vuelve al menu o intenta otra" }
-                ]
-            },
-            {
-                titulo: "ESTADISTICAS",
-                pasos: [
-                    { img: "/MULTIMEDIA/Estadisticas.jpeg", txt: "Mira graficas de goles e informacion de plantillas" },
-                    { img: "/MULTIMEDIA/Estadisticas1.jpeg", txt: "Al final podras ver videos referentes a la seleccion" },
-                    { img: "/MULTIMEDIA/Estadisticas3.jpeg", txt: "Diviertete analizando a las distintas selecciones" }
-                ]
-            }
+            { titulo: "COMO ESCANEAR", pasos: [{ img: "../MULTIMEDIA/tuto1.png", txt: "Presiona el icono de la camara en la pagina principal" }, { img: "../MULTIMEDIA/tuto2.png", txt: "Enfoca la bandera a la camara" }, { img: "../MULTIMEDIA/tuto3.png", txt: "¡Disfruta del modelo 3D!" }] },
+            { titulo: "CAMBIAR FILTROS", pasos: [{ img: "../MULTIMEDIA/GaleriaT1.jpeg", txt: "Selecciona el video que quieras modificar" }, { img: "../MULTIMEDIA/GaleriaT2.jpeg", txt: "Presiona ajustes y selecciona el filtro" }, { img: "../MULTIMEDIA/GaleriaT3.jpeg", txt: "¡Disfruta de tu video modificado!" }, { img: "../MULTIMEDIA/GaleriaT4.jpeg", txt: "Edita la cantidad de videos que quieras" }] },
+            { titulo: "TRIVIAS", pasos: [{ img: "../MULTIMEDIA/Trivia1.jpeg", txt: "Ingresa a trivias y selecciona la que mas te llame la atencion" }, { img: "../MULTIMEDIA/Trivia2.jpeg", txt: "Responde y pon en reto tus conocimientos" }, { img: "../MULTIMEDIA/Trivia3.jpeg", txt: "Ve tus resultados y vuelve al menu o intenta otra" }] },
+            { titulo: "ESTADISTICAS", pasos: [{ img: "../MULTIMEDIA/Estadisticas.jpeg", txt: "Mira graficas de goles e informacion de plantillas" }, { img: "../MULTIMEDIA/Estadisticas1.jpeg", txt: "Al final podras ver videos referentes a la seleccion" }, { img: "../MULTIMEDIA/Estadisticas3.jpeg", txt: "Diviertete analizando a las distintas selecciones" }] }
         ];
 
         let tutoActual = 0;
@@ -89,9 +67,8 @@
         function abrirTutorial(id) {
             tutoActual = id;
             pasoIndice = 0;
-            const modal = document.getElementById('modal-tutorial');
-            modal.classList.remove('modal-oculto');
-            modal.classList.add('modal-visible');
+            robotImg.src = "../MULTIMEDIA/robot-saludo.gif";
+            modal.className = 'modal-visible';
             mostrarPaso();
         }
 
@@ -100,29 +77,56 @@
             const contenedor = document.getElementById('paso-actual');
             const btnCerrar = document.getElementById('btn-cerrar-tuto');
 
+            // La imagen y el título van al modal
             contenedor.innerHTML = `
                 <h3 class="paso-titulo">PASO ${pasoIndice + 1}</h3>
                 <img src="${data.img}" class="img-tuto">
-                <h4 class="txt-tuto-h4">${data.txt}</h4>
             `;
 
-            // Botón de cierre solo al final
+            // EL TEXTO AHORA VA AL GLOBO DEL ROBOT
+            textoAsistente.innerText = data.txt;
+
+            // Mostrar botón solo al final
             btnCerrar.style.display = (pasoIndice === tutoriales[tutoActual].pasos.length - 1) ? "block" : "none";
         }
 
         function cambiarPaso(direccion) {
             const totalPasos = tutoriales[tutoActual].pasos.length;
+
+            // Si intentamos avanzar después del último paso, cerramos automáticamente
+            if (pasoIndice === totalPasos - 1 && direccion === 1) {
+                cerrarTutorial();
+                return;
+            }
+
             pasoIndice += direccion;
             if (pasoIndice < 0) pasoIndice = 0;
-            if (pasoIndice >= totalPasos) pasoIndice = totalPasos - 1;
+
             mostrarPaso();
         }
 
         function cerrarTutorial() {
-            const modal = document.getElementById('modal-tutorial');
-            modal.classList.remove('modal-visible');
-            modal.classList.add('modal-oculto');
+            modal.className = 'modal-oculto';
+            textoAsistente.innerText = "¡EXCELENTE! ¿NECESITAS AYUDA CON ALGO MÁS?";
+            robotImg.src = "../MULTIMEDIA/robot-saludo.gif";
         }
+
+        if (localStorage.getItem('temaGuardado') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        let frame = 1;
+        const robotElement = document.getElementById('robot-img');
+
+        // Esta función cambia la imagen de fondo cada 50 milisegundos (0.05s)
+        setInterval(() => {
+            frame++;
+            if (frame > 5) frame = 1;
+            // Asumiendo que las imágenes están en la carpeta MULTIMEDIA
+            robotElement.style.backgroundImage = `url('../MULTIMEDIA/${frame}.png')`;
+        }, 100);
+
     </script>
 </body>
+
 </html>

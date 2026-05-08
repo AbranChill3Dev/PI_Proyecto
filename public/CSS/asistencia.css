@@ -7,7 +7,6 @@
     --btn-text: #ffffff;
     --accent: #00ff2f;
     --modal-bg: rgba(255, 255, 255, 0.98);
-    --text-h4: #000000;
 }
 
 [data-theme="dark"] {
@@ -18,7 +17,6 @@
     --btn-bg: #ffffff;
     --btn-text: #000000;
     --modal-bg: rgba(0, 0, 0, 0.95);
-    --text-h4: #ffffff;
 }
 
 body, html {
@@ -33,7 +31,7 @@ body, html {
     background-image: var(--bg-image);
     background-size: cover; background-position: center;
     background-attachment: fixed;
-    display: flex; justify-content: center; align-items: center;
+    display: flex; justify-content: center; align-items: flex-start;
 }
 
 /* HEADER */
@@ -50,67 +48,117 @@ body, html {
 
 /* MENÚ PRINCIPAL */
 .menu-ayuda {
-    display: flex; flex-direction: column; gap: 20px;
+    display: flex; flex-direction: column; gap: 15px;
     width: 85%; max-width: 400px;
+    margin-top: 150px;
 }
 
-.titulo-principal { color: var(--accent); font-size: 0.9rem; text-align: center; margin-bottom: 10px; }
+.titulo-principal { color: var(--accent); font-size: 0.85rem; text-align: center; margin-bottom: 5px; }
 
 .btn-categoria {
     background-color: var(--btn-bg); color: var(--btn-text);
-    padding: 20px; border-radius: 15px; border: none;
+    padding: 18px; border-radius: 15px; border: none;
     font-family: "Zen Dots", sans-serif; cursor: pointer;
-    transition: 0.3s; font-size: 0.9rem;
+    transition: 0.3s; font-size: 0.85rem;
 }
+
+/* ASISTENTE FLOTANTE CORREGIDO */
+.asistente-flotante {
+    position: fixed;
+    bottom: 0px; /* PEGADO TOTAL AL BORDE INFERIOR */
+    right: 15px;
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-end; 
+    z-index: 3000;
+    pointer-events: none;
+}
+
+.robot-contenedor, .burbuja-texto { pointer-events: auto; }
+
+.robot-sprite {
+    width: 250px; /* Aumentado un poco para compensar el recorte */
+    height: 250px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* MARGEN NEGATIVO: Ajusta este valor según cuánto aire tenga tu PNG */
+    margin-bottom: -10px; 
+    
+    filter: drop-shadow(0 0 10px var(--accent));
+}
+
+@keyframes float-fix {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* Flota hacia arriba pero vuelve a base 0 */
+}
+
+.burbuja-texto {
+    background: var(--header-bg);
+    color: var(--header-text);
+    border: 2px solid var(--accent);
+    padding: 12px;
+    border-radius: 15px 15px 0 15px;
+    margin-right: -55px; 
+    margin-bottom: 200px; /* Ajustado para la nueva altura del robot */
+    max-width: 170px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.burbuja-texto::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
+    border-width: 10px 0 0 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--accent);
+}
+
+.burbuja-texto p { margin: 0; font-size: 0.55rem; line-height: 1.3; }
 
 /* MODAL / CARRUSEL */
 .modal-oculto { display: none; }
 .modal-visible {
-    display: flex; position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%; background: var(--modal-bg);
-    z-index: 2000; justify-content: center; align-items: center;
+    display: flex; 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    background: var(--modal-bg);
+    z-index: 2000; 
+    
+    justify-content: center; 
+    align-items: flex-start; /* <--- CAMBIA 'center' POR 'flex-start' */
 }
 
 .contenido-tutorial {
-    position: relative; width: 90%; max-width: 450px;
-    text-align: center; display: flex; flex-direction: column;
+    position: relative; 
+    width: 90%; 
+    max-width: 450px;
+    text-align: center; 
+    display: flex; 
+    flex-direction: column;
     align-items: center;
+
+    /* AJUSTA LA ALTURA AQUÍ */
+    margin-top: 80px; /* <--- Sube o baja este número para posicionar la imagen */
+    margin-bottom: 0; /* Ya no necesitas el margin-bottom grande de antes */
 }
 
-/* IMAGEN SIN MARCO VERDE */
-.img-tuto {
-    width: 100%; 
-    max-height: 60vh; 
-    border-radius: 5px;
-    object-fit: contain;
-    /* Eliminado el border y el box-shadow verde */
-}
+.img-tuto { width: 100%; max-height: 50vh; border-radius: 10px; object-fit: contain; }
+.paso-titulo { color: var(--accent); margin-bottom: 15px; font-size: 1rem; }
 
-.paso-titulo { color: var(--accent); margin-bottom: 15px; font-size: 1.1rem; }
-
-/* TEXTO H4 ABAJO DE LA IMAGEN */
-.txt-tuto-h4 { 
-    color: var(--text-h4); 
-    font-family: "Zen Dots", sans-serif;
-    font-size: 0.75rem; 
-    margin-top: 25px; 
-    line-height: 1.5;
-    padding: 0 15px;
-    text-transform: none;
-}
-
-/* NAVEGACIÓN TÁCTIL INVISIBLE */
-.zona-click {
-    position: absolute; top: 0; height: 80%; width: 50%;
-    z-index: 2100;
-}
+.zona-click { position: absolute; top: 0; height: 100%; width: 50%; z-index: 2100; }
 .zona-izquierda { left: 0; }
 .zona-derecha { right: 0; }
 
 .btn-cerrar {
     margin-top: 20px; padding: 15px; width: 80%;
     background: var(--accent); color: #000;
-    border-radius: 10px; border: none; 
-    font-family: "Zen Dots"; font-size: 0.8rem;
-    z-index: 2200; position: relative;
+    border-radius: 10px; border: none; font-family: "Zen Dots"; font-size: 0.75rem;
 }

@@ -190,12 +190,24 @@ function cargarPregunta() {
     textoPregunta.textContent = datos.pregunta;
     contenedorRespuestas.innerHTML = '';
 
-    // Opcional: También mezclar las respuestas dentro de cada pregunta
     const respuestasConIndice = datos.respuestas.map((res, i) => ({ texto: res, original: i }));
-    mezclarArreglo(respuestasConIndice).forEach((respuesta) => {
+    
+    // Mezclamos y luego iteramos usando el índice (i) para la dirección
+    mezclarArreglo(respuestasConIndice).forEach((respuesta, i) => {
         const boton = document.createElement('button');
         boton.classList.add('btn-respuesta');
         boton.textContent = respuesta.texto;
+
+        // --- LÓGICA DE DIRECCIÓN POR BOTÓN ---
+        if (i % 2 === 0) {
+            // Botón 1 y 3 vienen de la izquierda
+            boton.classList.add('animar-izquierda');
+        } else {
+            // Botón 2 y 4 vienen de la derecha
+            boton.classList.add('animar-derecha');
+        }
+        // -------------------------------------
+
         boton.onclick = () => verificarRespuesta(respuesta.original, datos.correcta, boton);
         contenedorRespuestas.appendChild(boton);
     });
